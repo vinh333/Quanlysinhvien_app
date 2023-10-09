@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#5D71C9" /> <!-- Màu nền của View -->
+    <corners android:radius="0dp" /> <!-- Đặt bo tròn góc chung là 0dp -->
+    <corners android:bottomLeftRadius="70dp" /> <!-- Độ bo tròn góc bên dưới bên trái (ở đây là 100dp) -->
+</shape>
