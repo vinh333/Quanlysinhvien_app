@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0FFFFFFF"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:background="#F8EDCA"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="#F8EDCA"
+                app:srcCompat="@drawable/trove" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="250dp"
+                app:srcCompat="@drawable/logo" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="134dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_bottom_corners"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="DANH SÁCH CÁC KHÓA"
+                android:textColor="#FFFFFF"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="468dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_khoa"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="207dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="KHÓA"
+                    android:textSize="48sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/imageButton3"
+                    android:layout_width="157dp"
+                    android:layout_height="match_parent"
+                    android:background="#F8EDCA"
+                    app:srcCompat="@drawable/khoa21" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_khoa"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView42"
+                    android:layout_width="207dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="KHÓA"
+                    android:textSize="48sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/imageButton23"
+                    android:layout_width="157dp"
+                    android:layout_height="match_parent"
+                    android:background="#F8EDCA"
+                    app:srcCompat="@drawable/khoa21" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/rounded_khoa"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView82"
+                    android:layout_width="207dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="KHÓA"
+                    android:textSize="48sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/imageButton93"
+                    android:layout_width="157dp"
+                    android:layout_height="match_parent"
+                    android:background="#F8EDCA"
+                    app:srcCompat="@drawable/khoa21" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="#F8EDCA"
+            android:gravity="center"
+            android:text="Cao Đẳng Kinh Tế - Kỹ Thuật Cần Thơ" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

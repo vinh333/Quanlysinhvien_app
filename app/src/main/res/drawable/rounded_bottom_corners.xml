@@ -1,0 +1,6 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#5D71C9" /> <!-- Màu nền -->
+    <corners
+        android:bottomRightRadius="50dp"
+        android:bottomLeftRadius="50dp"/>
+</shape>
