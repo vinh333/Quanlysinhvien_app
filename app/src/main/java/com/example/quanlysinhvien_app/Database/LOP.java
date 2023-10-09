@@ -2,14 +2,14 @@ package com.example.quanlysinhvien_app.Database;
 
 
 
-public class Lop {
+public class LOP {
     private String maLop;
     private String tenLop;
     private String maKhoaHoc;
     private String maHeDaoTao;
     private String maNganhHoc;
 
-    public Lop(String maLop, String tenLop, String maKhoaHoc, String maHeDaoTao, String maNganhHoc) {
+    public LOP(String maLop, String tenLop, String maKhoaHoc, String maHeDaoTao, String maNganhHoc) {
         this.maLop = maLop;
         this.tenLop = tenLop;
         this.maKhoaHoc = maKhoaHoc;

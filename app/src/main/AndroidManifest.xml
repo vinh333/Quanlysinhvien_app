@@ -25,6 +25,9 @@
         <activity
             android:name=".MainActivity" />
 
+        <activity
+            android:name=".CaidatActivity" />
+
     </application>
 
 </manifest>
