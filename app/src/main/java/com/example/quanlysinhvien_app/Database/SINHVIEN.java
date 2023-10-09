@@ -6,6 +6,7 @@ public class SINHVIEN {
     private String ngaySinh;
     private String gioiTinh;
     private String lop;
+<<<<<<< HEAD
     private String noiSinh;
     private String diaChi;
     private String maTinh;
@@ -15,17 +16,24 @@ public class SINHVIEN {
 
     public SINHVIEN(String maSV, String hoTen, String ngaySinh, String gioiTinh, String lop,
                     String noiSinh, String diaChi, String maTinh, String quan, String maLop, float hocBong) {
+=======
+
+    public SINHVIEN(String maSV, String hoTen, String ngaySinh, String gioiTinh, String lop) {
+>>>>>>> origin/test1
         this.maSV = maSV;
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;
         this.lop = lop;
+<<<<<<< HEAD
         this.noiSinh = noiSinh;
         this.diaChi = diaChi;
         this.maTinh = maTinh;
         this.quan = quan;
         this.maLop = maLop;
         this.hocBong = hocBong;
+=======
+>>>>>>> origin/test1
     }
 
     public String getMaSV() {
@@ -67,6 +75,7 @@ public class SINHVIEN {
     public void setLop(String lop) {
         this.lop = lop;
     }
+<<<<<<< HEAD
 
     public String getNoiSinh() {
         return noiSinh;
@@ -116,3 +125,7 @@ public class SINHVIEN {
         this.hocBong = hocBong;
     }
 }
+=======
+}
+
+>>>>>>> origin/test1
