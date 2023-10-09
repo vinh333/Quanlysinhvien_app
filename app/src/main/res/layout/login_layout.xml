@@ -130,13 +130,14 @@
             android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_corner_white"
+            android:backgroundTint="#FFFFFF"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:text="Đăng nhập"
             android:textColor="#090774"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:gravity="center_vertical|center_horizontal"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"/>
+            android:textStyle="bold" />
 
 
         <TextView
