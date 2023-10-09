@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
 
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:backgroundTint="#5D71C8">
 
     <LinearLayout
+        android:id="@+id/linearLayout6"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:orientation="horizontal"
@@ -22,14 +24,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/textView148"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/icon2"
                 android:gravity="center_horizontal" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/textView152"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -44,14 +46,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/textView114"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/icon3"
                 android:gravity="center_horizontal" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/textView115"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -66,14 +68,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/textView164"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/icon1"
                 android:gravity="center_horizontal" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/textView125"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -88,14 +90,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/textView144"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/icon4"
                 android:gravity="center_horizontal" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/textView154"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -112,7 +114,7 @@
         android:background="@drawable/rounded_corner_aqua"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -124,10 +126,9 @@
 
             <EditText
                 android:id="@+id/editTextText6"
-                android:layout_width="0dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_weight="1"
                 android:backgroundTint="@android:color/transparent"
                 android:ems="10"
                 android:gravity="center_vertical|left"
@@ -188,6 +189,54 @@
             android:layout_margin="10dp"
             android:src="@drawable/avt2" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="410dp"
+        android:layout_height="409dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="357dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/rounded_button"
+            android:text="KHÓA"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="357dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_button"
+            android:text="SINH VIÊN"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="357dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_button"
+            android:text="ĐIỂM THI"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="357dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_button"
+            android:text="ĐIỂM RÈN LUYỆN"
+            android:textSize="22sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
