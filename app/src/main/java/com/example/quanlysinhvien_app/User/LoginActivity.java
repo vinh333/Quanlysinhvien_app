@@ -86,13 +86,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
-
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//        String userId = "đâsd";
-//        String name = "ádsada23123";
-//        mDatabase.child("users").child(userId).child("username").setValue(name);
-
     }
 
     private void loginUser(String email, String password) {
