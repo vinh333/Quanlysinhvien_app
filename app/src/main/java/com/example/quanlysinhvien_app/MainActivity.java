@@ -18,22 +18,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView imageView = findViewById(R.id.imageView2);
-        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.avt2); // Thay your_image bằng ID của ảnh
 
-        // Tạo RoundedBitmapDrawable từ ảnh gốc
-        RoundedBitmapDrawable roundedDrawable = RoundedBitmapDrawableFactory.create(getResources(), originalBitmap);
-        roundedDrawable.setCircular(true);
 
-        // Thiết lập RoundedBitmapDrawable cho ImageView
-        imageView.setImageDrawable(roundedDrawable);
-
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, dasdsWasdasdadsfsddfdsorld!");
-        myRef.setValue("Hello, dasdsWasdasdadsfsddfdsorld!");
 
     }
 }

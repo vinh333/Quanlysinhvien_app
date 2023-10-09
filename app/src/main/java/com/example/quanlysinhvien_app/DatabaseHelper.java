@@ -6,7 +6,37 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+
     private static final String DATABASE_NAME = "STUDENT_DATABASE";
+
+    // Tên cột cho bảng LOP
+    public static final String CLASS_CODE_COLUMN_NAME = "MALOP";
+
+    // Tên cột cho bảng SINHVIEN
+    public static final String STUDENT_ID_COLUMN_NAME = "MASV";
+    public static final String STUDENT_NAME_COLUMN_NAME = "HOSV";
+    public static final String STUDENT_LAST_NAME_COLUMN_NAME = "TENSV";
+    public static final String STUDENT_GENDER_COLUMN_NAME = "GIOITINH";
+    public static final String STUDENT_BIRTHDATE_COLUMN_NAME = "NGAYSINH";
+    public static final String STUDENT_BIRTHPLACE_COLUMN_NAME = "NOISINH";
+    public static final String STUDENT_ADDRESS_COLUMN_NAME = "DIACHI";
+    public static final String STUDENT_CITY_COLUMN_NAME = "MATINH";
+    public static final String STUDENT_DISTRICT_COLUMN_NAME = "QUAN";
+    public static final String STUDENT_CLASS_CODE_COLUMN_NAME = "MALOP";
+    public static final String STUDENT_SCHOLARSHIP_COLUMN_NAME = "HOCBONG";
+
+    // Tên cột cho bảng BANGDIEMTHI
+    public static final String EXAM_SCORE_STUDENT_ID_COLUMN_NAME = "MASV";
+    public static final String EXAM_SCORE_SUBJECT_CODE_COLUMN_NAME = "MAMONHOC";
+    public static final String EXAM_SCORE_SESSION_COLUMN_NAME = "LANTHI";
+    public static final String EXAM_SCORE_SEMESTER_COLUMN_NAME = "HOCKY";
+    public static final String EXAM_SCORE_SCORE_COLUMN_NAME = "DIEM";
+
+    // Tên cột cho bảng BANGDIEMRENLUYEN
+    public static final String TRAINING_SCORE_STUDENT_ID_COLUMN_NAME = "MASV";
+    public static final String TRAINING_SCORE_SEMESTER_COLUMN_NAME = "HOCKY";
+    public static final String TRAINING_SCORE_SCORE_COLUMN_NAME = "DIEM";
+
     private static final int DATABASE_VERSION = 1;
 
     // Tạo bảng BANGDIEMTHI
