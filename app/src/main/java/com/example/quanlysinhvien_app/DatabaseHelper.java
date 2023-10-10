@@ -1,8 +1,14 @@
 package com.example.quanlysinhvien_app;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.quanlysinhvien_app.Database.SINHVIEN;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -37,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TRAINING_SCORE_SEMESTER_COLUMN_NAME = "HOCKY";
     public static final String TRAINING_SCORE_SCORE_COLUMN_NAME = "DIEM";
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 5;
 
     // Tạo bảng BANGDIEMTHI
     private static final String CREATE_TABLE_BANGDIEMTHI = "CREATE TABLE BANGDIEMTHI " +
@@ -127,6 +133,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_MONHOC);
         db.execSQL(CREATE_TABLE_SINHVIEN);
         db.execSQL(CREATE_TABLE_BANGDIEMRENLUYEN);
+
+
+
+        // Kiểm tra xem cơ sở dữ liệu có dữ liệu hay không
+        if (isDatabaseEmpty(db)) {
+            // Nếu cơ sở dữ liệu trống, thêm dữ liệu mẫu
+            insertSampleData();
+        }
     }
 
     @Override
@@ -145,4 +159,123 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Tạo lại các bảng
         onCreate(db);
     }
+
+    // Phương thức kiểm tra xem cơ sở dữ liệu có dữ liệu hay không
+    private boolean isDatabaseEmpty(SQLiteDatabase db) {
+        boolean isEmpty = true;
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DATABASE_NAME, null);
+        if (cursor.getCount() > 0) {
+            isEmpty = false;
+        }
+        cursor.close();
+        return isEmpty;
+    }
+    // Phương thức thêm dữ liệu mẫu cho tất cả các bảng
+    public void insertSampleData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        insertSampleDataKhoa(db);
+        insertSampleDataHeDaoTao(db);
+        insertSampleDataKhoaHoc(db);
+        insertSampleDataNganhHoc(db);
+        insertSampleDataLop(db);
+        insertSampleDataMonHoc(db);
+        insertSampleDataSinhVien(db);
+        insertSampleDataBangDiemThi(db);
+        insertSampleDataBangDiemRenLuyen(db);
+        db.close();
+    }
+
+    // Phương thức thêm dữ liệu mẫu cho bảng KHOA
+    private void insertSampleDataKhoa(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO KHOA (MAKHOA, TENKHOA) VALUES ('K001', 'Khoa Công Nghệ Thông Tin')");
+        db.execSQL("INSERT INTO KHOA (MAKHOA, TENKHOA) VALUES ('K002', 'Khoa Kinh Tế')");
+        // Thêm dữ liệu cho các khoa khác nếu cần thiết
+    }
+
+    // Phương thức thêm dữ liệu mẫu cho bảng HEDAOTAO
+    private void insertSampleDataHeDaoTao(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO HEDAOTAO (MAHE, TENHE) VALUES ('H01', 'Đại Học')");
+        db.execSQL("INSERT INTO HEDAOTAO (MAHE, TENHE) VALUES ('H02', 'Cao Đẳng')");
+        // Thêm dữ liệu cho các hệ đào tạo khác nếu cần thiết
+    }
+
+    // Phương thức thêm dữ liệu mẫu cho bảng KHOAHOC
+    private void insertSampleDataKhoaHoc(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO KHOAHOC (MAKHOAHOC, TENKHOAHOC) VALUES ('KH01', 'Khoa Học Máy Tính')");
+        db.execSQL("INSERT INTO KHOAHOC (MAKHOAHOC, TENKHOAHOC) VALUES ('KH02', 'Khoa Học Điều Dưỡng')");
+        // Thêm dữ liệu cho các khóa học khác nếu cần thiết
+    }
+
+    // Phương thức thêm dữ liệu mẫu cho bảng NGANHHOC
+    private void insertSampleDataNganhHoc(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO NGANHHOC (MANGANH, TENNGANH, MAKHOA) VALUES ('N01', 'Công Nghệ Thông Tin', 'K001')");
+        db.execSQL("INSERT INTO NGANHHOC (MANGANH, TENNGANH, MAKHOA) VALUES ('N02', 'Kế Toán', 'K002')");
+        // Thêm dữ liệu cho các ngành học khác nếu cần thiết
+    }
+
+    // Phương thức thêm dữ liệu mẫu cho bảng LOP
+    private void insertSampleDataLop(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO LOP (MALOP, TENLOP, MAKHOAHOC, MAHE, MANGANH) VALUES ('L001', 'Lớp 1A', 'KH01', 'H01', 'N01')");
+        db.execSQL("INSERT INTO LOP (MALOP, TENLOP, MAKHOAHOC, MAHE, MANGANH) VALUES ('L002', 'Lớp 2A', 'KH02', 'H02', 'N02')");
+        // Thêm dữ liệu cho các lớp khác nếu cần thiết
+    }
+
+    // Phương thức thêm dữ liệu mẫu cho bảng MONHOC
+    private void insertSampleDataMonHoc(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO MONHOC (MAMONHOC, TENMONHOC, LYTHUYET, THUCHANH) VALUES ('M01', 'Lập Trình Java', 4, 2)");
+        db.execSQL("INSERT INTO MONHOC (MAMONHOC, TENMONHOC, LYTHUYET, THUCHANH) VALUES ('M02', 'Kế Toán Căn Bản', 3, 1)");
+        // Thêm dữ liệu cho các môn học khác nếu cần thiết
+    }
+
+    // Phương thức thêm dữ liệu mẫu cho bảng SINHVIEN
+    private void insertSampleDataSinhVien(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO SINHVIEN (MASV, HOSV, TENSV, GIOITINH, NGAYSINH, NOISINH, DIACHI, MATINH, QUAN, MALOP, HOCBONG) VALUES ('SV001', 'Nguyen', 'Van A', 1, '2000-01-01', 'Hanoi', '123 Main St', 'HN', 'D1', 'L001', 500000)");
+        db.execSQL("INSERT INTO SINHVIEN (MASV, HOSV, TENSV, GIOITINH, NGAYSINH, NOISINH, DIACHI, MATINH, QUAN, MALOP, HOCBONG) VALUES ('SV002', 'Tran', 'Thi B', 0, '2001-02-02', 'Hanoi', '456 Main St', 'HN', 'D2', 'L002', 400000)");
+        // Thêm dữ liệu cho các sinh viên khác nếu cần thiết
+    }
+
+    // Phương thức thêm dữ liệu mẫu cho bảng BANGDIEMTHI
+    private void insertSampleDataBangDiemThi(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO BANGDIEMTHI (MASV, MAMONHOC, LANTHI, HOCKY, DIEM) VALUES ('SV001', 'M01', 'Lan 1', 'Hoc Ky 1', 8.5)");
+        db.execSQL("INSERT INTO BANGDIEMTHI (MASV, MAMONHOC, LANTHI, HOCKY, DIEM) VALUES ('SV002', 'M02', 'Lan 1', 'Hoc Ky 1', 7.5)");
+        // Thêm dữ liệu cho các bảng điểm thi khác nếu cần thiết
+    }
+
+    // Phương thức thêm dữ liệu mẫu cho bảng BANGDIEMRENLUYEN
+    private void insertSampleDataBangDiemRenLuyen(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO BANGDIEMRENLUYEN (MASV, HOCKY, DIEM) VALUES ('SV001', 'Hoc Ky 1', 9.0)");
+        db.execSQL("INSERT INTO BANGDIEMRENLUYEN (MASV, HOCKY, DIEM) VALUES ('SV002', 'Hoc Ky 1', 8.5)");
+        // Thêm dữ liệu cho các bảng điểm rèn luyện khác nếu cần thiết
+    }
+
+    public List<SINHVIEN> getAllSinhVien() {
+        List<SINHVIEN> sinhVienList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM SINHVIEN", null);
+        if (cursor.moveToFirst()) {
+            do {
+                // Lấy thông tin từ cursor và tạo đối tượng SINHVIEN
+                String maSV = cursor.getString(cursor.getColumnIndex(STUDENT_ID_COLUMN_NAME));
+                String hoTen = cursor.getString(cursor.getColumnIndex(STUDENT_NAME_COLUMN_NAME));
+                String ten = cursor.getString(cursor.getColumnIndex(STUDENT_LAST_NAME_COLUMN_NAME));
+                boolean gioiTinh = cursor.getInt(cursor.getColumnIndex(STUDENT_GENDER_COLUMN_NAME)) == 1;
+                String ngaySinh = cursor.getString(cursor.getColumnIndex(STUDENT_BIRTHDATE_COLUMN_NAME));
+                String diaChi = cursor.getString(cursor.getColumnIndex(STUDENT_ADDRESS_COLUMN_NAME));
+                String maTinh = cursor.getString(cursor.getColumnIndex(STUDENT_CITY_COLUMN_NAME));
+                String maQuan = cursor.getString(cursor.getColumnIndex(STUDENT_DISTRICT_COLUMN_NAME));
+                String maLop = cursor.getString(cursor.getColumnIndex(STUDENT_CLASS_CODE_COLUMN_NAME));
+                float hocBong = cursor.getFloat(cursor.getColumnIndex(STUDENT_SCHOLARSHIP_COLUMN_NAME));
+
+                // Tạo đối tượng SINHVIEN và thêm vào danh sách
+                SINHVIEN sinhVien = new SINHVIEN(maSV, hoTen, ten, gioiTinh, ngaySinh, diaChi, maTinh, maQuan, maLop, hocBong);
+                sinhVienList.add(sinhVien);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return sinhVienList;
+    }
+
+
 }
