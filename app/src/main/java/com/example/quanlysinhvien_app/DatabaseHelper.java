@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.quanlysinhvien_app.Database.SINHVIEN;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 
@@ -131,7 +134,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_SINHVIEN);
         db.execSQL(CREATE_TABLE_BANGDIEMRENLUYEN);
 
-        insertSampleData();
+
 
         // Kiểm tra xem cơ sở dữ liệu có dữ liệu hay không
         if (isDatabaseEmpty(db)) {
@@ -245,5 +248,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Thêm dữ liệu cho các bảng điểm rèn luyện khác nếu cần thiết
     }
 
-    // ... (phần khác của class)
+    public List<SINHVIEN> getAllSinhVien() {
+        List<SINHVIEN> sinhVienList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM SINHVIEN", null);
+        if (cursor.moveToFirst()) {
+            do {
+                // Lấy thông tin từ cursor và tạo đối tượng SINHVIEN
+                String maSV = cursor.getString(cursor.getColumnIndex(STUDENT_ID_COLUMN_NAME));
+                String hoTen = cursor.getString(cursor.getColumnIndex(STUDENT_NAME_COLUMN_NAME));
+                String ten = cursor.getString(cursor.getColumnIndex(STUDENT_LAST_NAME_COLUMN_NAME));
+                boolean gioiTinh = cursor.getInt(cursor.getColumnIndex(STUDENT_GENDER_COLUMN_NAME)) == 1;
+                String ngaySinh = cursor.getString(cursor.getColumnIndex(STUDENT_BIRTHDATE_COLUMN_NAME));
+                String diaChi = cursor.getString(cursor.getColumnIndex(STUDENT_ADDRESS_COLUMN_NAME));
+                String maTinh = cursor.getString(cursor.getColumnIndex(STUDENT_CITY_COLUMN_NAME));
+                String maQuan = cursor.getString(cursor.getColumnIndex(STUDENT_DISTRICT_COLUMN_NAME));
+                String maLop = cursor.getString(cursor.getColumnIndex(STUDENT_CLASS_CODE_COLUMN_NAME));
+                float hocBong = cursor.getFloat(cursor.getColumnIndex(STUDENT_SCHOLARSHIP_COLUMN_NAME));
+
+                // Tạo đối tượng SINHVIEN và thêm vào danh sách
+                SINHVIEN sinhVien = new SINHVIEN(maSV, hoTen, ten, gioiTinh, ngaySinh, diaChi, maTinh, maQuan, maLop, hocBong);
+                sinhVienList.add(sinhVien);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return sinhVienList;
+    }
+
+
 }

@@ -4,7 +4,7 @@ public class SINHVIEN {
     private String maSV;
     private String hoTen;
     private String ngaySinh;
-    private String gioiTinh;
+    private boolean gioiTinh;
     private String lop;
     private String noiSinh;
     private String diaChi;
@@ -13,8 +13,8 @@ public class SINHVIEN {
     private String maLop;
     private float hocBong;
 
-    public SINHVIEN(String maSV, String hoTen, String ngaySinh, String gioiTinh, String lop,
-                    String noiSinh, String diaChi, String maTinh, String quan, String maLop, float hocBong) {
+    public SINHVIEN(String maSV, String hoTen, String ngaySinh, boolean gioiTinh, String lop,
+                    String noiSinh, String diaChi, String maTinh, String quan, float hocBong) {
         this.maSV = maSV;
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
@@ -27,6 +27,8 @@ public class SINHVIEN {
         this.maLop = maLop;
         this.hocBong = hocBong;
     }
+
+
 
     public String getMaSV() {
         return maSV;
@@ -52,11 +54,11 @@ public class SINHVIEN {
         this.ngaySinh = ngaySinh;
     }
 
-    public String getGioiTinh() {
+    public boolean getGioiTinh() {
         return gioiTinh;
     }
 
-    public void setGioiTinh(String gioiTinh) {
+    public void setGioiTinh(boolean gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 
