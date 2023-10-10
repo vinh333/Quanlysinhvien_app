@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:background="#5D71C9"
+            android:gravity="center"
+            android:text="CÀI ĐẶT CHUNG "
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="60dp"
+            android:textSize="30sp" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:text="Giao diện" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:gravity="center_vertical"
+            android:text="Đổi mật khẩu" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:gravity="center_vertical"
+            android:text="Ngôn ngữ" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:gravity="center_vertical"
+            android:text="Cài đặt mã pin" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
