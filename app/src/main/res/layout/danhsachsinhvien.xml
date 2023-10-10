@@ -77,7 +77,7 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/btn_locsv"
                         android:layout_width="108dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="50dp"
