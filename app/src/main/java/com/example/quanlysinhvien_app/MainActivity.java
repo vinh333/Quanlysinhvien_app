@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Mở cơ sở dữ liệu để đọc hoặc ghi
         SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+
+        db.close();
         // Hoặc sử dụng để đọc dữ liệu: SQLiteDatabase db = mDatabaseHelper.getReadableDatabase();
 
         // Thực hiện các thao tác với cơ sở dữ liệu ở đây

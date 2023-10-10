@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/backgroud_2xanh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
    >
@@ -17,100 +18,84 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="177dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="138dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="117dp"
-                    android:layout_height="match_parent"
-                    app:srcCompat="?android:attr/textSelectHandleRight" />
-
-                <LinearLayout
-                    android:layout_width="291dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="bottom|right"
-                        android:text="SINH VIÊN"
-                        android:textColor="#000000"
-                        android:textSize="34sp" />
-
-                    <TextView
-                        android:id="@+id/textView18"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="bottom|right"
-                        android:text="CCNTT21-B"
-                        android:textColor="#000000"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center|right"
-                        android:text="__________________________________"
-                        android:textColor="#3F60A0" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginRight="15dp"
+                android:gravity="bottom|right"
+                android:text="SINH VIÊN"
+                android:textColor="#000000"
+                android:textSize="44sp" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:gravity="bottom|right"
+                android:text="CCNTT21-B"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|right"
+                android:text="__________________________________"
+                android:textColor="#3F60A0" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="37dp"
+                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="37dp"
-                        android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="157dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:text="Danh sách lớp"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
 
-                        <TextView
-                            android:id="@+id/textView3"
-                            android:layout_width="157dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="40dp"
-                            android:text="Danh sách lớp"
-                            android:textColor="#000000"
-                            android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="108dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:gravity="center|right"
+                        android:text="Sắp xếp theo"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
 
-                        <TextView
-                            android:id="@+id/textView4"
-                            android:layout_width="108dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="50dp"
-                            android:gravity="center|right"
-                            android:text="Sắp xếp theo"
-                            android:textColor="#000000"
-                            android:textSize="14sp" />
-
-                        <Spinner
-                            android:id="@+id/class_spinner"
-                            android:layout_width="30dp"
-                            android:layout_height="20dp"
-                            android:gravity="center|right"
-                            android:hint="Chọn khoa" />
-
-
-                    </LinearLayout>
+                    <Spinner
+                        android:id="@+id/class_spinner"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
+                        android:gravity="center|right"
+                        android:hint="Chọn khoa" />
 
 
                 </LinearLayout>
+
 
             </LinearLayout>
 
@@ -119,6 +104,7 @@
     </LinearLayout>
 
     <ListView
+        android:id="@+id/listView_Sinhvien"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
@@ -126,23 +112,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
         app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="304dp"
-        android:layout_height="298dp"
-        android:background="@drawable/icon9"
-        tools:layout_editor_absoluteX="-118dp"
-        tools:layout_editor_absoluteY="-87dp" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="304dp"
-        android:layout_height="298dp"
-        android:background="@drawable/icon9"
-        android:rotation="180"
-        tools:layout_editor_absoluteX="213dp"
-        tools:layout_editor_absoluteY="466dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout5"
