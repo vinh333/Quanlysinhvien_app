@@ -27,11 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Mở cơ sở dữ liệu để đọc hoặc ghi
         SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
-<<<<<<<<< Temporary merge branch 1
-=========
+
 
         db.close();
->>>>>>>>> Temporary merge branch 2
         // Hoặc sử dụng để đọc dữ liệu: SQLiteDatabase db = mDatabaseHelper.getReadableDatabase();
 
         // Thực hiện các thao tác với cơ sở dữ liệu ở đây
