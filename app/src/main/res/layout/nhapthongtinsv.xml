@@ -51,7 +51,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextText5"
+                        android:id="@+id/txtmasv"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_corner_gray"
@@ -91,7 +91,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextText5"
+                        android:id="@+id/txtho"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_corner_gray"
@@ -131,7 +131,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextText5"
+                        android:id="@+id/txtten"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_corner_gray"
@@ -171,7 +171,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextText5"
+                        android:id="@+id/txtgioitinh"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_corner_gray"
@@ -211,7 +211,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextText5"
+                        android:id="@+id/txtngaysinh"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_corner_gray"
@@ -251,7 +251,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextText5"
+                        android:id="@+id/txtnoisinh"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_corner_gray"
@@ -331,7 +331,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextText5"
+                        android:id="@+id/txtmatinh"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_corner_gray"
@@ -371,7 +371,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextText5"
+                        android:id="@+id/txtquan"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_corner_gray"
@@ -411,7 +411,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextText5"
+                        android:id="@+id/txtmalop"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_corner_gray"
@@ -451,7 +451,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextText5"
+                        android:id="@+id/txthocbong"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_corner_gray"
