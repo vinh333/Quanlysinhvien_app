@@ -11,25 +11,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
-    private DatabaseHelper mDatabaseHelper;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Khởi tạo DatabaseHelper khi mở MainActivity
-        mDatabaseHelper = new DatabaseHelper(this);
 
-        // Mở cơ sở dữ liệu để đọc hoặc ghi
-        SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
-
-
-        db.close();
         // Hoặc sử dụng để đọc dữ liệu: SQLiteDatabase db = mDatabaseHelper.getReadableDatabase();
 
         // Thực hiện các thao tác với cơ sở dữ liệu ở đây
@@ -50,5 +46,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
+
+
+
+
+
 }
