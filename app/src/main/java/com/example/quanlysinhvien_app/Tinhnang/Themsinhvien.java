@@ -9,8 +9,13 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quanlysinhvien_app.Database.SinhVien;
 import com.example.quanlysinhvien_app.DatabaseHelper;
 import com.example.quanlysinhvien_app.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
 
 public class Themsinhvien extends AppCompatActivity {
 
@@ -45,43 +50,42 @@ public class Themsinhvien extends AppCompatActivity {
             public void onClick(View view) {
                 // Xử lý sự kiện khi nút Lưu được nhấn
                 String masv = txtMasv.getText().toString();
-                String ho = txtHo.getText().toString();
-                String ten = txtTen.getText().toString();
-                String gioiTinh = txtGioiTinh.getText().toString();
+                String hotensv = txtHo.getText().toString();
+
+                // Chuyển đổi giới tính từ chuỗi sang boolean
+                boolean gioitinh = Boolean.parseBoolean(txtGioiTinh.getText().toString());
+                String diaChi = txtDiaChi.getText().toString();
                 String ngaySinh = txtNgaySinh.getText().toString();
                 String noiSinh = txtNoiSinh.getText().toString();
-                String diaChi = txtDiaChi.getText().toString();
+
                 String maTinh = txtMaTinh.getText().toString();
                 String quan = txtQuan.getText().toString();
                 String maLop = txtMaLop.getText().toString();
-                String hocBong = txtHocBong.getText().toString();
 
-                // Xử lý dữ liệu hoặc gửi dữ liệu đi đây
+                // Chuyển đổi hocBong từ chuỗi sang int
+                int hocBong = Integer.parseInt(txtHocBong.getText().toString());
 
-                // Thêm dữ liệu vào cơ sở dữ liệu
-                DatabaseHelper databaseHelper = new DatabaseHelper(Themsinhvien.this);
-                SQLiteDatabase db = databaseHelper.getWritableDatabase();
+                // Kiểm tra xem tất cả các trường đã được nhập chưa
+                if (!masv.isEmpty() && !hotensv.isEmpty() && !ngaySinh.isEmpty() && !noiSinh.isEmpty() &&
+                        !diaChi.isEmpty() && !maTinh.isEmpty() && !quan.isEmpty() && !maLop.isEmpty()) {
 
-                // Tạo chuỗi lệnh SQL INSERT
-                String insertDataQuery = "INSERT INTO SINHVIEN (MASV, HOSV, TENSV, GIOITINH, NGAYSINH, NOISINH, DIACHI, MATINH, QUAN, MALOP, HOCBONG) VALUES ('" +
-                        masv + "', '" +
-                        ho + "', '" +
-                        ten + "', '" +
-                        gioiTinh + "', '" +
-                        ngaySinh + "', '" +
-                        noiSinh + "', '" +
-                        diaChi + "', '" +
-                        maTinh + "', '" +
-                        quan + "', '" +
-                        maLop + "', '" +
-                        hocBong + "')";
+                    // Tạo đối tượng SinhVien để đẩy lên Firebase
+                    SinhVien sinhVien = new SinhVien( masv,  hotensv,  gioitinh,  diaChi,  hocBong,
+                            maLop,  maTinh,  ngaySinh,  noiSinh,  quan);
 
-                // Thực hiện lệnh SQL INSERT
-                db.execSQL(insertDataQuery);
+                    // Thực hiện việc ghi dữ liệu lên Firebase
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("sinhvien");
+                    myRef.child(masv).setValue(sinhVien);
 
-                // Đóng kết nối với cơ sở dữ liệu
-                db.close();
+
+
+
+                } else {
+
+                }
             }
         });
+
     }
 }
