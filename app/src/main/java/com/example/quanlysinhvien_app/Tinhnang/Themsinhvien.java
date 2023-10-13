@@ -20,7 +20,7 @@ import java.util.Date;
 public class Themsinhvien extends AppCompatActivity {
 
     private ImageView imageView;
-    private EditText txtMasv, txtHo, txtTen, txtGioiTinh, txtNgaySinh, txtNoiSinh,
+    private EditText txtMasv, txtHoTen, txtTen, txtGioiTinh, txtNgaySinh, txtNoiSinh,
             txtDiaChi, txtMaTinh, txtQuan, txtMaLop, txtHocBong;
     private Button btnLuu;
 
@@ -32,8 +32,8 @@ public class Themsinhvien extends AppCompatActivity {
         // Ánh xạ các phần tử từ layout XML
         imageView = findViewById(R.id.imageView3);
         txtMasv = findViewById(R.id.txtmasv);
-        txtHo = findViewById(R.id.txtho);
-        txtTen = findViewById(R.id.txtten);
+        txtHoTen = findViewById(R.id.txtho);
+
         txtGioiTinh = findViewById(R.id.txtgioitinh);
         txtNgaySinh = findViewById(R.id.txtngaysinh);
         txtNoiSinh = findViewById(R.id.txtnoisinh);
@@ -50,7 +50,7 @@ public class Themsinhvien extends AppCompatActivity {
             public void onClick(View view) {
                 // Xử lý sự kiện khi nút Lưu được nhấn
                 String masv = txtMasv.getText().toString();
-                String hotensv = txtHo.getText().toString();
+                String hotensv = txtHoTen.getText().toString();
 
                 // Chuyển đổi giới tính từ chuỗi sang boolean
                 boolean gioitinh = Boolean.parseBoolean(txtGioiTinh.getText().toString());
@@ -77,8 +77,6 @@ public class Themsinhvien extends AppCompatActivity {
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("sinhvien");
                     myRef.child(masv).setValue(sinhVien);
-
-
 
 
                 } else {
