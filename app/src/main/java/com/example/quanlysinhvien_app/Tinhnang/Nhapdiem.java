@@ -2,6 +2,7 @@ package com.example.quanlysinhvien_app.Tinhnang;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -16,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Nhapdiem extends AppCompatActivity {
 
@@ -61,15 +63,14 @@ public class Nhapdiem extends AppCompatActivity {
 
         // Tham chiếu đến Firebase Database và tải dữ liệu vào Spinner mã sinh viên
         DatabaseReference databaseReferenceMasv = FirebaseDatabase.getInstance().getReference("sinhvien");
-        loadSpinnerData(databaseReferenceMasv, spinner_masv);
+        loadSpinnerData(databaseReferenceMasv, spinner_masv, "masv");
+
 
         // Tham chiếu đến Firebase Database và tải dữ liệu vào Spinner mã môn học
         DatabaseReference databaseReferenceMonhoc = FirebaseDatabase.getInstance().getReference("monhoc");
-        loadSpinnerData(databaseReferenceMonhoc, spinner_tenmonhoc);
+        loadSpinnerData(databaseReferenceMonhoc, spinner_tenmonhoc, "tenmonhoc");
+        loadSpinnerData(databaseReferenceMonhoc, spinner_tinchi, "tongtinchi");
 
-        // Tham chiếu đến Firebase Database và tải dữ liệu vào Spinner học kỳ
-        DatabaseReference databaseReferenceTongTinChi = FirebaseDatabase.getInstance().getReference("monhoc");
-        loadSpinnerData(databaseReferenceTongTinChi, spinner_tinchi);
 
         // Tạo một danh sách điểm và cập nhật Spinner điểm
         ArrayList<String> diemList = new ArrayList<>();
@@ -88,42 +89,74 @@ public class Nhapdiem extends AppCompatActivity {
         ArrayAdapter<String> hockyAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, hockyList);
         hockyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_hocky.setAdapter(hockyAdapter);
+
+
+
+        // Thêm sự kiện lắng nghe cho Spinner spinner_tenmonhoc
+        spinner_tenmonhoc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // Lấy tên môn học được chọn từ Spinner spinner_tenmonhoc
+                String selectedMonHoc = parentView.getSelectedItem().toString();
+
+                // Gọi phương thức loadSpinnerData để cập nhật giá trị cho Spinner spinner_tinchi
+                loadSpinnerData(databaseReferenceMonhoc, spinner_tinchi, "tongtinchi");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Xử lý khi không có môn học nào được chọn
+            }
+        });
+
     }
 
-    private void loadSpinnerData(DatabaseReference databaseReference, final Spinner spinner) {
+    private void loadSpinnerData(DatabaseReference databaseReference, final Spinner spinner, final String childKey) {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> dataList = new ArrayList<>();
+                HashMap<String, Integer> monhocTinChiMap = new HashMap<>();
+                HashMap<String, String> sinhVienMap = new HashMap<>();
+
+                // Lặp qua các môn học và lấy thông tin tên môn và số tín chỉ
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    // Lấy giá trị của thuộc tính "tenmonhoc" từ DataSnapshot
-                    String tenmonhoc = snapshot.child("tenmonhoc").getValue(String.class);
-                    if (tenmonhoc != null) {
-                        dataList.add(tenmonhoc);
+                    String tenMonHoc = snapshot.child("tenmonhoc").getValue(String.class);
+                    Integer soTinChi = snapshot.child("tongtinchi").getValue(Integer.class);
+                    String masv = snapshot.child("masv").getValue(String.class);
+
+                    // Lưu thông tin số tín chỉ vào HashMap với key là tên môn học
+                    if (tenMonHoc != null && soTinChi != null) {
+                        monhocTinChiMap.put(tenMonHoc, soTinChi);
                     }
 
-                    // Lấy giá trị của thuộc tính "masv" từ DataSnapshot
-                    String masv = snapshot.child("masv").getValue(String.class);
+
+
+                    // Lưu giá trị masv vào dataList
                     if (masv != null) {
                         dataList.add(masv);
                     }
+                }
 
-//                    // Lấy giá trị của thuộc tính "tongtinchi" từ DataSnapshot và chuyển đổi thành chuỗi
-//                    Integer tongtinchi = snapshot.child("tongtinchi").getValue(Integer.class);
-//                    if (tongtinchi != null) {
-//                        dataList.add(String.valueOf(tongtinchi));
-//                    }
-                    String tenMonHoc = snapshot.child("tenmonhoc").getValue(String.class);
-                    Integer soTinChi = snapshot.child("tongtinchi").getValue(Integer.class);
-                    if (tenMonHoc != null) {
+                // Kiểm tra xem childKey có phải là tên môn học không
+                if (childKey.equals("tenmonhoc")) {
+                    for (String tenMonHoc : monhocTinChiMap.keySet()) {
                         dataList.add(tenMonHoc);
-                        // Thêm số lượng tín chỉ vào danh sách
+                    }
+                } else if (childKey.equals("tongtinchi")) {
+                    // Lấy số tín chỉ tương ứng với tên môn học được chọn
+                    String monHocDuocChon = spinner_tenmonhoc.getSelectedItem().toString();
+                    Integer soTinChi = monhocTinChiMap.get(monHocDuocChon);
+
+                    // Tạo danh sách từ 1 đến số tín chỉ
+                    if (soTinChi != null) {
                         for (int i = 1; i <= soTinChi; i++) {
                             dataList.add(String.valueOf(i));
                         }
                     }
                 }
 
+                // Cập nhật Spinner với danh sách dữ liệu
                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(Nhapdiem.this, android.R.layout.simple_spinner_item, dataList);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(dataAdapter);
@@ -135,6 +168,11 @@ public class Nhapdiem extends AppCompatActivity {
             }
         });
     }
+
+
+
+
+
 
 
 }
