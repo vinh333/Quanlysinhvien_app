@@ -2,7 +2,6 @@ package com.example.quanlysinhvien_app.Select;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -18,7 +17,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 public class Select_Sinhvien extends AppCompatActivity {
@@ -34,7 +32,7 @@ public class Select_Sinhvien extends AppCompatActivity {
         setContentView(R.layout.danhsachsinhvien);
 
         // Tìm ListView bằng ID
-        listView = findViewById(R.id.listView_Sinhvien);
+        listView = findViewById(R.id.listView_Diemdanh);
         sinhVienList = new ArrayList<>();
 
         // Tạo một instance của SinhVienAdapter và đặt adapter cho ListView
