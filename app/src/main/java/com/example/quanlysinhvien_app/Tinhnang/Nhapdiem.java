@@ -9,6 +9,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quanlysinhvien_app.Database.DiemThiHocKy;
 import com.example.quanlysinhvien_app.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,30 +37,34 @@ public class Nhapdiem extends AppCompatActivity {
         spinner_diem = findViewById(R.id.spinner_diem);
         spinner_tinchi = findViewById(R.id.spinner_tinchi);
 
-        btnLuu = findViewById(R.id.button_luu2); // Thêm dòng này để ánh xạ nút lưu
+        btnLuu = findViewById(R.id.button_luu_nhapmonhoc); // Thêm dòng này để ánh xạ nút lưu
 
         // Thêm sự kiện lắng nghe cho nút Lưu
         btnLuu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Lấy dữ liệu từ Spinner
                 String masv = spinner_masv.getSelectedItem().toString();
                 String monhoc = spinner_tenmonhoc.getSelectedItem().toString();
                 String diem = spinner_diem.getSelectedItem().toString();
                 String hocky = spinner_hocky.getSelectedItem().toString();
                 String tinchi = spinner_tinchi.getSelectedItem().toString();
 
-                // Kiểm tra xem các giá trị đã được chọn chưa
-                if (!masv.isEmpty() && !monhoc.isEmpty() && !diem.isEmpty() && !hocky.isEmpty()) {
+                if (!masv.isEmpty() && !monhoc.isEmpty() && !diem.isEmpty() && !hocky.isEmpty() && !tinchi.isEmpty()) {
+                    // Tạo đối tượng DiemThiHocKy
+                    DiemThiHocKy diemThiHocKy = new DiemThiHocKy(masv, hocky, monhoc, tinchi, diem);
+
                     // Thực hiện việc ghi dữ liệu lên Firebase
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("bangdiemthihocky");
-                    myRef.child(masv).child(hocky).child(monhoc).setValue(diem);
+                    myRef.child(masv).child(hocky).child(monhoc).setValue(diemThiHocKy);
+
                 } else {
-                    // Hiển thị thông báo hoặc xử lý lỗi nếu cần
+                    // Xử lý lỗi hoặc hiển thị thông báo nếu cần
                 }
             }
         });
+
+
 
         // Tham chiếu đến Firebase Database và tải dữ liệu vào Spinner mã sinh viên
         DatabaseReference databaseReferenceMasv = FirebaseDatabase.getInstance().getReference("sinhvien");
