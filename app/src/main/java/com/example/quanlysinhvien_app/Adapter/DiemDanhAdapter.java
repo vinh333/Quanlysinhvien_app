@@ -12,19 +12,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.quanlysinhvien_app.Database.SinhVien;
+import com.example.quanlysinhvien_app.Database.Diemdanh;
 import com.example.quanlysinhvien_app.R;
 
 import java.util.List;
 
-public class DiemDanhAdapter extends ArrayAdapter<SinhVien> {
+public class DiemDanhAdapter extends ArrayAdapter<Diemdanh> {
 
-    private List<SinhVien> sinhVienList;
+    private List<Diemdanh> diemdanhList;
     private Context context;
 
-    public DiemDanhAdapter(Context context, List<SinhVien> sinhVienList) {
-        super(context, R.layout.list_item_diemdanh, sinhVienList);
-        this.sinhVienList = sinhVienList;
+    public DiemDanhAdapter(Context context, List<Diemdanh> diemdanhList) {
+        super(context, R.layout.list_item_diemdanh, diemdanhList);
+        this.diemdanhList = diemdanhList;
         this.context = context;
     }
 
@@ -36,16 +36,16 @@ public class DiemDanhAdapter extends ArrayAdapter<SinhVien> {
             convertView = inflater.inflate(R.layout.list_item_diemdanh, parent, false);
         }
 
-        SinhVien sinhVien = sinhVienList.get(position);
+        Diemdanh diemdanh = diemdanhList.get(position);
 
         CheckBox checkBoxDiemDanh = convertView.findViewById(R.id.checkbox_diemdanh);
         TextView textViewTenSV = convertView.findViewById(R.id.textView_diemdanh_tensv);
         EditText editTextGhiChu = convertView.findViewById(R.id.textView_diemdanh_note);
 
         // Đặt dữ liệu cho các thành phần trong layout
-        textViewTenSV.setText(sinhVien.getHotensv());
-//        checkBoxDiemDanh.setChecked(sinhVien.isDiemDanh());
-//        editTextGhiChu.setText(sinhVien.getGhiChu());
+        textViewTenSV.setText(diemdanh.getMasv()); // Thay thế bằng phương thức lấy tên sinh viên từ Diemdanh
+        checkBoxDiemDanh.setChecked(diemdanh.isTinhtrangdiemdanh());
+        editTextGhiChu.setText(diemdanh.getGhiChu()); // Thay thế bằng phương thức lấy ghi chú từ Diemdanh
 
         // Các xử lý khác tại đây nếu cần
 

@@ -10,18 +10,20 @@ public class Diemdanh {
     private String hocky;
     private Date ngaydiemdanh;
     private boolean tinhtrangdiemdanh;
+    private String ghiChu; // Thêm biến để lưu ghi chú
 
     public Diemdanh() {
         // Empty constructor required for Firebase
     }
 
-    public Diemdanh(String masv, String malop, String mamonhoc, String hocky, Date ngaydiemdanh, boolean tinhtrangdiemdanh) {
+    public Diemdanh(String masv, String malop, String mamonhoc, String hocky, Date ngaydiemdanh, boolean tinhtrangdiemdanh, String ghiChu) {
         this.masv = masv;
         this.malop = malop;
         this.mamonhoc = mamonhoc;
         this.hocky = hocky;
         this.ngaydiemdanh = ngaydiemdanh;
         this.tinhtrangdiemdanh = tinhtrangdiemdanh;
+        this.ghiChu = ghiChu;
     }
 
     public String getMasv() {
@@ -71,5 +73,12 @@ public class Diemdanh {
     public void setTinhtrangdiemdanh(boolean tinhtrangdiemdanh) {
         this.tinhtrangdiemdanh = tinhtrangdiemdanh;
     }
-}
 
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+}

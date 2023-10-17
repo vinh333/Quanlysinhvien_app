@@ -1,70 +1,113 @@
 package com.example.quanlysinhvien_app.Tinhnang;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quanlysinhvien_app.Adapter.DiemDanhAdapter;
-import com.example.quanlysinhvien_app.Database.SinhVien;
+import com.example.quanlysinhvien_app.Database.Diemdanh;
 import com.example.quanlysinhvien_app.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Diemdanhsv extends AppCompatActivity {
 
-    private List<SinhVien> sinhVienList;
+    private List<Diemdanh> diemDanhList;
     private DiemDanhAdapter adapter;
     private ListView listView;
+    private Spinner spinnerLop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.diemdanh);
 
-        // Tìm ListView bằng ID
         listView = findViewById(R.id.listView_Diemdanh);
-        sinhVienList = new ArrayList<>();
-
-        // Tạo một instance của DiemDanhAdapter và đặt adapter cho ListView
-        adapter = new DiemDanhAdapter(this, sinhVienList);
+        spinnerLop = findViewById(R.id.spinner_lop);
+        diemDanhList = new ArrayList<>();
+        adapter = new DiemDanhAdapter(this, diemDanhList);
         listView.setAdapter(adapter);
 
-        loadDataFromFirebase(); // Load dữ liệu từ Firebase khi activity được tạo
-    }
+        // Khởi tạo ArrayAdapter cho Spinner
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLop.setAdapter(spinnerAdapter);
 
-    private void loadDataFromFirebase() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference("sinhvien");
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        // Lấy danh sách tên lớp từ Firebase và đưa vào Spinner
+        DatabaseReference lopRef = FirebaseDatabase.getInstance().getReference("lop");
+        lopRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                sinhVienList.clear(); // Xóa dữ liệu cũ trước khi thêm dữ liệu mới từ Firebase
+                List<String> tenLopList = new ArrayList<>();
 
-                // Lặp qua dữ liệu đã lấy từ Firebase
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    // Kiểm tra xem dữ liệu từ Firebase có tồn tại không
-                    if (snapshot.exists()) {
-                        SinhVien sinhVien = snapshot.getValue(SinhVien.class);
-                        sinhVienList.add(sinhVien);
+                    String tenLop = snapshot.child("tenlop").getValue(String.class);
+                    if (tenLop != null) {
+                        tenLopList.add(tenLop);
                     }
                 }
 
-                // Cập nhật dữ liệu trong adapter và hiển thị lại ListView
-                adapter.notifyDataSetChanged();
+                // Cập nhật danh sách lớp trong Spinner
+                spinnerAdapter.clear();
+                spinnerAdapter.addAll(tenLopList);
+                spinnerAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Phương thức này được gọi khi việc lấy dữ liệu bị hủy bỏ hoặc thất bại
+                // Xử lý khi việc lấy dữ liệu bị hủy bỏ hoặc thất bại
             }
         });
+
+        // Xử lý sự kiện khi chọn một lớp từ Spinner
+        // Trong sự kiện khi chọn một lớp từ Spinner
+        spinnerLop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String tenLopChon = parent.getItemAtPosition(position).toString();
+
+                // Lấy danh sách sinh viên tương ứng với lớp đã chọn từ Firebase
+                DatabaseReference sinhVienRef = FirebaseDatabase.getInstance().getReference("sinhvien").orderByChild("tenlop").equalTo(tenLopChon).getRef();
+                sinhVienRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        diemDanhList.clear();
+
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Diemdanh diemdanh = snapshot.getValue(Diemdanh.class);
+                            if (diemdanh != null) {
+                                diemDanhList.add(diemdanh);
+                            }
+                        }
+
+                        // Cập nhật dữ liệu trong adapter và hiển thị lại ListView
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Xử lý khi việc lấy dữ liệu bị hủy bỏ hoặc thất bại
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Xử lý khi không có lớp nào được chọn
+            }
+        });
+
     }
 }
