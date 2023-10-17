@@ -20,27 +20,27 @@
             android:textSize="30sp" />
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/giaodien"
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:text="Giao diện" />
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/doimk"
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:gravity="center_vertical"
             android:text="Đổi mật khẩu" />
 
         <TextView
-            android:id="@+id/textView25"
+            android:id="@+id/ngonngu"
             android:layout_width="match_parent"
             android:layout_height="67dp"
             android:gravity="center_vertical"
             android:text="Ngôn ngữ" />
 
         <TextView
-            android:id="@+id/textView26"
+            android:id="@+id/mapin"
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:gravity="center_vertical"
