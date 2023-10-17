@@ -39,6 +39,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LLnhapdiem"
+            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="17dp"
@@ -61,6 +63,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LLdiemdanh"
+            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="17dp"
@@ -83,7 +87,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btn_caidat"
+            android:id="@+id/LLcaidat"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="17dp"
@@ -201,7 +205,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnkhoa"
             android:layout_width="357dp"
             android:layout_height="70dp"
             android:layout_marginLeft="25dp"
@@ -210,7 +214,7 @@
             android:textSize="22sp" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btnsv"
             android:layout_width="357dp"
             android:layout_height="70dp"
             android:layout_marginLeft="25dp"

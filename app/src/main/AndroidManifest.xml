@@ -27,7 +27,18 @@
 
         <activity
             android:name=".CaidatActivity" />
-
+        <activity
+            android:name=".nhapdiem" />
+        <activity
+            android:name=".diemdanh" />
+        <activity
+            android:name=".chucnangthem" />
+        <activity
+            android:name=".sinhvien" />
+        <activity
+            android:name=".dskhoa" />
+        <activity
+            android:name=".khoa" />
     </application>
 
 </manifest>
