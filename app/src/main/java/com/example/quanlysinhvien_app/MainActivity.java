@@ -1,32 +1,26 @@
 package com.example.quanlysinhvien_app;
 
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+
 import android.os.Bundle;
+import android.widget.Switch;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper mDatabaseHelper;
-
+    private int newMode;;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nhapthongtinsv);
+        setContentView(R.layout.chucnangthem);
 
 //        // Khởi tạo DatabaseHelper khi mở MainActivity
 //        mDatabaseHelper = new DatabaseHelper(this);
 //
 //        // Mở cơ sở dữ liệu để đọc hoặc ghi
-//        SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+//        SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();3
 //        // Hoặc sử dụng để đọc dữ liệu: SQLiteDatabase db = mDatabaseHelper.getReadableDatabase();
 //
 //        // Thực hiện các thao tác với cơ sở dữ liệu ở đây
@@ -47,5 +41,32 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
+
+
+        int currentMode = AppCompatDelegate.getDefaultNightMode();
+
+        // Tìm và tham chiếu đến Switch theo ID "giaodien"
+        Switch switchButton = findViewById(R.id.giaodien);
+
+        switchButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+            if (isChecked) {
+                newMode = AppCompatDelegate.MODE_NIGHT_YES; // Chế độ tối
+            } else {
+                newMode = AppCompatDelegate.MODE_NIGHT_NO; // Chế độ sáng
+            }
+
+            // Kiểm tra xem chế độ mới có khác với chế độ hiện tại không
+            if (currentMode != newMode) {
+                // Thiết lập chế độ mới
+                AppCompatDelegate.setDefaultNightMode(newMode);
+
+                // Cập nhật giao diện
+//                recreate();
+            }
+
+        });
+
+
     }
 }
