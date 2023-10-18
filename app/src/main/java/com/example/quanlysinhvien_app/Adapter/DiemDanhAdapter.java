@@ -43,7 +43,7 @@ public class DiemDanhAdapter extends ArrayAdapter<Diemdanh> {
         EditText editTextGhiChu = convertView.findViewById(R.id.textView_diemdanh_note);
 
         // Đặt dữ liệu cho các thành phần trong layout
-        textViewTenSV.setText(diemdanh.getMasv()); // Thay thế bằng phương thức lấy tên sinh viên từ Diemdanh
+        textViewTenSV.setText(diemdanh.getHotensv()); // Thay thế bằng phương thức lấy tên sinh viên từ Diemdanh
         checkBoxDiemDanh.setChecked(diemdanh.isTinhtrangdiemdanh());
         editTextGhiChu.setText(diemdanh.getGhiChu()); // Thay thế bằng phương thức lấy ghi chú từ Diemdanh
 

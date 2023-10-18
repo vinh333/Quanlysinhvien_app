@@ -12,11 +12,13 @@ public class Diemdanh {
     private boolean tinhtrangdiemdanh;
     private String ghiChu; // Thêm biến để lưu ghi chú
 
+    private String hotensv; // Thay vì tensv, sử dụng hotensv
+
     public Diemdanh() {
         // Empty constructor required for Firebase
     }
 
-    public Diemdanh(String masv, String malop, String mamonhoc, String hocky, Date ngaydiemdanh, boolean tinhtrangdiemdanh, String ghiChu) {
+    public Diemdanh(String masv, String malop, String mamonhoc, String hocky, Date ngaydiemdanh, boolean tinhtrangdiemdanh, String ghiChu, String hotensv) {
         this.masv = masv;
         this.malop = malop;
         this.mamonhoc = mamonhoc;
@@ -24,7 +26,18 @@ public class Diemdanh {
         this.ngaydiemdanh = ngaydiemdanh;
         this.tinhtrangdiemdanh = tinhtrangdiemdanh;
         this.ghiChu = ghiChu;
+        this.hotensv = hotensv;
     }
+
+    // Getter và setter cho hotensv
+    public String getHotensv() {
+        return hotensv;
+    }
+
+    public void setHotensv(String hotensv) {
+        this.hotensv = hotensv;
+    }
+
 
     public String getMasv() {
         return masv;

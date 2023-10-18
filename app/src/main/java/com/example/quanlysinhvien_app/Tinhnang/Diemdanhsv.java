@@ -8,11 +8,13 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quanlysinhvien_app.Adapter.DiemDanhAdapter;
 import com.example.quanlysinhvien_app.Database.Diemdanh;
 import com.example.quanlysinhvien_app.R;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,7 +55,7 @@ public class Diemdanhsv extends AppCompatActivity {
                 List<String> tenLopList = new ArrayList<>();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String tenLop = snapshot.child("tenlop").getValue(String.class);
+                    String tenLop = snapshot.child("malop").getValue(String.class);
                     if (tenLop != null) {
                         tenLopList.add(tenLop);
                     }
@@ -72,27 +74,26 @@ public class Diemdanhsv extends AppCompatActivity {
         });
 
         // Xử lý sự kiện khi chọn một lớp từ Spinner
-        // Trong sự kiện khi chọn một lớp từ Spinner
         spinnerLop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String tenLopChon = parent.getItemAtPosition(position).toString();
 
                 // Lấy danh sách sinh viên tương ứng với lớp đã chọn từ Firebase
-                DatabaseReference sinhVienRef = FirebaseDatabase.getInstance().getReference("sinhvien").orderByChild("tenlop").equalTo(tenLopChon).getRef();
-                sinhVienRef.addValueEventListener(new ValueEventListener() {
+                DatabaseReference sinhVienRef = FirebaseDatabase.getInstance().getReference("sinhvien");
+                diemDanhList.clear(); // Xóa dữ liệu cũ trước khi thêm dữ liệu mới
+
+                // Lắng nghe sự kiện thêm sinh viên vào lớp được chọn
+                sinhVienRef.orderByChild("malop").equalTo(tenLopChon).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        diemDanhList.clear();
-
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Diemdanh diemdanh = snapshot.getValue(Diemdanh.class);
                             if (diemdanh != null) {
                                 diemDanhList.add(diemdanh);
                             }
-                        }
 
-                        // Cập nhật dữ liệu trong adapter và hiển thị lại ListView
+                        }
                         adapter.notifyDataSetChanged();
                     }
 
