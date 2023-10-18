@@ -1,24 +1,21 @@
 package com.example.quanlysinhvien_app.Database;
 
-import java.sql.Date;
-
 public class Diemdanh {
 
     private String masv;
     private String malop;
     private String mamonhoc;
     private String hocky;
-    private Date ngaydiemdanh;
+    private String ngaydiemdanh; // Sửa đổi kiểu dữ liệu thành String
     private boolean tinhtrangdiemdanh;
-    private String ghiChu; // Thêm biến để lưu ghi chú
-
-    private String hotensv; // Thay vì tensv, sử dụng hotensv
+    private String ghiChu;
+    private String hotensv;
 
     public Diemdanh() {
         // Empty constructor required for Firebase
     }
 
-    public Diemdanh(String masv, String malop, String mamonhoc, String hocky, Date ngaydiemdanh, boolean tinhtrangdiemdanh, String ghiChu, String hotensv) {
+    public Diemdanh(String masv, String malop, String mamonhoc, String hocky, String ngaydiemdanh, boolean tinhtrangdiemdanh, String ghiChu, String hotensv) {
         this.masv = masv;
         this.malop = malop;
         this.mamonhoc = mamonhoc;
@@ -28,16 +25,6 @@ public class Diemdanh {
         this.ghiChu = ghiChu;
         this.hotensv = hotensv;
     }
-
-    // Getter và setter cho hotensv
-    public String getHotensv() {
-        return hotensv;
-    }
-
-    public void setHotensv(String hotensv) {
-        this.hotensv = hotensv;
-    }
-
 
     public String getMasv() {
         return masv;
@@ -71,11 +58,11 @@ public class Diemdanh {
         this.hocky = hocky;
     }
 
-    public Date getNgaydiemdanh() {
+    public String getNgaydiemdanh() {
         return ngaydiemdanh;
     }
 
-    public void setNgaydiemdanh(Date ngaydiemdanh) {
+    public void setNgaydiemdanh(String ngaydiemdanh) {
         this.ngaydiemdanh = ngaydiemdanh;
     }
 
@@ -93,5 +80,13 @@ public class Diemdanh {
 
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
+    }
+
+    public String getHotensv() {
+        return hotensv;
+    }
+
+    public void setHotensv(String hotensv) {
+        this.hotensv = hotensv;
     }
 }

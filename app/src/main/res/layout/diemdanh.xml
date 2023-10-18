@@ -12,8 +12,8 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="406dp"
-            android:layout_height="264dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -77,26 +77,15 @@
                             android:textSize="20sp" />
 
                         <EditText
-                            android:id="@+id/dayEditText"
+                            android:id="@+id/dateEditText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="100dp"
-                            android:hint="Ngày"
-                            android:inputType="number" />
+                            android:hint="Chọn ngày điểm danh"
+                            android:focusable="false"
+                            android:clickable="true" />
 
-                        <EditText
-                            android:id="@+id/monthEditText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="Tháng"
-                            android:inputType="number" />
 
-                        <EditText
-                            android:id="@+id/yearEditText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="Năm"
-                            android:inputType="number" />
+
 
                     </LinearLayout>
 
@@ -157,8 +146,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="411dp"
-            android:layout_height="466dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -173,7 +162,7 @@
             <ListView
                 android:id="@+id/listView_Diemdanh"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -181,6 +170,12 @@
                 app:layout_constraintVertical_bias="1.0" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/luudiemdanh"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Lưu" />
 
     </LinearLayout>
 
