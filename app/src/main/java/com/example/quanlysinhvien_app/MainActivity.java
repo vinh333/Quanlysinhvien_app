@@ -1,7 +1,11 @@
 package com.example.quanlysinhvien_app;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import androidx.annotation.Nullable;
@@ -14,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chucnangthem);
+        setContentView(R.layout.activity_main);
 
 //        // Khởi tạo DatabaseHelper khi mở MainActivity
 //        mDatabaseHelper = new DatabaseHelper(this);
@@ -42,31 +46,54 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+        LinearLayout linearLayoutTrangChu = findViewById(R.id.LLnhapdiem);
+        LinearLayout linearLayoutDiemdanh = findViewById(R.id.LLdiemdanh);
+        LinearLayout linearLayoutCaidat = findViewById(R.id.LLcaidat);
+        Button btnSV = findViewById(R.id.btnsv);
+        Button btnKhoa = findViewById(R.id.btnkhoa);
 
-        int currentMode = AppCompatDelegate.getDefaultNightMode();
 
-        // Tìm và tham chiếu đến Switch theo ID "giaodien"
-        Switch switchButton = findViewById(R.id.giaodien);
-
-        switchButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
-            if (isChecked) {
-                newMode = AppCompatDelegate.MODE_NIGHT_YES; // Chế độ tối
-            } else {
-                newMode = AppCompatDelegate.MODE_NIGHT_NO; // Chế độ sáng
+        linearLayoutTrangChu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang màn hình Trang Chủ
+                Intent intent = new Intent(MainActivity.this, nhapdiem.class);
+                startActivity(intent);
             }
-
-            // Kiểm tra xem chế độ mới có khác với chế độ hiện tại không
-            if (currentMode != newMode) {
-                // Thiết lập chế độ mới
-                AppCompatDelegate.setDefaultNightMode(newMode);
-
-                // Cập nhật giao diện
-//                recreate();
+        });
+        linearLayoutDiemdanh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang màn hình Trang Chủ
+                Intent intent = new Intent(MainActivity.this, diemdanh.class);
+                startActivity(intent);
             }
-
         });
 
+        linearLayoutCaidat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang màn hình Trang Chủ
+                Intent intent = new Intent(MainActivity.this, chucnangthem.class);
+                startActivity(intent);
+            }
+        });
+        btnSV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang màn hình Trang Chủ
+                Intent intent = new Intent(MainActivity.this, sinhvien.class);
+                startActivity(intent);
+            }
+        });
 
+        btnKhoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang màn hình Trang Chủ
+                Intent intent = new Intent(MainActivity.this, dskhoa.class);
+                startActivity(intent);
+            }
+        });
     }
 }
