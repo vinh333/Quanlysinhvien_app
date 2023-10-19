@@ -12,6 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.example.quanlysinhvien_app.Select.Select_Sinhvien;
+import com.example.quanlysinhvien_app.Tinhnang.Diemdanhsv;
+import com.example.quanlysinhvien_app.Tinhnang.Nhapdiem;
+import com.example.quanlysinhvien_app.Tinhnang.Themsinhvien;
+
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper mDatabaseHelper;
     private int newMode;;
@@ -36,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // Chuyển sang màn hình Trang Chủ
-                    Intent intent = new Intent(MainActivity.this, nhapdiem.class);
+                    Intent intent = new Intent(MainActivity.this, Nhapdiem.class);
                     startActivity(intent);
                 }
             });
@@ -44,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // Chuyển sang màn hình Trang Chủ
-                    Intent intent = new Intent(MainActivity.this, diemdanh.class);
+                    Intent intent = new Intent(MainActivity.this, Diemdanhsv.class);
                     startActivity(intent);
                 }
             });
@@ -61,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // Chuyển sang màn hình Trang Chủ
-                    Intent intent = new Intent(MainActivity.this, sinhvien.class);
+                    Intent intent = new Intent(MainActivity.this, Select_Sinhvien.class);
                     startActivity(intent);
                 }
             });

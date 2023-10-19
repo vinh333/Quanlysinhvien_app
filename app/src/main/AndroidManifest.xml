@@ -29,6 +29,18 @@
         <activity
             android:name=".CaidatActivity" />
         <activity
+            android:name=".Select.Select_Sinhvien" />
+        <activity
+            android:name=".Tinhnang.Thongtinsinhvien" />
+        <activity
+            android:name=".Tinhnang.Diemdanhsv" />
+        <activity
+            android:name=".Tinhnang.Nhapdiem" />
+        <activity
+            android:name=".Tinhnang.Themsinhvien" />
+        <activity
+            android:name=".Tinhnang.Themmonhoc" />
+        <activity
             android:name=".nhapdiem" />
         <activity
             android:name=".diemdanh" />
