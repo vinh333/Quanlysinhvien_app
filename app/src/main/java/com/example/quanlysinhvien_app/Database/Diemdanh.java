@@ -66,7 +66,7 @@ public class Diemdanh {
         this.ngaydiemdanh = ngaydiemdanh;
     }
 
-    public boolean isTinhtrangdiemdanh() {
+    public boolean getTinhtrangdiemdanh() {
         return tinhtrangdiemdanh;
     }
 

@@ -13,19 +13,16 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quanlysinhvien_app.Adapter.DiemDanhAdapter;
 import com.example.quanlysinhvien_app.Database.Diemdanh;
 import com.example.quanlysinhvien_app.R;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,15 +30,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 public class Diemdanhsv extends AppCompatActivity {
 
     private List<Diemdanh> diemDanhList;
     private DiemDanhAdapter adapter;
     private ListView listView;
-    private Spinner spinnerLop , spinnerMon;
+    private Spinner spinnerLop, spinnerMon;
     private EditText dateEditText;
 
     @Override
@@ -56,13 +51,17 @@ public class Diemdanhsv extends AppCompatActivity {
         adapter = new DiemDanhAdapter(this, diemDanhList);
         listView.setAdapter(adapter);
         Button luuDiemDanhButton = findViewById(R.id.luudiemdanh);
+        dateEditText = findViewById(R.id.dateEditText);
 
-        // Khởi tạo ArrayAdapter cho Spinner lớp
+        // Khởi tạo ArrayAdapter cho Spinner lớp và Spinner môn
         ArrayAdapter<String> spinnerLopAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
         spinnerLopAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLop.setAdapter(spinnerLopAdapter);
+        ArrayAdapter<String> spinnerMonAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
+        spinnerMonAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMon.setAdapter(spinnerMonAdapter);
 
-// Lấy danh sách tên lớp từ Firebase và đưa vào Spinner lớp
+        // Lấy danh sách tên lớp từ Firebase và đưa vào Spinner lớp
         DatabaseReference lopRef = FirebaseDatabase.getInstance().getReference("lop");
         lopRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -87,11 +86,6 @@ public class Diemdanhsv extends AppCompatActivity {
                 // Xử lý khi việc lấy dữ liệu bị hủy bỏ hoặc thất bại
             }
         });
-
-        // Khởi tạo ArrayAdapter cho Spinner môn
-        ArrayAdapter<String> spinnerMonAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
-        spinnerMonAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerMon.setAdapter(spinnerMonAdapter);
 
         // Lấy danh sách tên môn từ Firebase và đưa vào Spinner môn
         DatabaseReference monRef = FirebaseDatabase.getInstance().getReference("monhoc");
@@ -119,10 +113,6 @@ public class Diemdanhsv extends AppCompatActivity {
             }
         });
 
-
-
-
-
         // Xử lý sự kiện khi chọn một lớp từ Spinner
         spinnerLop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -142,7 +132,6 @@ public class Diemdanhsv extends AppCompatActivity {
                             if (diemdanh != null) {
                                 diemDanhList.add(diemdanh);
                             }
-
                         }
                         adapter.notifyDataSetChanged();
                     }
@@ -164,15 +153,50 @@ public class Diemdanhsv extends AppCompatActivity {
         luuDiemDanhButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Gọi phương thức để lưu dữ liệu lên Firebase
-                luuDanhSachDiemDanh();
+                // Lấy ngày và môn điểm danh từ EditText và Spinner
+                String ngayDiemDanhStr = dateEditText.getText().toString();
+                String monDiemDanh = spinnerMon.getSelectedItem().toString();
+                String lop = spinnerLop.getSelectedItem().toString();
+
+                // Chuyển đổi chuỗi ngày thành đối tượng java.util.Date
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat dateFormatkey = new SimpleDateFormat("yyyy/MM/dd");
+                try {
+                    // Chuyển đổi chuỗi ngày thành đối tượng java.util.Date
+                    java.util.Date parsedDate = dateFormat.parse(ngayDiemDanhStr);
+                    // Chuyển đổi ngày thành chuỗi ngày theo định dạng key
+                    String ngayDiemDanhKey = dateFormatkey.format(parsedDate);
+
+                    DatabaseReference diemdanhRef = FirebaseDatabase.getInstance().getReference("diemdanh");
+
+                    // Tạo key dựa trên lớp, môn, ngày và mã sinh viên
+                    String diemdanhId = lop + "_" + monDiemDanh + "_" + ngayDiemDanhKey;
+
+                    // Lưu trạng thái điểm danh của từng sinh viên vào Firebase
+                    for (Diemdanh diemdanh : diemDanhList) {
+                        String maSV = diemdanh.getHotensv();
+                        boolean isChecked = diemdanh.getTinhtrangdiemdanh();
+                        String ghichu = diemdanh.getGhiChu();
+                        // Đặt ngày và môn điểm danh cho đối tượng diemdanh (dưới dạng chuỗi)
+                        diemdanh.setNgaydiemdanh(ngayDiemDanhStr);
+                        diemdanh.setMamonhoc(monDiemDanh);
+                        diemdanh.setMalop(lop);
+                        diemdanh.setTinhtrangdiemdanh(isChecked);
+                        diemdanh.setGhiChu(ghichu);
+                        // Đưa dữ liệu lên Firebase tại key được tạo
+                        diemdanhRef.child(diemdanhId).child(maSV).setValue(diemdanh);
+                    }
+
+                    // Thông báo cho người dùng biết rằng dữ liệu đã được lưu thành công (nếu cần thiết)
+                    Toast.makeText(Diemdanhsv.this, "Dữ liệu đã được lưu thành công!", Toast.LENGTH_SHORT).show();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    // Xử lý lỗi khi không thể chuyển đổi ngày
+                }
             }
         });
 
-        // Ánh xạ EditText ngày ( chọn ngày datepicker)
-        dateEditText = findViewById(R.id.dateEditText);
-
-        // Thiết lập sự kiện khi EditText ngày được nhấn
+        // Ánh xạ EditText ngày (chọn ngày datepicker)
         dateEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,49 +204,6 @@ public class Diemdanhsv extends AppCompatActivity {
             }
         });
     }
-
-    private void luuDanhSachDiemDanh() {
-        // Lấy ngày và môn điểm danh từ EditText và Spinner
-        String ngayDiemDanhStr = dateEditText.getText().toString();
-        String monDiemDanh = spinnerMon.getSelectedItem().toString();
-        String lop = spinnerLop.getSelectedItem().toString();
-        String maSV = ""; // Bạn cần lấy mã sinh viên từ dữ liệu nơi đó (chẳng hạn như EditText)
-
-        // Chuyển đổi chuỗi ngày thành đối tượng java.util.Date
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat dateFormatkey = new SimpleDateFormat("yyyy/MM/dd");
-        try {
-            // Chuyển đổi chuỗi ngày thành đối tượng java.util.Date
-            java.util.Date parsedDate = dateFormat.parse(ngayDiemDanhStr);
-            // Chuyển đổi ngày thành chuỗi ngày theo định dạng key
-            String ngayDiemDanhKey = dateFormatkey.format(parsedDate);
-
-            DatabaseReference diemdanhRef = FirebaseDatabase.getInstance().getReference("diemdanh");
-
-            // Tạo key dựa trên lớp, môn, ngày và mã sinh viên
-            String diemdanhId = lop + "_" + monDiemDanh + "_" + ngayDiemDanhKey ;
-
-            // Đặt ngày và môn điểm danh cho đối tượng diemdanh (dưới dạng chuỗi)
-            Diemdanh diemdanh = new Diemdanh();
-            diemdanh.setNgaydiemdanh(ngayDiemDanhStr);
-            diemdanh.setMamonhoc(monDiemDanh);
-            diemdanh.setMalop(lop);
-
-            // Đưa dữ liệu lên Firebase tại key được tạo
-            diemdanhRef.child(diemdanhId).setValue(diemdanh);
-
-            // Thông báo cho người dùng biết rằng dữ liệu đã được lưu thành công (nếu cần thiết)
-            Toast.makeText(this, "Dữ liệu đã được lưu thành công!", Toast.LENGTH_SHORT).show();
-        } catch (ParseException e) {
-            e.printStackTrace();
-            // Xử lý lỗi khi không thể chuyển đổi ngày
-        }
-    }
-
-
-
-
-
 
     private void showDatePickerDialog() {
         // Lấy ngày hiện tại

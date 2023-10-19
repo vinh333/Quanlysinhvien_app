@@ -1,6 +1,8 @@
 package com.example.quanlysinhvien_app.Adapter;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,26 +30,70 @@ public class DiemDanhAdapter extends ArrayAdapter<Diemdanh> {
         this.context = context;
     }
 
+    static class ViewHolder {
+        CheckBox checkBoxDiemDanh;
+        TextView textViewTenSV;
+        EditText editTextGhiChu;
+    }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        ViewHolder holder;
+
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.list_item_diemdanh, parent, false);
+
+            holder = new ViewHolder();
+            holder.checkBoxDiemDanh = convertView.findViewById(R.id.checkbox_diemdanh);
+            holder.textViewTenSV = convertView.findViewById(R.id.textView_diemdanh_tensv);
+            holder.editTextGhiChu = convertView.findViewById(R.id.textView_diemdanh_note);
+
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
         Diemdanh diemdanh = diemdanhList.get(position);
 
-        CheckBox checkBoxDiemDanh = convertView.findViewById(R.id.checkbox_diemdanh);
-        TextView textViewTenSV = convertView.findViewById(R.id.textView_diemdanh_tensv);
-        EditText editTextGhiChu = convertView.findViewById(R.id.textView_diemdanh_note);
-
         // Đặt dữ liệu cho các thành phần trong layout
-        textViewTenSV.setText(diemdanh.getHotensv()); // Thay thế bằng phương thức lấy tên sinh viên từ Diemdanh
-        checkBoxDiemDanh.setChecked(diemdanh.isTinhtrangdiemdanh());
-        editTextGhiChu.setText(diemdanh.getGhiChu()); // Thay thế bằng phương thức lấy ghi chú từ Diemdanh
+        holder.textViewTenSV.setText(diemdanh.getHotensv());
+        holder.checkBoxDiemDanh.setChecked(diemdanh.getTinhtrangdiemdanh());
+        holder.editTextGhiChu.setText(diemdanh.getGhiChu());
 
-        // Các xử lý khác tại đây nếu cần
+        // Lưu trạng thái của CheckBox khi thay đổi
+        holder.checkBoxDiemDanh.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            diemdanh.setTinhtrangdiemdanh(isChecked);
+        });
+
+
+        // Lưu trạng thái của CheckBox khi thay đổi
+        holder.checkBoxDiemDanh.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            diemdanh.setTinhtrangdiemdanh(isChecked);
+        });
+        // Đặt trạng thái của CheckBox
+        holder.checkBoxDiemDanh.setChecked(diemdanh.getTinhtrangdiemdanh());
+
+
+        // Lưu nội dung của EditText khi thay đổi
+        holder.editTextGhiChu.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                diemdanh.setGhiChu(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Lưu ngay cả khi EditText rỗng
+                diemdanh.setGhiChu(s.toString());
+            }
+        });
+
 
         return convertView;
     }
