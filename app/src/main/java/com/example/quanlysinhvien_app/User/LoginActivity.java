@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.quanlysinhvien_app.MainActivity;
+import com.example.quanlysinhvien_app.PinEntryActivity;
+import com.example.quanlysinhvien_app.PinManager;
 import com.example.quanlysinhvien_app.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,15 +36,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private Button btnLogin;
-    private LinearLayout btnRegister; // Thêm nút đăng ký
-
-
+    private LinearLayout btnRegister;
     private FirebaseAuth mAuth;
-
     private SharedPreferences sharedPreferences;
-
-    private DatabaseReference mDatabase;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +48,8 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
 
-
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-//        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             currentUser.reload();
@@ -68,12 +61,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Write a message to the database
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("message");
-
-                myRef.setValue("Hello, juasdkojasl!");
-
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
 
@@ -84,8 +71,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     private void loginUser(String email, String password) {
@@ -94,16 +79,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             saveLoginStatus(email);
                             updateUI(user);
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
                     }
@@ -128,21 +109,22 @@ public class LoginActivity extends AppCompatActivity {
     public void updateUI(FirebaseUser account) {
         if (account != null) {
             Toast.makeText(this, "You Signed In successfully", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+
+            PinManager pinManager = new PinManager(this);
+            String savedPin = pinManager.getPin();
+
+            if (savedPin != null) {
+                // Người dùng đã thiết lập mã PIN, chuyển đến PinEntryActivity
+                Intent intent = new Intent(LoginActivity.this, PinEntryActivity.class);
+                startActivity(intent);
+            } else {
+                // Người dùng chưa thiết lập mã PIN, chuyển đến MainActivity
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
         } else {
             Toast.makeText(this, "You Didn't sign in", Toast.LENGTH_LONG).show();
         }
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (getLoginStatus()) {
-            String email = getEmail();
-            etEmail.setText(email);
-        }
-    }
-
-
 }
+
