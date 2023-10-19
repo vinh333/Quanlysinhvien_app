@@ -18,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        PinManager pinManager = new PinManager(this);
-        String savedPin = pinManager.getPin();
-
-        if (savedPin == null) {
-
+//
+//        PinManager pinManager = new PinManager(this);
+//        String savedPin = pinManager.getPin();
+//
+//        if (savedPin == null) {
             setContentView(R.layout.activity_main);
+
             LinearLayout linearLayoutTrangChu = findViewById(R.id.LLnhapdiem);
             LinearLayout linearLayoutDiemdanh = findViewById(R.id.LLdiemdanh);
             LinearLayout linearLayoutCaidat = findViewById(R.id.LLcaidat);
@@ -75,11 +75,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        } else {
-            // Mã PIN đã cài đặt, chuyển đến trang nhập mã PIN
-            Intent intent = new Intent(this, PinEntryActivity.class);
-            startActivity(intent);
-
-        }
+//        } else {
+//            // Mã PIN đã cài đặt, chuyển đến trang nhập mã PIN
+//            Intent intent = new Intent(this, PinEntryActivity.class);
+//            startActivity(intent);
+//
+//        }
     }
+
 }
