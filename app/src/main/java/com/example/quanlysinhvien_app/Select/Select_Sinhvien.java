@@ -1,7 +1,9 @@
 package com.example.quanlysinhvien_app.Select;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -9,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.quanlysinhvien_app.Adapter.SinhVienAdapter;
 import com.example.quanlysinhvien_app.Database.SinhVien;
 import com.example.quanlysinhvien_app.R;
+import com.example.quanlysinhvien_app.Tinhnang.Thongtinsinhvien;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -68,6 +71,24 @@ public class Select_Sinhvien extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+        // chọn sinh viên từ listview
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Lấy sinh viên được chọn từ danh sách
+                SinhVien selectedSinhVien = sinhVienList.get(position);
+
+                // Tạo Intent để chuyển dữ liệu sang trang Thongtisinhvien
+                Intent intent = new Intent(Select_Sinhvien.this, Thongtinsinhvien.class);
+
+                // Đặt dữ liệu (masv) vào Intent
+                intent.putExtra("masv", selectedSinhVien.getMasv());
+
+                // Chuyển đến trang Thongtisinhvien
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void loadDataFromFirebase() {

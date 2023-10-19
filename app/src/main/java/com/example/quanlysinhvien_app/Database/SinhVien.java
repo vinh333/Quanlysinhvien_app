@@ -12,7 +12,7 @@ public class SinhVien {
     private int hocbong;
     private String malop;
     private String matinh;
-    private Date ngaysinh;
+    private String ngaysinh;
     private String noisinh;
     private String quan;
 
@@ -25,13 +25,7 @@ public class SinhVien {
         this.hocbong = hocBong;
         this.malop = maLop;
         this.matinh = maTinh;
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            this.ngaysinh = sdf.parse(ngaySinh);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            this.ngaysinh = new Date(); // Đặt ngày sinh mặc định nếu có lỗi khi chuyển đổi ngày
-        }
+        this.ngaysinh = ngaySinh;
         this.noisinh = noiSinh;
         this.quan = quan;
     }
@@ -56,7 +50,7 @@ public class SinhVien {
         this.hotensv = hotensv;
     }
 
-    public boolean isGioitinh() {
+    public boolean getGioitinh() {
         return gioitinh;
     }
 
@@ -96,11 +90,11 @@ public class SinhVien {
         this.matinh = matinh;
     }
 
-    public Date getNgaysinh() {
+    public String getNgaysinh() {
         return ngaysinh;
     }
 
-    public void setNgaysinh(Date ngaysinh) {
+    public void setNgaysinh(String ngaysinh) {
         this.ngaysinh = ngaysinh;
     }
 
