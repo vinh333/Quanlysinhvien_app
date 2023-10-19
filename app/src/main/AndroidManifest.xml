@@ -39,6 +39,11 @@
             android:name=".dskhoa" />
         <activity
             android:name=".khoa" />
+        <activity
+            android:name=".mapin" />
+        <activity
+            android:name=".PinEntryActivity" />
+
     </application>
 
 </manifest>
