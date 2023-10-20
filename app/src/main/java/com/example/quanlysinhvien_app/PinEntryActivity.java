@@ -30,7 +30,7 @@ public class PinEntryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String enteredPin = pinEntryEditText.getText().toString();
-                String savedPin = sharedPreferences.getString("pin", "");
+                String savedPin = sharedPreferences.getString("pin_key", "");
 
 
                 if (enteredPin.equals(savedPin)) {
