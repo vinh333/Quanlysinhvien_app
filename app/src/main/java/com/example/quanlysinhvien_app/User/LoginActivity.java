@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             updateUI(currentUser);
         }
 
-        sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("PIN_PREFERENCES", MODE_PRIVATE);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

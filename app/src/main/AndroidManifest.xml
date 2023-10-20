@@ -39,14 +39,10 @@
             android:name=".Tinhnang.Themsinhvien" />
         <activity
             android:name=".Tinhnang.Themmonhoc" />
-        <activity
-            android:name=".nhapdiem" />
-        <activity
-            android:name=".diemdanh" />
+
         <activity
             android:name=".chucnangthem" />
-        <activity
-            android:name=".sinhvien" />
+
         <activity
             android:name=".dskhoa" />
         <activity
