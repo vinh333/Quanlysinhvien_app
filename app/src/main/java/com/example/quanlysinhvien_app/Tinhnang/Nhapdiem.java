@@ -31,7 +31,7 @@ public class Nhapdiem extends AppCompatActivity {
         setContentView(R.layout.nhapdiem);
 
         // Ánh xạ các phần tử từ layout XML
-        spinner_masv = findViewById(R.id.spinner_sinhvien);
+        spinner_masv = findViewById(R.id.spinner_lop_diem);
         spinner_hocky = findViewById(R.id.spinner_hocky);
         spinner_tenmonhoc = findViewById(R.id.spinner_tenmonhoc);
         spinner_diem = findViewById(R.id.spinner_diem);
