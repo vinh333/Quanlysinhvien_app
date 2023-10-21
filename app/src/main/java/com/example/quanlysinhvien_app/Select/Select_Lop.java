@@ -6,59 +6,63 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.quanlysinhvien_app.Adapter.SinhVienAdapter;
-import com.example.quanlysinhvien_app.Database.SinhVien;
+
+import com.example.quanlysinhvien_app.Adapter.LopAdapter;
+import com.example.quanlysinhvien_app.Database.Lop;
 import com.example.quanlysinhvien_app.R;
+import com.example.quanlysinhvien_app.Tinhnang.Nhapdiem;
 import com.example.quanlysinhvien_app.Tinhnang.Thongtinsinhvien;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Select_Sinhvien extends AppCompatActivity {
+public class Select_Lop extends AppCompatActivity {
 
-    private List<SinhVien> sinhVienList;
-    private SinhVienAdapter adapter;
+    private List<Lop> lopList;
+    private LopAdapter adapter;
     private ListView listView;
     private boolean isAscendingOrder = true; // Biến để theo dõi trạng thái sắp xếp
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.danhsachsinhvien);
+        setContentView(R.layout.danhsachlop);
 
         // Tìm ListView bằng ID
         listView = findViewById(R.id.listView_Lop);
-        sinhVienList = new ArrayList<>();
+        lopList = new ArrayList<>();
 
-        // Tạo một instance của SinhVienAdapter và đặt adapter cho ListView
-        adapter = new SinhVienAdapter(this, sinhVienList);
+        // Tạo một instance của LopAdapter và đặt adapter cho ListView
+        adapter = new LopAdapter(this, lopList);
         listView.setAdapter(adapter);
 
         loadDataFromFirebase(); // Load dữ liệu từ Firebase khi activity được tạo
 
-        // Tìm nút lọc sinh viên theo tên và mã sinh viên bằng ID
-        TextView btnLocSV = findViewById(R.id.btn_loclop);
-        btnLocSV.setOnClickListener(new View.OnClickListener() {
+        // Tìm nút lọc lớp theo tên và mã lớp bằng ID
+        TextView btnLocLop = findViewById(R.id.btn_loclop);
+        btnLocLop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Xử lý sự kiện khi nút lọc được nhấn
                 // Sắp xếp dữ liệu từ A đến Z hoặc từ Z đến A tùy vào giá trị của isAscendingOrder
-                Collections.sort(sinhVienList, new Comparator<SinhVien>() {
+                Collections.sort(lopList, new Comparator<Lop>() {
                     @Override
-                    public int compare(SinhVien sv1, SinhVien sv2) {
+                    public int compare(Lop lop1, Lop lop2) {
                         int result;
                         if (isAscendingOrder) {
-                            result = sv1.getMasv().compareToIgnoreCase(sv2.getMasv());
+                            result = lop1.getMaLop().compareToIgnoreCase(lop2.getMaLop());
                         } else {
-                            result = sv2.getMasv().compareToIgnoreCase(sv1.getMasv());
+                            result = lop2.getMaLop().compareToIgnoreCase(lop1.getMaLop());
                         }
                         return result;
                     }
@@ -71,53 +75,45 @@ public class Select_Sinhvien extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
-        // chọn sinh viên từ listview
+
+        // chọn lớp từ listview
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Lấy sinh viên được chọn từ danh sách
-                SinhVien selectedSinhVien = sinhVienList.get(position);
+                // Lấy lớp được chọn từ danh sách
+                Lop selectedLop = lopList.get(position);
 
-                // Tạo Intent để chuyển dữ liệu sang trang Thongtisinhvien
-                Intent intent = new Intent(Select_Sinhvien.this, Thongtinsinhvien.class);
+                // Tạo Intent để chuyển dữ liệu sang trang Thongtinsinhvien
+                Intent intent = new Intent(Select_Lop.this, Nhapdiem.class);
 
-                // Đặt dữ liệu (masv) vào Intent
-                intent.putExtra("masv", selectedSinhVien.getMasv());
+                // Đặt dữ liệu (maLop) vào Intent
+                intent.putExtra("malop", selectedLop.getMaLop());
 
-                // Chuyển đến trang Thongtisinhvien
+                // Chuyển đến trang Thongtinsinhvien
                 startActivity(intent);
             }
         });
-
     }
 
     private void loadDataFromFirebase() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference("sinhvien");
+        DatabaseReference databaseReference = database.getReference("lop"); // Change to "lop" instead of "sinhvien"
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                sinhVienList.clear(); // Xóa dữ liệu cũ trước khi thêm dữ liệu mới từ Firebase
+                lopList.clear(); // Xóa dữ liệu cũ trước khi thêm dữ liệu mới từ Firebase
 
                 // Lặp qua dữ liệu đã lấy từ Firebase
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // Kiểm tra xem dữ liệu từ Firebase có tồn tại không
                     if (snapshot.exists()) {
-                        SinhVien sinhVien = new SinhVien();
-                        sinhVien.setMasv(snapshot.child("masv").getValue(String.class));
-                        sinhVien.setHotensv(snapshot.child("hotensv").getValue(String.class));
-                        sinhVien.setGioitinh(snapshot.child("gioitinh").getValue(Boolean.class));
-                        sinhVien.setDiachi(snapshot.child("diachi").getValue(String.class));
-                        sinhVien.setHocbong(snapshot.child("hocbong").getValue(Integer.class));
-                        sinhVien.setMalop(snapshot.child("malop").getValue(String.class));
-                        sinhVien.setMatinh(snapshot.child("matinh").getValue(String.class));
-                        // Phải sử dụng phương thức getValue(Long.class) cho ngày sinh vì Firebase trả về Long
-//                        sinhVien.setNgaysinh(new Date(snapshot.child("ngaysinh").getValue(Long.class)));
-                        sinhVien.setNoisinh(snapshot.child("noisinh").getValue(String.class));
-                        sinhVien.setQuan(snapshot.child("quan").getValue(String.class));
+                        Lop lop = new Lop();
+                        lop.setMaLop(snapshot.child("malop").getValue(String.class));
+                        lop.setTenLop(snapshot.child("tenlop").getValue(String.class));
 
-                        sinhVienList.add(sinhVien);
+
+                        lopList.add(lop);
                     }
                 }
 

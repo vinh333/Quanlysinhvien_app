@@ -160,7 +160,7 @@
                 android:textColor="#3F60A0" />
 
             <ListView
-                android:id="@+id/listView_Diemdanh"
+                android:id="@+id/listView_Lop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout5"

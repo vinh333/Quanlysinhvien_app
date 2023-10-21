@@ -1,5 +1,6 @@
 package com.example.quanlysinhvien_app.Tinhnang;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,7 +23,7 @@ import java.util.HashMap;
 
 public class Nhapdiem extends AppCompatActivity {
 
-    private Spinner spinner_masv, spinner_tenmonhoc, spinner_hocky, spinner_diem,spinner_tinchi;
+    private Spinner spinner_masv, spinner_tenmonhoc, spinner_hocky, spinner_diem,spinner_tinchi,spinner_Lop;
     private Button btnLuu;
 
     @Override
@@ -67,6 +68,9 @@ public class Nhapdiem extends AppCompatActivity {
 
 
         // Tham chiếu đến Firebase Database và tải dữ liệu vào Spinner mã sinh viên
+        // lay sinh viên theo mã lớp
+        Intent intent = getIntent();
+        String malop = intent.getStringExtra("malop");
         DatabaseReference databaseReferenceMasv = FirebaseDatabase.getInstance().getReference("sinhvien");
         loadSpinnerData(databaseReferenceMasv, spinner_masv, "masv");
 

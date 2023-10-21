@@ -28,7 +28,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class Diemdanhsv extends AppCompatActivity {
@@ -44,7 +43,7 @@ public class Diemdanhsv extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.diemdanh);
 
-        listView = findViewById(R.id.listView_Diemdanh);
+        listView = findViewById(R.id.listView_Lop);
         spinnerLop = findViewById(R.id.spinner_lop);
         spinnerMon = findViewById(R.id.spiner_mon);
         diemDanhList = new ArrayList<>();

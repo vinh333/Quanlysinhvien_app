@@ -15,6 +15,11 @@ public class Lop {
         this.maNganh = maNganh;
     }
 
+    public Lop() {
+
+    }
+
+
     // Getters and setters
     public String getMaLop() {
         return maLop;

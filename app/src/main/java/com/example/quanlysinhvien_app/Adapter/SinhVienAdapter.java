@@ -1,17 +1,13 @@
 package com.example.quanlysinhvien_app.Adapter;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import com.example.quanlysinhvien_app.Database.SinhVien;
-import com.example.quanlysinhvien_app.Database.SinhVien;
-import com.example.quanlysinhvien_app.DatabaseHelper;
 import com.example.quanlysinhvien_app.R;
 
 import java.util.List;
@@ -36,10 +32,10 @@ public class SinhVienAdapter extends ArrayAdapter<SinhVien> {
 
         SinhVien sinhVien = sinhVienList.get(position);
 
-        TextView tvMaSV = convertView.findViewById(R.id.tvMaSV);
+        TextView tvMaSV = convertView.findViewById(R.id.tvMaLop);
         tvMaSV.setText(sinhVien.getMasv());
 
-         TextView tvHoTen = convertView.findViewById(R.id.tvTenSV);
+         TextView tvHoTen = convertView.findViewById(R.id.tvTenLop);
          tvHoTen.setText(sinhVien.getHotensv());
 
         return convertView;

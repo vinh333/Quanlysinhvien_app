@@ -2,6 +2,7 @@ package com.example.quanlysinhvien_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +34,7 @@ public class mapin extends AppCompatActivity {
                 String enteredPin = pinInput.getText().toString();
                 if (enteredPin.length() == 6) {
                     // Lưu mã PIN
+                    Log.d("New PIN", enteredPin);
                     pinManager.setPin(enteredPin);
                     Toast.makeText(mapin.this, "Mã PIN đã được lưu.", Toast.LENGTH_SHORT).show();
 
