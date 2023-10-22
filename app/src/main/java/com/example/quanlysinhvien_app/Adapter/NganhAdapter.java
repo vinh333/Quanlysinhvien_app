@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,7 +32,16 @@ public class NganhAdapter extends ArrayAdapter<NganhHoc> {
             convertView = LayoutInflater.from(mContext).inflate(mResource, parent, false);
         }
 
-        // Lấy dữ liệu từ danh sách NganhHoc và hiển thị nó trong các TextViews hoặc các trường khác.
+        // Lấy đối tượng NganhHoc tại vị trí position
+        NganhHoc nganhHoc = getItem(position);
+
+        // Hiển thị thông tin ngành học trong TextView của mỗi item
+        TextView tenNganhTextView = convertView.findViewById(R.id.ten_nganh);
+        if (nganhHoc != null) {
+            tenNganhTextView.setText(nganhHoc.getTennganh());
+        }
+
+
 
         return convertView;
     }
