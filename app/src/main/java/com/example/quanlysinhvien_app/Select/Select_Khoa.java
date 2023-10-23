@@ -1,12 +1,12 @@
 package com.example.quanlysinhvien_app.Select;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quanlysinhvien_app.Adapter.KhoaAdapter;
-import com.example.quanlysinhvien_app.Adapter.NganhAdapter;
 import com.example.quanlysinhvien_app.Database.Khoa;
 import com.example.quanlysinhvien_app.Database.NganhHoc;
 import com.example.quanlysinhvien_app.R;
@@ -18,11 +18,14 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Select_Khoa extends AppCompatActivity {
     private ListView khoaListView;
     private DatabaseReference mDatabase;
+    private Map<Khoa, List<NganhHoc>> khoaNganhMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +45,10 @@ public class Select_Khoa extends AppCompatActivity {
                 for (DataSnapshot khoaSnapshot : khoaDataSnapshot.getChildren()) {
                     Khoa khoa = khoaSnapshot.getValue(Khoa.class);
                     khoaList.add(khoa);
+                    String makhoa = khoa.getMakhoa();
 
-                    // Lấy dữ liệu ngành học từ Firebase Realtime Database dựa trên mã khoa
                     DatabaseReference nganhRef = FirebaseDatabase.getInstance().getReference().child("nganhhoc");
-                    Query query = nganhRef.orderByChild("manganh");
+                    Query query = nganhRef.orderByChild("makhoa").equalTo(makhoa);
 
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -57,9 +60,13 @@ public class Select_Khoa extends AppCompatActivity {
                                 nganhList.add(nganhHoc);
                             }
 
-                            // Tạo Adapter và thiết lập cho ListView Khoa
-                            KhoaAdapter khoaAdapter = new KhoaAdapter(Select_Khoa.this, R.layout.item_khoa, khoaList, nganhList);
-                            khoaListView.setAdapter(khoaAdapter);
+                            khoaNganhMap.put(khoa, nganhList);
+
+                            if (khoaNganhMap.size() == khoaList.size()) {
+                                // Tất cả dữ liệu đã được tải, tạo Adapter và thiết lập cho ListView Khoa
+                                KhoaAdapter khoaAdapter = new KhoaAdapter(Select_Khoa.this, R.layout.item_khoa, khoaList, khoaNganhMap);
+                                khoaListView.setAdapter(khoaAdapter);
+                            }
                         }
 
                         @Override
@@ -67,7 +74,6 @@ public class Select_Khoa extends AppCompatActivity {
                             // Xử lý khi có lỗi truy vấn dữ liệu
                         }
                     });
-
                 }
             }
 
@@ -76,6 +82,5 @@ public class Select_Khoa extends AppCompatActivity {
                 // Xử lý lỗi nếu cần
             }
         });
-
     }
 }

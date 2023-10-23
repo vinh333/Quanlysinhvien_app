@@ -16,18 +16,22 @@ import com.example.quanlysinhvien_app.Database.NganhHoc;
 import com.example.quanlysinhvien_app.R;
 
 import java.util.List;
+import java.util.Map;
 
 public class KhoaAdapter extends ArrayAdapter<Khoa> {
     private Context mContext;
     private int mResource;
     private List<NganhHoc> nganhList;
+    private Map<Khoa, List<NganhHoc>> khoaNganhMap;
 
-    public KhoaAdapter(@NonNull Context context, int resource, @NonNull List<Khoa> khoaList, List<NganhHoc> nganhList) {
+
+    public KhoaAdapter(@NonNull Context context, int resource, @NonNull List<Khoa> khoaList, Map<Khoa, List<NganhHoc>> khoaNganhMap) {
         super(context, resource, khoaList);
         mContext = context;
         mResource = resource;
-        this.nganhList = nganhList;
+        this.khoaNganhMap = khoaNganhMap;
     }
+
 
     @NonNull
     @Override
@@ -39,6 +43,9 @@ public class KhoaAdapter extends ArrayAdapter<Khoa> {
         TextView tenKhoaTextView = convertView.findViewById(R.id.tenkhoa);
         tenKhoaTextView.setText(getItem(position).getTenkhoa());
 
+        Khoa khoa = getItem(position);
+        List<NganhHoc> nganhList = khoaNganhMap.get(khoa);
+
         // Hiển thị danh sách ngành trong mỗi item khoa
         ListView nganhListView = convertView.findViewById(R.id.list_nganh);
         NganhAdapter nganhAdapter = new NganhAdapter(mContext, R.layout.item_nganh, nganhList);
@@ -46,5 +53,6 @@ public class KhoaAdapter extends ArrayAdapter<Khoa> {
 
         return convertView;
     }
+
 }
 
