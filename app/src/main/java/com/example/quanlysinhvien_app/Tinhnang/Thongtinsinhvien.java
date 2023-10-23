@@ -2,9 +2,14 @@ package com.example.quanlysinhvien_app.Tinhnang;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.quanlysinhvien_app.Adapter.CustomAdapter;
 import com.example.quanlysinhvien_app.Database.SinhVien;
 import com.example.quanlysinhvien_app.R;
 import com.google.firebase.database.DataSnapshot;
@@ -16,13 +21,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Thongtinsinhvien extends AppCompatActivity {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     private TextView txtMaSV, txtTenSV, txtGioiTinh, txtNgaySinh, txtDiaChi, txtMaLop, txtNoiSinh, txtNamHoc;
 
+    private String tenKhoaHoc;
+    private  List<String> khoaHocList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +44,40 @@ public class Thongtinsinhvien extends AppCompatActivity {
         txtDiaChi = findViewById(R.id.txt_diachi);
         txtMaLop = findViewById(R.id.txt_malop);
         txtNoiSinh = findViewById(R.id.txt_noisinh);
-        txtNamHoc = findViewById(R.id.txt_namhoc); // Ánh xạ TextView cho Niên khóa
+        txtNamHoc = findViewById(R.id.txt_namhoc);
 
         Intent intent = getIntent();
         if (intent != null) {
             String masv = intent.getStringExtra("masv");
             loadDataFromFirebaseByMaSV(masv);
         }
+
+        // Khai báo ListView
+        ListView listView = findViewById(R.id.list_nienkhoa);
+
+
+
+        // Ánh xạ ListView và thiết lập CustomAdapter
+        CustomAdapter adapter = new CustomAdapter(Thongtinsinhvien.this, R.layout.layout_thongtisinhvien, khoaHocList);
+        listView.setAdapter(adapter);
+
+        // Thiết lập sự kiện khi người dùng nhấn vào một mục trong ListView
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Lấy năm học từ danh sách niên khóa
+                String selectedYear = khoaHocList.get(position);
+
+                // Tạo Intent để chuyển dữ liệu năm học qua trang Hienthi_Diem
+                Intent intent = new Intent(Thongtinsinhvien.this, Hienthi_Diem.class);
+                intent.putExtra("selectedYear", selectedYear);
+
+                // Khởi chạy Intent
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void loadDataFromFirebaseByMaSV(String masvToSearch) {
@@ -65,22 +101,18 @@ public class Thongtinsinhvien extends AppCompatActivity {
                                 txtGioiTinh.setText("Nữ");
                             }
 
-                            String ngaySinhString = String.valueOf(sinhVien.getNgaysinh()); // Đọc chuỗi ngày tháng từ Firebase
+                            String ngaySinhString = String.valueOf(sinhVien.getNgaysinh());
                             try {
-                                Date ngaySinhDate = dateFormat.parse(ngaySinhString); // Chuyển đổi chuỗi thành Date
-                                txtNgaySinh.setText(dateFormat.format(ngaySinhDate)); // Hiển thị ngày sinh dưới dạng chuỗi
+                                Date ngaySinhDate = dateFormat.parse(ngaySinhString);
+                                txtNgaySinh.setText(dateFormat.format(ngaySinhDate));
                             } catch (ParseException e) {
                                 e.printStackTrace();
-                                // Xử lý khi có lỗi xảy ra trong quá trình chuyển đổi
                             }
                             txtDiaChi.setText(sinhVien.getDiachi());
                             txtMaLop.setText(sinhVien.getMalop());
                             txtNoiSinh.setText(sinhVien.getNoisinh());
 
-                            // Lấy mã lớp từ sinh viên
                             String maLop = sinhVien.getMalop();
-
-                            // Truy vấn niên khóa từ mã lớp
                             DatabaseReference lopReference = FirebaseDatabase.getInstance().getReference("lop").child(maLop);
                             lopReference.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -88,16 +120,28 @@ public class Thongtinsinhvien extends AppCompatActivity {
                                     if (lopSnapshot.exists()) {
                                         String maKhoaHoc = lopSnapshot.child("makhoahoc").getValue(String.class);
 
-                                        // Lấy tên khoá học từ nút khoahoc
                                         DatabaseReference khoaHocReference = FirebaseDatabase.getInstance().getReference("khoahoc").child(maKhoaHoc);
                                         khoaHocReference.addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot khoaHocSnapshot) {
                                                 if (khoaHocSnapshot.exists()) {
-                                                    String tenKhoaHoc = khoaHocSnapshot.child("tenkhoahoc").getValue(String.class);
+                                                    tenKhoaHoc = khoaHocSnapshot.child("tenkhoahoc").getValue(String.class);
+                                                    txtNamHoc.setText(tenKhoaHoc);
 
-                                                    // Hiển thị niên khóa trong TextView
-                                                    txtNamHoc.setText("Năm học: " + tenKhoaHoc);
+                                                    // Tạo danh sách niên khóa từ năm hiện tại đến 4 năm tiếp theo
+
+                                                    tenKhoaHoc = tenKhoaHoc.substring(8); // Bỏ "Khoahoc " từ đầu chuỗi
+                                                    int currentYear = Integer.parseInt(tenKhoaHoc);
+                                                    for (int i = currentYear; i < currentYear + 4; i++) {
+                                                        khoaHocList.add(String.valueOf(i));
+                                                    }
+
+                                                    // Ánh xạ ListView
+                                                    ListView listView = findViewById(R.id.list_nienkhoa);
+
+                                                    // Tạo CustomAdapter và gắn vào ListView
+                                                    CustomAdapter adapter = new CustomAdapter(Thongtinsinhvien.this, R.layout.layout_thongtisinhvien, khoaHocList);
+                                                    listView.setAdapter(adapter);
                                                 }
                                             }
 

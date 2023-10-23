@@ -42,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Thông tin sinh viên"
-                android:textSize="20dp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -60,14 +61,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Mã sinh viên" />
+                    android:text="Mã sinh viên"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/txt_masv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textAlignment="textEnd"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -80,14 +84,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tên sinh viên" />
+                    android:text="Tên sinh viên"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/txt_tensv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textAlignment="textEnd"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -100,14 +107,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Giới tính" />
+                    android:text="Giới tính"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/txt_gioitinh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textAlignment="textEnd"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -120,14 +130,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Ngày sinh" />
+                    android:text="Ngày sinh"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/txt_ngaysinh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textAlignment="textEnd"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -140,14 +153,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Địa chỉ" />
+                    android:text="Địa chỉ"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/txt_diachi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textAlignment="textEnd"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -160,14 +176,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Mã lớp" />
+                    android:text="Mã lớp"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/txt_malop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textAlignment="textEnd"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -180,14 +199,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Nơi Sinh" />
+                    android:text="Nơi Sinh"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/txt_noisinh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textAlignment="textEnd"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -200,14 +222,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Năm học" />
+                    android:text="Năm học"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/txt_namhoc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textAlignment="textEnd"
+                    android:textSize="20sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -222,12 +247,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Năm học"
-                android:textSize="20dp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <ListView
+            android:id="@+id/list_nienkhoa"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="229dp" />
 
     </LinearLayout>
 </ScrollView>
