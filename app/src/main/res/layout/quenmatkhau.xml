@@ -68,9 +68,10 @@
             android:backgroundTint="@android:color/transparent"
             android:ems="10"
             android:inputType="text"
-            android:text="Email" />
+            android:hint="Email" />
 
-        <TextView
+        <Button
+            android:id="@+id/btnDN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
