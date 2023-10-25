@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backroud_login"
-    tools:context=".MainActivity">
+    tools:context=".quenpass_nhaplai">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -40,7 +40,7 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="390dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="114dp"
         android:background="@drawable/rounded_corner_white"
         android:orientation="vertical"
@@ -54,11 +54,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="Đặt lại nhập khẩu"
+            android:text="Đặt lại mật khẩu"
             android:textAlignment="center"
             android:textColor="#090774"
             android:textSize="27dp"
             android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@android:color/transparent"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="Email" />
 
         <EditText
             android:id="@+id/editTextText3"
@@ -69,34 +81,34 @@
             android:layout_marginRight="10dp"
             android:backgroundTint="@android:color/transparent"
             android:ems="10"
-            android:inputType="text"
-            android:text="Mật khẩu mới" />
+            android:inputType="textPassword"
+            android:hint="Mật khẩu mới" />
 
         <EditText
             android:id="@+id/editTextText4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="10dp"
             android:backgroundTint="@android:color/transparent"
             android:ems="10"
-            android:inputType="text"
-            android:text="Xác nhận mật khẩu mới" />
+            android:inputType="textPassword"
+            android:hint="Xác nhận mật khẩu mới" />
 
-        <TextView
+        <Button
+            android:id="@+id/changePasswordButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:background="@drawable/rounded_corner_blue"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="Đăng nhập"
+            android:text="Thay đổi mật khẩu"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
