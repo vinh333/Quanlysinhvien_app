@@ -32,12 +32,13 @@ public class Thongtinsinhvien extends AppCompatActivity {
 
     private String tenKhoaHoc;
     private  List<String> khoaHocList = new ArrayList<>();
+    private  String masv ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_thongtisinhvien);
 
-        txtMaSV = findViewById(R.id.txt_masv);
+        txtMaSV = findViewById(R.id.txt_tbmon);
         txtTenSV = findViewById(R.id.txt_tensv);
         txtGioiTinh = findViewById(R.id.txt_gioitinh);
         txtNgaySinh = findViewById(R.id.txt_ngaysinh);
@@ -48,7 +49,7 @@ public class Thongtinsinhvien extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            String masv = intent.getStringExtra("masv");
+             masv = intent.getStringExtra("masv");
             loadDataFromFirebaseByMaSV(masv);
         }
 
@@ -69,9 +70,10 @@ public class Thongtinsinhvien extends AppCompatActivity {
                 // Lấy năm học từ danh sách niên khóa
                 String selectedYear = khoaHocList.get(position);
 
-                // Tạo Intent để chuyển dữ liệu năm học qua trang Hienthi_Diem
+                // Tạo Intent để chuyển dữ liệu năm học và masv qua trang Hienthi_Diem
                 Intent intent = new Intent(Thongtinsinhvien.this, Hienthi_Diem.class);
                 intent.putExtra("selectedYear", selectedYear);
+                intent.putExtra("masv", masv);
 
                 // Khởi chạy Intent
                 startActivity(intent);
