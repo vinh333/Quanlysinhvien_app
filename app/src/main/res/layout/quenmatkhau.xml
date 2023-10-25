@@ -68,9 +68,10 @@
             android:backgroundTint="@android:color/transparent"
             android:ems="10"
             android:inputType="text"
-            android:text="Email" />
+            android:hint="Email" />
 
-        <TextView
+        <Button
+            android:id="@+id/btnDN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -83,6 +84,26 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
+        <Button
+            android:id="@+id/btnForgotPasswordBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_corner_blue"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="Thoát"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/forgetPasswordProgressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
