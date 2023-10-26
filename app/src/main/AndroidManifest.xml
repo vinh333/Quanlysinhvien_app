@@ -54,6 +54,8 @@
             android:name=".mapin" />
         <activity
             android:name=".PinEntryActivity" />
+        <activity
+            android:name=".User.quenpass" />
 
     </application>
 
