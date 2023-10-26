@@ -45,19 +45,19 @@ public class Nhapdiem extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String masv = spinner_masv.getSelectedItem().toString();
-                String monhoc = spinner_tenmonhoc.getSelectedItem().toString();
+                String tenmonhoc = spinner_tenmonhoc.getSelectedItem().toString();
                 String diem = spinner_diem.getSelectedItem().toString();
                 String hocky = spinner_hocky.getSelectedItem().toString();
                 String tinchi = spinner_tinchi.getSelectedItem().toString();
 
-                if (!masv.isEmpty() && !monhoc.isEmpty() && !diem.isEmpty() && !hocky.isEmpty() && !tinchi.isEmpty()) {
+                if (!masv.isEmpty() && !tenmonhoc.isEmpty() && !diem.isEmpty() && !hocky.isEmpty() && !tinchi.isEmpty()) {
                     // Tạo đối tượng DiemThiHocKy
-                    DiemThiHocKy diemThiHocKy = new DiemThiHocKy(masv, hocky, monhoc, tinchi, diem);
+                    DiemThiHocKy diemThiHocKy = new DiemThiHocKy(masv, hocky, tenmonhoc, tinchi, diem);
 
                     // Thực hiện việc ghi dữ liệu lên Firebase
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("bangdiemthihocky");
-                    myRef.child(masv).child(hocky).child(monhoc).setValue(diemThiHocKy);
+                    myRef.child(masv).child(hocky).child(tenmonhoc).setValue(diemThiHocKy);
 
                 } else {
                     // Xử lý lỗi hoặc hiển thị thông báo nếu cần
