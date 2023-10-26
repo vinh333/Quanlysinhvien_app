@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void updateUI(FirebaseUser account) {
         if (account != null) {
-            Toast.makeText(this, "You Signed In successfully", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_LONG).show();
 
             PinManager pinManager = new PinManager(this);
             String savedPin = pinManager.getPin();
