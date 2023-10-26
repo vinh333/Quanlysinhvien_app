@@ -33,7 +33,7 @@
                 android:text="Mã sv" />
 
             <Spinner
-                android:id="@+id/spinner_lop_diem"
+                android:id="@+id/spinner_sinhvien"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

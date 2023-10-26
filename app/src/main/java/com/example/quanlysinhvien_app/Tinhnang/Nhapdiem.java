@@ -1,6 +1,5 @@
 package com.example.quanlysinhvien_app.Tinhnang;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,7 +22,7 @@ import java.util.HashMap;
 
 public class Nhapdiem extends AppCompatActivity {
 
-    private Spinner spinner_masv, spinner_tenmonhoc, spinner_hocky, spinner_diem,spinner_tinchi,spinner_Lop;
+    private Spinner spinner_masv, spinner_tenmonhoc, spinner_hocky, spinner_diem,spinner_tinchi;
     private Button btnLuu;
 
     @Override
@@ -32,7 +31,7 @@ public class Nhapdiem extends AppCompatActivity {
         setContentView(R.layout.nhapdiem);
 
         // Ánh xạ các phần tử từ layout XML
-        spinner_masv = findViewById(R.id.spinner_lop_diem);
+        spinner_masv = findViewById(R.id.spinner_sinhvien);
         spinner_hocky = findViewById(R.id.spinner_hocky);
         spinner_tenmonhoc = findViewById(R.id.spinner_tenmonhoc);
         spinner_diem = findViewById(R.id.spinner_diem);
@@ -45,19 +44,19 @@ public class Nhapdiem extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String masv = spinner_masv.getSelectedItem().toString();
-                String tenmonhoc = spinner_tenmonhoc.getSelectedItem().toString();
+                String monhoc = spinner_tenmonhoc.getSelectedItem().toString();
                 String diem = spinner_diem.getSelectedItem().toString();
                 String hocky = spinner_hocky.getSelectedItem().toString();
                 String tinchi = spinner_tinchi.getSelectedItem().toString();
 
-                if (!masv.isEmpty() && !tenmonhoc.isEmpty() && !diem.isEmpty() && !hocky.isEmpty() && !tinchi.isEmpty()) {
+                if (!masv.isEmpty() && !monhoc.isEmpty() && !diem.isEmpty() && !hocky.isEmpty() && !tinchi.isEmpty()) {
                     // Tạo đối tượng DiemThiHocKy
-                    DiemThiHocKy diemThiHocKy = new DiemThiHocKy(masv, hocky, tenmonhoc, tinchi, diem);
+                    DiemThiHocKy diemThiHocKy = new DiemThiHocKy(masv, hocky, monhoc, tinchi, diem);
 
                     // Thực hiện việc ghi dữ liệu lên Firebase
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("bangdiemthihocky");
-                    myRef.child(masv).child(hocky).child(tenmonhoc).setValue(diemThiHocKy);
+                    myRef.child(masv).child(hocky).child(monhoc).setValue(diemThiHocKy);
 
                 } else {
                     // Xử lý lỗi hoặc hiển thị thông báo nếu cần
@@ -68,8 +67,6 @@ public class Nhapdiem extends AppCompatActivity {
 
 
         // Tham chiếu đến Firebase Database và tải dữ liệu vào Spinner mã sinh viên
-        // lay sinh viên theo mã lớp
-
         DatabaseReference databaseReferenceMasv = FirebaseDatabase.getInstance().getReference("sinhvien");
         loadSpinnerData(databaseReferenceMasv, spinner_masv, "masv");
 
@@ -126,30 +123,24 @@ public class Nhapdiem extends AppCompatActivity {
                 ArrayList<String> dataList = new ArrayList<>();
                 HashMap<String, Integer> monhocTinChiMap = new HashMap<>();
                 HashMap<String, String> sinhVienMap = new HashMap<>();
-                Intent intent = getIntent();
-                String malop = intent.getStringExtra("malop");
 
                 // Lặp qua các môn học và lấy thông tin tên môn và số tín chỉ
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String tenMonHoc = snapshot.child("tenmonhoc").getValue(String.class);
                     Integer soTinChi = snapshot.child("tongtinchi").getValue(Integer.class);
-//                    String masv = snapshot.child("masv").getValue(String.class);
+                    String masv = snapshot.child("masv").getValue(String.class);
 
                     // Lưu thông tin số tín chỉ vào HashMap với key là tên môn học
                     if (tenMonHoc != null && soTinChi != null) {
                         monhocTinChiMap.put(tenMonHoc, soTinChi);
                     }
 
-                    // Kiểm tra nếu sinh viên có trường dữ liệu "malop" trùng với malop từ Intent
-                    String malopSinhVien = snapshot.child("malop").getValue(String.class);
-                    if (malopSinhVien != null && malopSinhVien.equals(malop)) {
-                        // Nếu trùng, thêm masv vào danh sách
-                        String masv = snapshot.child("masv").getValue(String.class);
-                        if (masv != null) {
-                            dataList.add(masv);
-                        }
-                    }
 
+
+                    // Lưu giá trị masv vào dataList
+                    if (masv != null) {
+                        dataList.add(masv);
+                    }
                 }
 
                 // Kiểm tra xem childKey có phải là tên môn học không
