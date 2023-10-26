@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Quanlysinhvien_app"
         tools:targetApi="31">
         <activity
-            android:name=".Tinhnang.Nhapdiem"
+            android:name=".Select.Select_Khoa"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,12 +32,12 @@
             android:name=".Tinhnang.Thongtinsinhvien" />
 <!--        <activity-->
 <!--            android:name=".Select.Select_Lop" />-->
-<!--        <activity-->
-<!--            android:name=".Select.Select_Sinhvien" />-->
+        <activity
+            android:name=".Select.Select_Sinhvien" />
         <activity
             android:name=".Tinhnang.Diemdanhsv" />
-<!--        <activity-->
-<!--            android:name=".Tinhnang.Nhapdiem" />-->
+        <activity
+            android:name=".Tinhnang.Nhapdiem" />
         <activity
             android:name=".Tinhnang.Themsinhvien" />
         <activity
@@ -54,10 +54,7 @@
             android:name=".mapin" />
         <activity
             android:name=".PinEntryActivity" />
-<!--        <activity-->
-<!--            android:name=".User.quenpass_nhaplai" />-->
-        <activity
-            android:name=".Tinhnang.Hienthi_Diem" />
+
     </application>
 
 </manifest>

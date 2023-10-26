@@ -58,7 +58,7 @@ public class chucnangthem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Đánh dấu người dùng đã đăng xuất
-                setLoggedInStatus(false);
+                setLoggedInStatus(true);
 
                 // Chuyển đến màn hình đăng nhập
                 Intent intent = new Intent(chucnangthem.this, LoginActivity.class);
@@ -72,7 +72,13 @@ public class chucnangthem extends AppCompatActivity {
     private void setLoggedInStatus(boolean isLoggedIn) {
         SharedPreferences preferences = getSharedPreferences("my_prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+
+        // Xóa thông tin đăng nhập (email và mật khẩu)
+        editor.putString("email", "");  // Đặt email thành chuỗi rỗng
+        editor.putString("password", ""); // Đặt mật khẩu thành chuỗi rỗng
+
         editor.putBoolean("is_logged_in", isLoggedIn);
         editor.apply();
     }
+
 }
