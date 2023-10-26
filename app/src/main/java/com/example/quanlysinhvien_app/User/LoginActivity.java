@@ -22,6 +22,7 @@ import com.example.quanlysinhvien_app.MainActivity;
 import com.example.quanlysinhvien_app.PinEntryActivity;
 import com.example.quanlysinhvien_app.PinManager;
 import com.example.quanlysinhvien_app.R;
+import com.example.quanlysinhvien_app.Tinhnang.Diemdanhsv;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private LinearLayout btnRegister;
     private FirebaseAuth mAuth;
     private SharedPreferences sharedPreferences;
+    private TextView quen_mk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,15 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        quen_mk = findViewById(R.id.quenmk);
+        quen_mk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang màn hình Trang Chủ
+                Intent intent = new Intent(LoginActivity.this, quenpass.class);
+                startActivity(intent);
+            }
+        });
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();

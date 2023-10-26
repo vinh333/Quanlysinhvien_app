@@ -1,9 +1,10 @@
 package com.example.quanlysinhvien_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -11,10 +12,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.example.quanlysinhvien_app.User.LoginActivity;
+
 public class chucnangthem extends AppCompatActivity {
     private DatabaseHelper mDatabaseHelper;
     private int newMode;
     private PinManager pinManager;
+    private Button logout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,6 +28,7 @@ public class chucnangthem extends AppCompatActivity {
         int currentMode = AppCompatDelegate.getDefaultNightMode();
         TextView mapin = findViewById(R.id.mapin);
         Switch switchButton = findViewById(R.id.giaodien);
+        logout = findViewById(R.id.dangxuat);
 
         // Khởi tạo PinManager
         pinManager = new PinManager(this);
@@ -48,5 +53,26 @@ public class chucnangthem extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Đánh dấu người dùng đã đăng xuất
+                setLoggedInStatus(false);
+
+                // Chuyển đến màn hình đăng nhập
+                Intent intent = new Intent(chucnangthem.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    // Phương thức để thiết lập trạng thái đăng nhập trong SharedPreferences
+    private void setLoggedInStatus(boolean isLoggedIn) {
+        SharedPreferences preferences = getSharedPreferences("my_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("is_logged_in", isLoggedIn);
+        editor.apply();
     }
 }

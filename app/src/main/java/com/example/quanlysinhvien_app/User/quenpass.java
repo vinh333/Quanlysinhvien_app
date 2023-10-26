@@ -72,8 +72,8 @@ public class quenpass extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(quenpass.this, "Reset Password link has been sent to your registered Email", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(quenpass.this, quenpass_nhaplai.class);
+                        Toast.makeText(quenpass.this, "Vui lòng kiểm hộp thư email để đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(quenpass.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     }
