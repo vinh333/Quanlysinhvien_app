@@ -2,7 +2,6 @@ package com.example.quanlysinhvien_app.Tinhnang;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -29,7 +28,7 @@ public class Hienthi_Diem extends AppCompatActivity {
     private List<String> subjects;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_hienthi_diem);
 
@@ -58,8 +57,10 @@ public class Hienthi_Diem extends AppCompatActivity {
                 // Dữ liệu đã thay đổi, xử lý dữ liệu ở đây
                 subjects.clear();
                 for (DataSnapshot subjectSnapshot : dataSnapshot.getChildren()) {
-                    String subjectName = subjectSnapshot.getKey();
-                    subjects.add(subjectName);
+                    // Lấy giá trị của thuộc tính "monhoc" từ mỗi nút con
+                    String monHocValue = subjectSnapshot.child("monhoc").getValue(String.class);
+                    // Thêm vào danh sách subjects
+                    subjects.add(monHocValue);
                 }
                 // Thông báo cho Adapter rằng dữ liệu đã thay đổi, cần cập nhật giao diện
                 adapter.notifyDataSetChanged();
