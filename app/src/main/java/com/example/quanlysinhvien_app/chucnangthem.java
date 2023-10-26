@@ -12,18 +12,25 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.example.quanlysinhvien_app.DatabaseHelper;
+import com.example.quanlysinhvien_app.PinManager;
+import com.example.quanlysinhvien_app.R;
 import com.example.quanlysinhvien_app.User.LoginActivity;
+import com.google.firebase.auth.FirebaseAuth; // Import thư viện Firebase Auth
 
 public class chucnangthem extends AppCompatActivity {
     private DatabaseHelper mDatabaseHelper;
     private int newMode;
     private PinManager pinManager;
     private Button logout;
+    private FirebaseAuth mAuth; // Khai báo đối tượng FirebaseAuth
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chucnangthem);
+
+        mAuth = FirebaseAuth.getInstance(); // Khởi tạo đối tượng FirebaseAuth
 
         int currentMode = AppCompatDelegate.getDefaultNightMode();
         TextView mapin = findViewById(R.id.mapin);
@@ -57,15 +64,22 @@ public class chucnangthem extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Đánh dấu người dùng đã đăng xuất
-                setLoggedInStatus(true);
-
-                // Chuyển đến màn hình đăng nhập
-                Intent intent = new Intent(chucnangthem.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                // Đăng xuất người dùng
+                signOut();
             }
         });
+    }
+
+    // Hàm đăng xuất người dùng
+    private void signOut() {
+        mAuth.signOut(); // Đăng xuất người dùng khỏi Firebase Authentication
+
+        // Đánh dấu người dùng đã đăng xuất
+        setLoggedInStatus(false);
+
+        // Chuyển đến màn hình đăng nhập
+        Intent intent = new Intent(chucnangthem.this, LoginActivity.class);
+        startActivity(intent);
     }
 
     // Phương thức để thiết lập trạng thái đăng nhập trong SharedPreferences
@@ -80,5 +94,4 @@ public class chucnangthem extends AppCompatActivity {
         editor.putBoolean("is_logged_in", isLoggedIn);
         editor.apply();
     }
-
 }
