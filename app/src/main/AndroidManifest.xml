@@ -48,7 +48,8 @@
 
         <activity
             android:name=".Select.Select_Nganh" />
-
+        <activity
+            android:name=".Select.Select_Lop" />
         <activity
             android:name=".mapin" />
         <activity

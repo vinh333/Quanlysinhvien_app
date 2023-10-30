@@ -2,6 +2,8 @@ package com.example.quanlysinhvien_app.Select;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -72,6 +74,22 @@ public class Select_Nganh extends AppCompatActivity {
                                 Toast.makeText(Select_Nganh.this, "Không thể đọc dữ liệu từ Firebase", Toast.LENGTH_SHORT).show();
                             }
                         });
+
+                        // Xử lý sự kiện khi người dùng chọn một ngành học
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                String selectedNganh = tenNganhList.get(position);
+                                getMaNganhFromFirebase(selectedNganh, new FirebaseCallback() {
+                                    @Override
+                                    public void onCallback(String maNganh) {
+                                        Intent intent = new Intent(Select_Nganh.this, Select_Lop.class);
+                                        intent.putExtra("MA_NGANH", maNganh);
+                                        startActivity(intent);
+                                    }
+                                });
+                            }
+                        });
                     } else {
                         // Mã khoa không hợp lệ, thông báo cho người dùng
                         Toast.makeText(Select_Nganh.this, "Mã khoa không hợp lệ", Toast.LENGTH_SHORT).show();
@@ -86,5 +104,32 @@ public class Select_Nganh extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void getMaNganhFromFirebase(final String tenNganh, final FirebaseCallback callback) {
+        final String[] maNganh = {""};
+        DatabaseReference nganhRef = FirebaseDatabase.getInstance().getReference("nganhhoc");
+        nganhRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot nganhSnapshot : dataSnapshot.getChildren()) {
+                    String tenNganhFirebase = nganhSnapshot.child("tennganh").getValue(String.class);
+                    if (tenNganhFirebase != null && tenNganhFirebase.equals(tenNganh)) {
+                        maNganh[0] = nganhSnapshot.child("manganh").getValue(String.class);
+                        break;
+                    }
+                }
+                callback.onCallback(maNganh[0]);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Xử lý lỗi nếu có
+            }
+        });
+    }
+
+    public interface FirebaseCallback {
+        void onCallback(String maNganh);
     }
 }

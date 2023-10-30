@@ -14,7 +14,6 @@ import com.example.quanlysinhvien_app.Adapter.LopAdapter;
 import com.example.quanlysinhvien_app.Database.Lop;
 import com.example.quanlysinhvien_app.R;
 import com.example.quanlysinhvien_app.Tinhnang.Nhapdiem;
-import com.example.quanlysinhvien_app.Tinhnang.Thongtinsinhvien;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,11 +31,18 @@ public class Select_Lop extends AppCompatActivity {
     private LopAdapter adapter;
     private ListView listView;
     private boolean isAscendingOrder = true; // Biến để theo dõi trạng thái sắp xếp
+    private String maNganh; // Biến để lưu giá trị "manganh" nhận từ Intent
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.danhsachlop);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            // Nhận giá trị "manganh" từ Intent
+            maNganh = intent.getStringExtra("MA_NGANH");
+        }
 
         // Tìm ListView bằng ID
         listView = findViewById(R.id.listView_Lop);
@@ -83,13 +89,13 @@ public class Select_Lop extends AppCompatActivity {
                 // Lấy lớp được chọn từ danh sách
                 Lop selectedLop = lopList.get(position);
 
-                // Tạo Intent để chuyển dữ liệu sang trang Thongtinsinhvien
+                // Tạo Intent để chuyển dữ liệu sang trang Nhapdiem
                 Intent intent = new Intent(Select_Lop.this, Nhapdiem.class);
 
                 // Đặt dữ liệu (maLop) vào Intent
                 intent.putExtra("malop", selectedLop.getMaLop());
 
-                // Chuyển đến trang Thongtinsinhvien
+                // Chuyển đến trang Nhapdiem
                 startActivity(intent);
             }
         });
@@ -97,7 +103,7 @@ public class Select_Lop extends AppCompatActivity {
 
     private void loadDataFromFirebase() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference("lop"); // Change to "lop" instead of "sinhvien"
+        DatabaseReference databaseReference = database.getReference("lop");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -106,13 +112,11 @@ public class Select_Lop extends AppCompatActivity {
 
                 // Lặp qua dữ liệu đã lấy từ Firebase
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    // Kiểm tra xem dữ liệu từ Firebase có tồn tại không
-                    if (snapshot.exists()) {
+                    // Kiểm tra xem dữ liệu từ Firebase có tồn tại và có thuộc "manganh" đã chọn không
+                    if (snapshot.exists() && snapshot.child("manganh").getValue(String.class).equals(maNganh)) {
                         Lop lop = new Lop();
                         lop.setMaLop(snapshot.child("malop").getValue(String.class));
                         lop.setTenLop(snapshot.child("tenlop").getValue(String.class));
-
-
                         lopList.add(lop);
                     }
                 }
@@ -123,7 +127,7 @@ public class Select_Lop extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Phương thức này được gọi khi việc lấy dữ liệu bị hủy bỏ hoặc thất bại
+                // Xử lý lỗi nếu có
             }
         });
     }
