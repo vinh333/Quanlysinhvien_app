@@ -28,7 +28,7 @@ public class Select_Sinhvien extends AppCompatActivity {
     private SinhVienAdapter adapter;
     private ListView listView;
     private boolean isAscendingOrder = true; // Biến để theo dõi trạng thái sắp xếp
-
+    private String maLop;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +41,11 @@ public class Select_Sinhvien extends AppCompatActivity {
         // Tạo một instance của SinhVienAdapter và đặt adapter cho ListView
         adapter = new SinhVienAdapter(this, sinhVienList);
         listView.setAdapter(adapter);
+        Intent intent = getIntent();
+        if (intent != null) {
+            // Nhận giá trị "manganh" từ Intent
+            maLop = intent.getStringExtra("malop");
+        }
 
         loadDataFromFirebase(); // Load dữ liệu từ Firebase khi activity được tạo
 
@@ -102,8 +107,8 @@ public class Select_Sinhvien extends AppCompatActivity {
 
                 // Lặp qua dữ liệu đã lấy từ Firebase
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    // Kiểm tra xem dữ liệu từ Firebase có tồn tại không
-                    if (snapshot.exists()) {
+                    // Kiểm tra xem dữ liệu từ Firebase có tồn tại và có thuộc mã lớp đã chọn không
+                    if (snapshot.exists() && snapshot.child("malop").getValue(String.class).equals(maLop)) {
                         SinhVien sinhVien = new SinhVien();
                         sinhVien.setMasv(snapshot.child("masv").getValue(String.class));
                         sinhVien.setHotensv(snapshot.child("hotensv").getValue(String.class));
@@ -113,7 +118,7 @@ public class Select_Sinhvien extends AppCompatActivity {
                         sinhVien.setMalop(snapshot.child("malop").getValue(String.class));
                         sinhVien.setMatinh(snapshot.child("matinh").getValue(String.class));
                         // Phải sử dụng phương thức getValue(Long.class) cho ngày sinh vì Firebase trả về Long
-//                        sinhVien.setNgaysinh(new Date(snapshot.child("ngaysinh").getValue(Long.class)));
+//                    sinhVien.setNgaysinh(new Date(snapshot.child("ngaysinh").getValue(Long.class)));
                         sinhVien.setNoisinh(snapshot.child("noisinh").getValue(String.class));
                         sinhVien.setQuan(snapshot.child("quan").getValue(String.class));
 
@@ -131,4 +136,5 @@ public class Select_Sinhvien extends AppCompatActivity {
             }
         });
     }
+
 }

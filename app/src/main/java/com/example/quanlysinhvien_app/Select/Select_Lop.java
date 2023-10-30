@@ -90,7 +90,7 @@ public class Select_Lop extends AppCompatActivity {
                 Lop selectedLop = lopList.get(position);
 
                 // Tạo Intent để chuyển dữ liệu sang trang Nhapdiem
-                Intent intent = new Intent(Select_Lop.this, Nhapdiem.class);
+                Intent intent = new Intent(Select_Lop.this, Select_Sinhvien.class);
 
                 // Đặt dữ liệu (maLop) vào Intent
                 intent.putExtra("malop", selectedLop.getMaLop());

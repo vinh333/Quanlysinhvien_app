@@ -49,7 +49,11 @@
         <activity
             android:name=".Select.Select_Nganh" />
         <activity
+            android:name=".Select.Select_Sinhvien" />
+        <activity
             android:name=".Select.Select_Lop" />
+        <activity
+            android:name=".Tinhnang.Nhapdiem" />
         <activity
             android:name=".mapin" />
         <activity
