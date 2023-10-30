@@ -11,7 +11,7 @@ import com.example.quanlysinhvien_app.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Themmonhoc extends AppCompatActivity {
+public class  Themmonhoc extends AppCompatActivity {
 
     private EditText txtMaMonHoc, txtTenMonHoc, txt_TongTinChi;
     private Button btnLuu;

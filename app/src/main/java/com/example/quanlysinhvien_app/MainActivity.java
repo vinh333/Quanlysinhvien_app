@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // Chuyển sang màn hình Trang Chủ
-                    Intent intent = new Intent(MainActivity.this, dskhoa.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(MainActivity.this, dskhoa.class);
+//                    startActivity(intent);
                 }
             });
 

@@ -36,7 +36,6 @@ public class Nhapdiem extends AppCompatActivity {
         spinner_tenmonhoc = findViewById(R.id.spinner_tenmonhoc);
         spinner_diem = findViewById(R.id.spinner_diem);
         spinner_tinchi = findViewById(R.id.spinner_tinchi);
-
         btnLuu = findViewById(R.id.button_luu_nhapmonhoc); // Thêm dòng này để ánh xạ nút lưu
 
         // Thêm sự kiện lắng nghe cho nút Lưu
@@ -165,6 +164,7 @@ public class Nhapdiem extends AppCompatActivity {
                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(Nhapdiem.this, android.R.layout.simple_spinner_item, dataList);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(dataAdapter);
+
             }
 
             @Override
