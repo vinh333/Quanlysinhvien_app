@@ -21,8 +21,8 @@ import java.util.List;
 
 public class DiemDanhAdapter extends ArrayAdapter<Diemdanh> {
 
-    private List<Diemdanh> diemdanhList;
-    private Context context;
+    static List<Diemdanh> diemdanhList;
+    static Context context;
 
     public DiemDanhAdapter(Context context, List<Diemdanh> diemdanhList) {
         super(context, R.layout.list_item_diemdanh, diemdanhList);
@@ -97,4 +97,7 @@ public class DiemDanhAdapter extends ArrayAdapter<Diemdanh> {
 
         return convertView;
     }
+        public static List<Diemdanh> getDanhSachDiemDanh() {
+            return diemdanhList;
+        }
 }

@@ -2,14 +2,14 @@ package com.example.quanlysinhvien_app.Database;
 
 public class Diemdanh {
 
-    private String masv;
-    private String malop;
-    private String mamonhoc;
-    private String hocky;
-    private String ngaydiemdanh; // Sửa đổi kiểu dữ liệu thành String
-    private boolean tinhtrangdiemdanh;
-    private String ghiChu;
-    private String hotensv;
+    static String masv;
+    static String malop;
+    static String mamonhoc;
+    static String hocky;
+    static String ngaydiemdanh; // Sửa đổi kiểu dữ liệu thành String
+    static boolean tinhtrangdiemdanh;
+    static String ghiChu;
+    static String hotensv;
 
     public Diemdanh() {
         // Empty constructor required for Firebase

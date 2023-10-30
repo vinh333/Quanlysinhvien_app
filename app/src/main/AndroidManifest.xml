@@ -30,8 +30,8 @@
 
         <activity
             android:name=".Tinhnang.Thongtinsinhvien" />
-<!--        <activity-->
-<!--            android:name=".Select.Select_Lop" />-->
+        <activity
+            android:name=".Select.Select_Lop" />
         <activity
             android:name=".Select.Select_Sinhvien" />
         <activity
@@ -56,7 +56,10 @@
             android:name=".PinEntryActivity" />
         <activity
             android:name=".User.quenpass" />
-
+        <activity
+            android:name=".Tinhnang.Hienthi_Diem" />
+        <activity
+            android:name=".Adapter.hienthi.hienthidiemdanh" />
     </application>
 
 </manifest>

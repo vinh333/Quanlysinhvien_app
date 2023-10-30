@@ -1,6 +1,7 @@
 package com.example.quanlysinhvien_app.Tinhnang;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,8 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quanlysinhvien_app.Adapter.DiemDanhAdapter;
+import com.example.quanlysinhvien_app.Adapter.hienthi.hienthidiemdanh;
 import com.example.quanlysinhvien_app.Database.Diemdanh;
+import com.example.quanlysinhvien_app.PinEntryActivity;
 import com.example.quanlysinhvien_app.R;
+import com.example.quanlysinhvien_app.User.LoginActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,7 +54,28 @@ public class Diemdanhsv extends AppCompatActivity {
         adapter = new DiemDanhAdapter(this, diemDanhList);
         listView.setAdapter(adapter);
         Button luuDiemDanhButton = findViewById(R.id.luudiemdanh);
+        Button htdiemdanh = findViewById(R.id.htdiemdanh);
         dateEditText = findViewById(R.id.dateEditText);
+
+        // Sự kiện khi nút "Hiển thị danh sách" được nhấn
+        htdiemdanh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Lấy thông tin từ Spinner và EditText
+                String ngayDiemDanh = dateEditText.getText().toString();
+                String maLop = spinnerLop.getSelectedItem().toString();
+                String maMon = spinnerMon.getSelectedItem().toString();
+
+                // Truyền thông tin đến trang hienthidiemdanh
+                Intent intent = new Intent(Diemdanhsv.this, hienthidiemdanh.class);
+                intent.putExtra("ngayDiemDanh", ngayDiemDanh);
+                intent.putExtra("maLop", maLop);
+                intent.putExtra("maMon", maMon);
+                startActivity(intent);
+            }
+        });
+
+
 
         // Khởi tạo ArrayAdapter cho Spinner lớp và Spinner môn
         ArrayAdapter<String> spinnerLopAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
