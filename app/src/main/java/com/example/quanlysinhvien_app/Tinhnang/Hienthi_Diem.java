@@ -3,6 +3,8 @@ package com.example.quanlysinhvien_app.Tinhnang;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -49,6 +51,19 @@ public class Hienthi_Diem extends AppCompatActivity {
 
         // Kết nối tới Firebase Realtime Database
         mDatabase = FirebaseDatabase.getInstance().getReference().child("bangdiemthihocky").child(masv);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Lấy giá trị monhoc được chọn từ ListView tại vị trí (position)
+                String selectedMonHoc = (String) parent.getItemAtPosition(position);
+
+                // Tạo Intent và chuyển giá trị monhoc thông qua Intent khi mở Hienthi_Diem Activity
+                Intent intent = new Intent(Hienthi_Diem.this, Hienthi_Diem_Chitiet.class);
+                intent.putExtra("masv", masv); // masvValue là giá trị của masv bạn muốn chuyển
+                intent.putExtra("monhoc", selectedMonHoc); // Chuyển giá trị monhoc được chọn
+                startActivity(intent);
+            }
+        });
 
         // Lắng nghe sự kiện khi dữ liệu thay đổi trên Firebase
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -59,6 +74,7 @@ public class Hienthi_Diem extends AppCompatActivity {
                 for (DataSnapshot subjectSnapshot : dataSnapshot.getChildren()) {
                     // Lấy giá trị của thuộc tính "monhoc" từ mỗi nút con
                     String monHocValue = subjectSnapshot.child("monhoc").getValue(String.class);
+
                     // Thêm vào danh sách subjects
                     subjects.add(monHocValue);
                 }

@@ -62,6 +62,8 @@
 <!--            android:name=".User.quenpass_nhaplai" />-->
         <activity
             android:name=".Tinhnang.Hienthi_Diem" />
+        <activity
+            android:name=".Tinhnang.Hienthi_Diem_Chitiet" />
     </application>
 
 </manifest>
