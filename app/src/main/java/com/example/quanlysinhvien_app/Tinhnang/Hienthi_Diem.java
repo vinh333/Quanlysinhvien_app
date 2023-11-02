@@ -51,6 +51,7 @@ public class Hienthi_Diem extends AppCompatActivity {
 
         // Kết nối tới Firebase Realtime Database
         mDatabase = FirebaseDatabase.getInstance().getReference().child("bangdiemthihocky").child(masv);
+        Log.d("sadasd","adasd");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -73,7 +74,7 @@ public class Hienthi_Diem extends AppCompatActivity {
                 subjects.clear();
                 for (DataSnapshot subjectSnapshot : dataSnapshot.getChildren()) {
                     // Lấy giá trị của thuộc tính "monhoc" từ mỗi nút con
-                    String monHocValue = subjectSnapshot.child("monhoc").getValue(String.class);
+                    String monHocValue = subjectSnapshot.getKey();
 
                     // Thêm vào danh sách subjects
                     subjects.add(monHocValue);

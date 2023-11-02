@@ -55,7 +55,7 @@ public class Nhapdiem extends AppCompatActivity {
                     // Thực hiện việc ghi dữ liệu lên Firebase
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("bangdiemthihocky");
-                    myRef.child(masv).child(monhoc).setValue(diemThiHocKy);
+                    myRef.child(masv).child(monhoc).child(tinchi).setValue(diemThiHocKy);
 
                 } else {
                     // Xử lý lỗi hoặc hiển thị thông báo nếu cần
