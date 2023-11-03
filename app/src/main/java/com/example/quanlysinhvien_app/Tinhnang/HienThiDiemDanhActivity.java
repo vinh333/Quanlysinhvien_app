@@ -1,13 +1,19 @@
 package com.example.quanlysinhvien_app.Tinhnang;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quanlysinhvien_app.Database.Diemdanh;
@@ -27,6 +33,7 @@ public class HienThiDiemDanhActivity extends AppCompatActivity {
     private ListView listViewDiemDanh;
     private ArrayAdapter<String> lopAdapter, hocKyAdapter, ngayAdapter;
     private DatabaseReference diemDanhRef;
+    private String selectedLop, selectedHocKy, selectedNgay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +64,8 @@ public class HienThiDiemDanhActivity extends AppCompatActivity {
         spinnerLop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                loadHocKyData(parent.getItemAtPosition(position).toString());
+                selectedLop = parent.getItemAtPosition(position).toString();
+                loadHocKyData(selectedLop);
             }
 
             @Override
@@ -69,7 +77,8 @@ public class HienThiDiemDanhActivity extends AppCompatActivity {
         spinnerHocKy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                loadNgayData(spinnerLop.getSelectedItem().toString(), parent.getItemAtPosition(position).toString());
+                selectedHocKy = parent.getItemAtPosition(position).toString();
+                loadNgayData(selectedLop, selectedHocKy);
             }
 
             @Override
@@ -81,14 +90,21 @@ public class HienThiDiemDanhActivity extends AppCompatActivity {
         spinnerNgay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                loadDataToListView(spinnerLop.getSelectedItem().toString(),
-                        spinnerHocKy.getSelectedItem().toString(),
-                        parent.getItemAtPosition(position).toString());
+                selectedNgay = parent.getItemAtPosition(position).toString();
+                loadDataToListView(selectedLop, selectedHocKy, selectedNgay);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        listViewDiemDanh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String maSV = parent.getItemAtPosition(position).toString();
+                showEditDialog(maSV);
             }
         });
     }
@@ -158,8 +174,9 @@ public class HienThiDiemDanhActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<String> diemDanhInfoList = new ArrayList<>();
-                for (DataSnapshot sinhVienSnapshot : dataSnapshot.getChildren()) {
-                    Diemdanh diemDanh = sinhVienSnapshot.getValue(Diemdanh.class);
+                for (DataSnapshot svSnapshot : dataSnapshot.getChildren()) {
+                    String maSV = svSnapshot.getKey();
+                    Diemdanh diemDanh = svSnapshot.getValue(Diemdanh.class);
                     if (diemDanh != null) {
                         String tinhTrang = diemDanh.getTinhtrangdiemdanh() ? "Có" : "Vắng";
                         String diemDanhInfo = "Mã SV: " + diemDanh.getHotensv() +
@@ -183,4 +200,52 @@ public class HienThiDiemDanhActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void showEditDialog(final String maSVInfo) {
+        // Tách thông tin từ chuỗi maSVInfo
+        String[] parts = maSVInfo.split("Ngày Điểm Danh:");
+        if (parts.length >= 1) {
+            String[] subParts = parts[0].split("Mã SV:");
+            if (subParts.length >= 2) {
+                final String tenSV = subParts[1].trim(); // Lấy tên sinh viên sau khi tách chuỗi
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                View view = getLayoutInflater().inflate(R.layout.dialog_edit_diemdanh, null);
+                builder.setView(view);
+
+                final CheckBox checkBoxTinhTrang = view.findViewById(R.id.checkBoxTinhTrang);
+                final EditText editTextGhiChu = view.findViewById(R.id.editTextGhiChu);
+                Button buttonLuu = view.findViewById(R.id.buttonLuu);
+
+                final AlertDialog alertDialog = builder.create();
+
+                buttonLuu.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean tinhTrang = checkBoxTinhTrang.isChecked();
+                        String ghiChu = editTextGhiChu.getText().toString();
+
+                        // Cập nhật thông tin điểm danh vào Firebase
+                        diemDanhRef.child(selectedLop).child(selectedHocKy).child(selectedNgay).child(tenSV).child("tinhtrangdiemdanh").setValue(tinhTrang);
+                        diemDanhRef.child(selectedLop).child(selectedHocKy).child(selectedNgay).child(tenSV).child("ghiChu").setValue(ghiChu);
+
+                        // Hiển thị thông báo cho người dùng biết rằng thông tin đã được cập nhật
+                        Toast.makeText(HienThiDiemDanhActivity.this, "Thông tin điểm danh của " + tenSV + " đã được cập nhật!", Toast.LENGTH_SHORT).show();
+
+                        alertDialog.dismiss(); // Đóng AlertDialog sau khi nhấn nút "Lưu"
+                    }
+                });
+
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialog.show();
+            }
+        }
+    }
+
 }
