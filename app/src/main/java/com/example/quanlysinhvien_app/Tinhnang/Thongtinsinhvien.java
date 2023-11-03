@@ -1,24 +1,30 @@
 package com.example.quanlysinhvien_app.Tinhnang;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.quanlysinhvien_app.Adapter.CustomAdapter;
 import com.example.quanlysinhvien_app.Database.SinhVien;
 import com.example.quanlysinhvien_app.R;
+import com.example.quanlysinhvien_app.Tinhnang.Edit_Thongtinsinhvien;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,12 +33,12 @@ import java.util.List;
 
 public class Thongtinsinhvien extends AppCompatActivity {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
     private TextView txtMaSV, txtTenSV, txtGioiTinh, txtNgaySinh, txtDiaChi, txtMaLop, txtNoiSinh, txtNamHoc;
-
+    private ImageView imageViewAvatar;
     private String tenKhoaHoc;
-    private  List<String> khoaHocList = new ArrayList<>();
-    private  String masv ;
+    private List<String> khoaHocList = new ArrayList<>();
+    private String masv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +53,11 @@ public class Thongtinsinhvien extends AppCompatActivity {
         txtNoiSinh = findViewById(R.id.txt_noisinh);
         txtNamHoc = findViewById(R.id.txt_namhoc);
         TextView txtEditThongTinSinhVien = findViewById(R.id.txt_edit_thongtinsinhvien);
-        // nút chỉnh sửa nhảy sang trang Edit_Thongtinsinhvien
+        imageViewAvatar = findViewById(R.id.imgAvatar);
+
         txtEditThongTinSinhVien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Tạo Intent để chuyển sang Edit_Thongtinsinhvien và truyền masv qua Intent
                 Intent intent = new Intent(Thongtinsinhvien.this, Edit_Thongtinsinhvien.class);
                 intent.putExtra("masv", masv);
                 startActivity(intent);
@@ -60,37 +66,24 @@ public class Thongtinsinhvien extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-             masv = intent.getStringExtra("masv");
+            masv = intent.getStringExtra("masv");
             loadDataFromFirebaseByMaSV(masv);
         }
 
-        // Khai báo ListView
         ListView listView = findViewById(R.id.list_nienkhoa);
-
-
-
-        // Ánh xạ ListView và thiết lập CustomAdapter
         CustomAdapter adapter = new CustomAdapter(Thongtinsinhvien.this, R.layout.layout_thongtisinhvien, khoaHocList);
         listView.setAdapter(adapter);
-
-        // Thiết lập sự kiện khi người dùng nhấn vào một mục trong ListView
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Lấy năm học từ danh sách niên khóa
                 String selectedYear = khoaHocList.get(position);
-
-                // Tạo Intent để chuyển dữ liệu năm học và masv qua trang Hienthi_Diem
                 Intent intent = new Intent(Thongtinsinhvien.this, Hienthi_Diem.class);
                 intent.putExtra("selectedYear", selectedYear);
                 intent.putExtra("masv", masv);
-
-                // Khởi chạy Intent
                 startActivity(intent);
             }
         });
-
     }
 
     private void loadDataFromFirebaseByMaSV(String masvToSearch) {
@@ -107,7 +100,6 @@ public class Thongtinsinhvien extends AppCompatActivity {
                             txtMaSV.setText(sinhVien.getMasv());
                             txtTenSV.setText(sinhVien.getHotensv());
 
-                            // Kiểm tra giới tính và hiển thị "Nam" hoặc "Nữ"
                             if (sinhVien.getGioitinh()) {
                                 txtGioiTinh.setText("Nam");
                             } else {
@@ -141,18 +133,13 @@ public class Thongtinsinhvien extends AppCompatActivity {
                                                     tenKhoaHoc = khoaHocSnapshot.child("tenkhoahoc").getValue(String.class);
                                                     txtNamHoc.setText(tenKhoaHoc);
 
-                                                    // Tạo danh sách niên khóa từ năm hiện tại đến 4 năm tiếp theo
-
-                                                    tenKhoaHoc = tenKhoaHoc.substring(8); // Bỏ "Khoahoc " từ đầu chuỗi
+                                                    tenKhoaHoc = tenKhoaHoc.substring(8);
                                                     int currentYear = Integer.parseInt(tenKhoaHoc);
                                                     for (int i = currentYear; i < currentYear + 4; i++) {
                                                         khoaHocList.add(String.valueOf(i));
                                                     }
 
-                                                    // Ánh xạ ListView
                                                     ListView listView = findViewById(R.id.list_nienkhoa);
-
-                                                    // Tạo CustomAdapter và gắn vào ListView
                                                     CustomAdapter adapter = new CustomAdapter(Thongtinsinhvien.this, R.layout.layout_thongtisinhvien, khoaHocList);
                                                     listView.setAdapter(adapter);
                                                 }
@@ -171,6 +158,9 @@ public class Thongtinsinhvien extends AppCompatActivity {
                                     // Xử lý khi truy vấn bị hủy bỏ hoặc thất bại
                                 }
                             });
+
+                            // Load và hiển thị avatar từ Firebase Storage
+                            loadAvatarFromFirebaseStorage(masvToSearch);
                         }
                     }
                 }
@@ -179,6 +169,23 @@ public class Thongtinsinhvien extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Xử lý khi truy vấn bị hủy bỏ hoặc thất bại
+            }
+        });
+    }
+
+    private void loadAvatarFromFirebaseStorage(String masv) {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("avatars").child(masv + ".jpg");
+
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                String avatarUrl = uri.toString();
+                Picasso.get().load(avatarUrl).into(imageViewAvatar);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý khi tải hình ảnh thất bại (nếu cần)
             }
         });
     }

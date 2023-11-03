@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.quanlysinhvien_app.Database.SinhVien;
 import com.example.quanlysinhvien_app.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -35,9 +37,16 @@ public class SinhVienAdapter extends ArrayAdapter<SinhVien> {
         TextView tvMaSV = convertView.findViewById(R.id.tvMaLop);
         tvMaSV.setText(sinhVien.getMasv());
 
-         TextView tvHoTen = convertView.findViewById(R.id.tvTenLop);
-         tvHoTen.setText(sinhVien.getHotensv());
+        TextView tvHoTen = convertView.findViewById(R.id.tvTenLop);
+        tvHoTen.setText(sinhVien.getHotensv());
+
+        ImageView imageViewAvatar = convertView.findViewById(R.id.imageavt);
+
+        // Tải và hiển thị avatar sử dụng Picasso
+        Picasso.get().load(sinhVien.getAvatarUrl()).into(imageViewAvatar);
+
 
         return convertView;
     }
 }
+

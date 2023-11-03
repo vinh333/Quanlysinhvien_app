@@ -19,10 +19,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3">
+            app:layout_constraintTop_toBottomOf="@+id/imgAvatar">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/imgAvatar"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_gravity="center_horizontal"
@@ -457,11 +457,7 @@
                 android:layout_height="wrap_content"
                 android:text="Lưu" />
 
-            <Button
-                android:id="@+id/button_luu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lưu" />
+
 
         </LinearLayout>
 

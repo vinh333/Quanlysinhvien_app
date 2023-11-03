@@ -15,9 +15,10 @@ public class SinhVien {
     private String ngaysinh;
     private String noisinh;
     private String quan;
+    private String avatarUrl; // Thêm trường để lưu đường dẫn của hình ảnh avatar
 
     public SinhVien(String masv, String hotensv, boolean gioitinh, String diaChi, int hocBong,
-                    String maLop, String maTinh, String ngaySinh, String noiSinh, String quan) {
+                    String maLop, String maTinh, String ngaySinh, String noiSinh, String quan, String avatarUrl) {
         this.masv = masv;
         this.hotensv = hotensv;
         this.gioitinh = gioitinh;
@@ -28,6 +29,7 @@ public class SinhVien {
         this.ngaysinh = ngaySinh;
         this.noisinh = noiSinh;
         this.quan = quan;
+        this.avatarUrl = avatarUrl; // Khởi tạo giá trị cho trường avatarUrl
     }
 
     public SinhVien() {
@@ -112,6 +114,14 @@ public class SinhVien {
 
     public void setQuan(String quan) {
         this.quan = quan;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }
 

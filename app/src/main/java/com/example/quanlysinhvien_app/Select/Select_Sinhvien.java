@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -121,6 +123,9 @@ public class Select_Sinhvien extends AppCompatActivity {
 //                    sinhVien.setNgaysinh(new Date(snapshot.child("ngaysinh").getValue(Long.class)));
                         sinhVien.setNoisinh(snapshot.child("noisinh").getValue(String.class));
                         sinhVien.setQuan(snapshot.child("quan").getValue(String.class));
+
+                        String avatarUrl = snapshot.child("avatarUrl").getValue(String.class);
+                        sinhVien.setAvatarUrl(avatarUrl);
 
                         sinhVienList.add(sinhVien);
                     }
