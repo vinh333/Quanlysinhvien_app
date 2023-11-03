@@ -46,6 +46,17 @@ public class Thongtinsinhvien extends AppCompatActivity {
         txtMaLop = findViewById(R.id.txt_malop);
         txtNoiSinh = findViewById(R.id.txt_noisinh);
         txtNamHoc = findViewById(R.id.txt_namhoc);
+        TextView txtEditThongTinSinhVien = findViewById(R.id.txt_edit_thongtinsinhvien);
+        // nút chỉnh sửa nhảy sang trang Edit_Thongtinsinhvien
+        txtEditThongTinSinhVien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Tạo Intent để chuyển sang Edit_Thongtinsinhvien và truyền masv qua Intent
+                Intent intent = new Intent(Thongtinsinhvien.this, Edit_Thongtinsinhvien.class);
+                intent.putExtra("masv", masv);
+                startActivity(intent);
+            }
+        });
 
         Intent intent = getIntent();
         if (intent != null) {
