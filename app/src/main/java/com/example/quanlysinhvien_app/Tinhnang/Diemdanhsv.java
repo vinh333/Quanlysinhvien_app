@@ -35,9 +35,9 @@ public class Diemdanhsv extends AppCompatActivity {
     private List<Diemdanh> diemDanhList;
     private DiemDanhAdapter adapter;
     private ListView listView;
-    private Spinner spinnerLop, spinnerMon;
+    private Spinner spinnerLop, spinnerMon,spinnerHocKy;
     private EditText dateEditText;
-
+    private  int hocKyValue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +46,39 @@ public class Diemdanhsv extends AppCompatActivity {
         listView = findViewById(R.id.listView_Lop);
         spinnerLop = findViewById(R.id.spinner_lop);
         spinnerMon = findViewById(R.id.spiner_mon);
+        spinnerHocKy = findViewById(R.id.spinner_diemdanh_hocky);
         diemDanhList = new ArrayList<>();
         adapter = new DiemDanhAdapter(this, diemDanhList);
         listView.setAdapter(adapter);
         Button luuDiemDanhButton = findViewById(R.id.luudiemdanh);
         dateEditText = findViewById(R.id.dateEditText);
+
+        // Khởi tạo ArrayAdapter cho Spinner học kỳ
+        ArrayAdapter<CharSequence> spinnerHocKyAdapter = ArrayAdapter.createFromResource(this,
+                R.array.hocky_array, android.R.layout.simple_spinner_item);
+        spinnerHocKyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerHocKy.setAdapter(spinnerHocKyAdapter);
+
+        // Xử lý sự kiện khi chọn một giá trị từ Spinner học kỳ
+        spinnerHocKy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedHocKy = parent.getItemAtPosition(position).toString();
+
+                // Lưu giá trị học kỳ tương ứng lên Firebase
+                 hocKyValue = (selectedHocKy.equals("Học Kỳ 1")) ? 1 : 2;
+                DatabaseReference hocKyRef = FirebaseDatabase.getInstance().getReference("hocky");
+                hocKyRef.setValue(hocKyValue);
+
+                // Hiển thị thông báo cho người dùng biết rằng giá trị học kỳ đã được lưu
+                Toast.makeText(Diemdanhsv.this, "Học Kỳ đã được chọn: " + selectedHocKy, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Xử lý khi không có giá trị nào được chọn
+            }
+        });
 
         // Khởi tạo ArrayAdapter cho Spinner lớp và Spinner môn
         ArrayAdapter<String> spinnerLopAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
@@ -159,7 +187,7 @@ public class Diemdanhsv extends AppCompatActivity {
 
                 // Chuyển đổi chuỗi ngày thành đối tượng java.util.Date
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat dateFormatkey = new SimpleDateFormat("yyyy/MM/dd");
+                SimpleDateFormat dateFormatkey = new SimpleDateFormat("yyyy-MM-dd");
                 try {
                     // Chuyển đổi chuỗi ngày thành đối tượng java.util.Date
                     java.util.Date parsedDate = dateFormat.parse(ngayDiemDanhStr);
@@ -183,7 +211,7 @@ public class Diemdanhsv extends AppCompatActivity {
                         diemdanh.setTinhtrangdiemdanh(isChecked);
                         diemdanh.setGhiChu(ghichu);
                         // Đưa dữ liệu lên Firebase tại key được tạo
-                        diemdanhRef.child(diemdanhId).child(maSV).setValue(diemdanh);
+                        diemdanhRef.child(lop).child(String.valueOf(hocKyValue)).child(ngayDiemDanhKey).child(maSV).setValue(diemdanh);
                     }
 
                     // Thông báo cho người dùng biết rằng dữ liệu đã được lưu thành công (nếu cần thiết)

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewLop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chọn Lớp:"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerLop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewLop"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textViewHocKy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chọn Học Kỳ:"
+        android:layout_below="@id/spinnerLop"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerHocKy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewHocKy"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textViewNgay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chọn Ngày:"
+        android:layout_below="@id/spinnerHocKy"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerNgay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewNgay"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:id="@+id/listViewDiemDanh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerNgay"
+        android:layout_marginTop="16dp" />
+</RelativeLayout>
