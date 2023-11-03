@@ -29,11 +29,10 @@ import com.squareup.picasso.Picasso;
 
 public class Edit_Thongtinsinhvien extends AppCompatActivity {
     private EditText editMaSV, editTenSV, editNgaySinh, editDiaChi, editGioiTinh, editMaLop, editNoiSinh, editNamHoc;
-    private Button btnLuu;
+    private Button btnLuu, btnXoa;
     private ImageView imageViewAvatar;
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
-    private String tenKhoaHoc;
     private static final int PICK_IMAGE_REQUEST = 1;
 
     @Override
@@ -50,6 +49,7 @@ public class Edit_Thongtinsinhvien extends AppCompatActivity {
         editNoiSinh = findViewById(R.id.editNoiSinh);
         editNamHoc = findViewById(R.id.editNamHoc);
         btnLuu = findViewById(R.id.btnLuu);
+        btnXoa = findViewById(R.id.btnXoa);
         imageViewAvatar = findViewById(R.id.imageViewAvatar);
 
         // Nhận mã sinh viên từ Intent
@@ -81,8 +81,6 @@ public class Edit_Thongtinsinhvien extends AppCompatActivity {
 
                             // Tải và hiển thị avatar từ Firebase Storage
                             Picasso.get().load(sinhVien.getAvatarUrl()).into(imageViewAvatar);
-                            Log.d("AvatarURL","sdasd");
-
                         }
                     }
                 }
@@ -127,6 +125,25 @@ public class Edit_Thongtinsinhvien extends AppCompatActivity {
                     openGallery();
                 }
             });
+
+            // Xử lý sự kiện khi người dùng nhấn nút "Xóa"
+            btnXoa.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Xóa sinh viên từ Firebase Realtime Database
+                    databaseReference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Xóa thành công, hiển thị thông báo
+                            Toast.makeText(Edit_Thongtinsinhvien.this, "Sinh viên đã được xóa!", Toast.LENGTH_SHORT).show();
+
+                            // Giả lập việc nhấn nút Back 2 lần để quay lại 2 trang trước đó
+                            onBackPressed();
+                        }
+                    });
+                }
+            });
+
         }
     }
 
