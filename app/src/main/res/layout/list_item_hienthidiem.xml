@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_hocky_indiem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Học kỳ 1"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/text_tenmon_indiem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cấu trúc dữ liệu"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView_diem_hk1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="8 9 8.5 10" />
+
+            <TextView
+                android:id="@+id/textView_diemtb_hk1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="8"
+                android:textColor="#2196F3" />
+
+            <TextView
+                android:id="@+id/textView_diemtb_hk_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="8"
+                android:textColor="#2196F3" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

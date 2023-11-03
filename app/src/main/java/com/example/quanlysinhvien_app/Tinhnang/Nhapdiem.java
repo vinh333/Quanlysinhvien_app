@@ -9,7 +9,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.quanlysinhvien_app.Database.DiemThiHocKy;
+import com.example.quanlysinhvien_app.Database.BangDiemHocKy;
 import com.example.quanlysinhvien_app.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,12 +50,12 @@ public class Nhapdiem extends AppCompatActivity {
 
                 if (!masv.isEmpty() && !monhoc.isEmpty() && !diem.isEmpty() && !hocky.isEmpty() && !tinchi.isEmpty()) {
                     // Tạo đối tượng DiemThiHocKy
-                    DiemThiHocKy diemThiHocKy = new DiemThiHocKy(masv, hocky, monhoc, tinchi, diem);
+                    BangDiemHocKy diemThiHocKy = new BangDiemHocKy(masv, hocky, monhoc, tinchi, diem);
 
                     // Thực hiện việc ghi dữ liệu lên Firebase
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("bangdiemthihocky");
-                    myRef.child(masv).child(monhoc).child(tinchi).setValue(diemThiHocKy);
+                    myRef.child(masv).child(hocky).child(monhoc).child(tinchi).setValue(diemThiHocKy);
 
                 } else {
                     // Xử lý lỗi hoặc hiển thị thông báo nếu cần

@@ -1,17 +1,17 @@
 package com.example.quanlysinhvien_app.Database;
 
-public class DiemThiHocKy {
+public class BangDiemHocKy {
     private String masv;
     private String hocky;
     private String monhoc;
     private String tinchi;
     private String diem;
 
-    public DiemThiHocKy() {
+    public BangDiemHocKy() {
         // Default constructor required for calls to DataSnapshot.getValue(DiemThiHocKy.class)
     }
 
-    public DiemThiHocKy(String masv, String hocky, String monhoc, String tinchi, String diem) {
+    public BangDiemHocKy(String masv, String hocky, String monhoc, String tinchi, String diem) {
         this.masv = masv;
         this.hocky = hocky;
         this.monhoc = monhoc;

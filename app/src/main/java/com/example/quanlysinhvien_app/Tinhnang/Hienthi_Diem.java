@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +29,8 @@ public class Hienthi_Diem extends AppCompatActivity {
     private ListView listView;
     private ArrayAdapter<String> adapter;
     private List<String> subjects;
-
+    private Spinner spinnerHocky;
+    private  String hockyValue;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,43 +51,64 @@ public class Hienthi_Diem extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, subjects);
         listView.setAdapter(adapter);
 
-        // Kết nối tới Firebase Realtime Database
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("bangdiemthihocky").child(masv);
-        Log.d("sadasd","adasd");
+        // Khởi tạo Spinner và thiết lập Adapter cho Spinner
+        spinnerHocky = findViewById(R.id.spinner_hocky_hienthidiem);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.hocky_array, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerHocky.setAdapter(spinnerAdapter);
+
+        // Thiết lập sự kiện khi lựa chọn từ Spinner
+        spinnerHocky.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // Lấy giá trị được chọn từ Spinner
+                String selectedHocky = parentView.getItemAtPosition(position).toString();
+
+                // Cập nhật mDatabase dựa trên học kỳ được chọn
+                 hockyValue = selectedHocky.equals("Học Kỳ 1") ? "1" : "2";
+                mDatabase = FirebaseDatabase.getInstance().getReference().child("bangdiemthihocky").child(masv).child(hockyValue);
+
+                // Gọi lại ValueEventListener nếu cần thiết
+                mDatabase.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        // Xử lý dữ liệu khi thay đổi
+                        subjects.clear();
+                        for (DataSnapshot subjectSnapshot : dataSnapshot.getChildren()) {
+                            // Lấy giá trị của thuộc tính "monhoc" từ mỗi nút con
+                            String monHocValue = subjectSnapshot.getKey();
+                            // Thêm vào danh sách subjects
+                            subjects.add(monHocValue);
+                        }
+                        // Thông báo cho Adapter rằng dữ liệu đã thay đổi, cần cập nhật giao diện
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Xử lý khi có lỗi xảy ra khi đọc dữ liệu từ Firebase
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Xử lý khi không có item nào được chọn
+            }
+        });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Lấy giá trị monhoc được chọn từ ListView tại vị trí (position)
                 String selectedMonHoc = (String) parent.getItemAtPosition(position);
 
-                // Tạo Intent và chuyển giá trị monhoc thông qua Intent khi mở Hienthi_Diem Activity
+                // Tạo Intent và chuyển giá trị monhoc và hocky thông qua Intent khi mở Hienthi_Diem_Chitiet Activity
                 Intent intent = new Intent(Hienthi_Diem.this, Hienthi_Diem_Chitiet.class);
-                intent.putExtra("masv", masv); // masvValue là giá trị của masv bạn muốn chuyển
-                intent.putExtra("monhoc", selectedMonHoc); // Chuyển giá trị monhoc được chọn
+                intent.putExtra("masv", masv);
+                intent.putExtra("monhoc", selectedMonHoc);
+                intent.putExtra("hocky", hockyValue);
                 startActivity(intent);
-            }
-        });
-
-        // Lắng nghe sự kiện khi dữ liệu thay đổi trên Firebase
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // Dữ liệu đã thay đổi, xử lý dữ liệu ở đây
-                subjects.clear();
-                for (DataSnapshot subjectSnapshot : dataSnapshot.getChildren()) {
-                    // Lấy giá trị của thuộc tính "monhoc" từ mỗi nút con
-                    String monHocValue = subjectSnapshot.getKey();
-
-                    // Thêm vào danh sách subjects
-                    subjects.add(monHocValue);
-                }
-                // Thông báo cho Adapter rằng dữ liệu đã thay đổi, cần cập nhật giao diện
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Xử lý khi có lỗi xảy ra khi đọc dữ liệu từ Firebase
             }
         });
     }
