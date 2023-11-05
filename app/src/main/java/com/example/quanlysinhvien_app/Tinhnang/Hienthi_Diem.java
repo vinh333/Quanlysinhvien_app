@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quanlysinhvien_app.Adapter.Hienthidiem_CustomAdapter;
+import com.example.quanlysinhvien_app.Database.Hienthidiem_Custom;
 import com.example.quanlysinhvien_app.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,13 +29,15 @@ public class Hienthi_Diem extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private String masv;
     private ListView listView;
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<Hienthidiem_Custom> adapter;
     private List<String> subjects;
     private Spinner spinnerHocky;
     private  String hockyValue;
 
     private int totalDiem = 0;
     private int tongtinchi = 0;
+    private List<Hienthidiem_Custom> subjects2;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +54,9 @@ public class Hienthi_Diem extends AppCompatActivity {
 
         // Khởi tạo ListView và Adapter
         listView = findViewById(R.id.list_danhsachmondiem);
+        subjects2 = new ArrayList<>();
         subjects = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, subjects);
+        adapter = new Hienthidiem_CustomAdapter(this, R.layout.list_item_diem_mon, subjects2);
         listView.setAdapter(adapter);
 
         // Khởi tạo Spinner và thiết lập Adapter cho Spinner
@@ -128,6 +133,9 @@ public class Hienthi_Diem extends AppCompatActivity {
                                                     double diemTrungBinh = (double) totalDiem / tongtinchi;
 
                                                     Log.d("Hienthi_Diem", "Diem trung binh: " + diemTrungBinh + danhSachDiem);
+                                                    Hienthidiem_Custom hienthidiem = new Hienthidiem_Custom(tenMonHocFirebase, diemTrungBinh, new StringBuilder(danhSachDiem.toString().trim()));
+                                                    subjects2.add(hienthidiem);
+                                                    adapter.notifyDataSetChanged();
 
                                                 }
 
@@ -149,7 +157,6 @@ public class Hienthi_Diem extends AppCompatActivity {
                         }
 
                         // Thông báo cho Adapter rằng dữ liệu đã thay đổi, cần cập nhật giao diện
-                        adapter.notifyDataSetChanged();
                     }
 
                     @Override

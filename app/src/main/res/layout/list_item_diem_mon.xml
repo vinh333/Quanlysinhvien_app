@@ -25,14 +25,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="8 9 8.5 10" />
+                android:text="" />
 
             <TextView
                 android:id="@+id/text_diem_trung_binh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="8"
+                android:text=""
                 android:textColor="#2196F3" />
 
         </LinearLayout>
