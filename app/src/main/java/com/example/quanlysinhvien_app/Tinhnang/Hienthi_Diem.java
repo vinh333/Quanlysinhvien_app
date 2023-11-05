@@ -31,6 +31,9 @@ public class Hienthi_Diem extends AppCompatActivity {
     private List<String> subjects;
     private Spinner spinnerHocky;
     private  String hockyValue;
+
+    private int totalDiem = 0;
+    private int tongtinchi = 0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +68,7 @@ public class Hienthi_Diem extends AppCompatActivity {
                 String selectedHocky = parentView.getItemAtPosition(position).toString();
 
                 // Cập nhật mDatabase dựa trên học kỳ được chọn
-                 hockyValue = selectedHocky.equals("Học Kỳ 1") ? "1" : "2";
+                hockyValue = selectedHocky.equals("Học Kỳ 1") ? "1" : "2";
                 mDatabase = FirebaseDatabase.getInstance().getReference().child("bangdiemthihocky").child(masv).child(hockyValue);
 
                 // Gọi lại ValueEventListener nếu cần thiết
@@ -80,6 +83,71 @@ public class Hienthi_Diem extends AppCompatActivity {
                             // Thêm vào danh sách subjects
                             subjects.add(monHocValue);
                         }
+
+
+                        // Khai báo biến để lưu tổng điểm và tổng số tín chỉ
+                         totalDiem = 0;
+                         tongtinchi = 0;
+
+                        // Duyệt qua danh sách subjects và lấy dữ liệu từ Firebase
+                        for (String monHoc : subjects) {
+                            // Tham chiếu đến dữ liệu trên Firebase
+                            DatabaseReference monHocReference = FirebaseDatabase.getInstance().getReference("monhoc");
+                            monHocReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                        String tenMonHocFirebase = snapshot.child("tenmonhoc").getValue(String.class);
+                                        if (tenMonHocFirebase != null && tenMonHocFirebase.equals(monHoc)) {
+                                            Long tongtinchi = snapshot.child("tongtinchi").getValue(Long.class);
+                                            DatabaseReference diemHocKyReference = FirebaseDatabase.getInstance()
+                                                    .getReference("bangdiemthihocky").child(masv).child(hockyValue).child(monHoc);
+                                            diemHocKyReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                    int totalTinChi = 0;
+                                                    int totalDiem = 0;
+                                                    StringBuilder danhSachDiem = new StringBuilder();
+                                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                                        String diemString = snapshot.child("diem").getValue(String.class);
+                                                        String tinchiString = snapshot.child("tinchi").getValue(String.class);
+                                                        danhSachDiem.append(" ").append(diemString);
+                                                        try {
+                                                            int diem = Integer.parseInt(diemString);
+                                                            int tinchi = Integer.parseInt(tinchiString);
+                                                            if (tinchi == tongtinchi.intValue()) {
+                                                                totalDiem += diem * 2;
+                                                            } else {
+                                                                totalDiem += diem;
+                                                            }
+
+                                                        } catch (NumberFormatException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
+                                                    double diemTrungBinh = (double) totalDiem / tongtinchi;
+
+                                                    Log.d("Hienthi_Diem", "Diem trung binh: " + diemTrungBinh + danhSachDiem);
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                    // Xử lý khi có lỗi xảy ra khi đọc dữ liệu từ Firebase
+                                                }
+                                            });
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    // Xử lý khi có lỗi xảy ra khi đọc dữ liệu từ Firebase
+                                }
+                            });
+                        }
+
                         // Thông báo cho Adapter rằng dữ liệu đã thay đổi, cần cập nhật giao diện
                         adapter.notifyDataSetChanged();
                     }
