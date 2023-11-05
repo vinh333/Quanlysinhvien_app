@@ -25,39 +25,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="" />
+                android:text="8 9 8.5 10" />
 
             <TextView
                 android:id="@+id/text_diem_trung_binh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text=""
-                android:textColor="#2196F3" />
+                android:text="8"
+                android:textColor="#E91E63" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView_diem_hk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="8 9 8.5 10" />
-
-        <TextView
-            android:id="@+id/textView_diemtb_hk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="8"
-            android:textColor="#2196F3" />
-
-        <TextView
-            android:id="@+id/textView_diemtb_hk_"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="8"
-            android:textColor="#2196F3" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

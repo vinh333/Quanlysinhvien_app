@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,7 @@ public class Hienthi_Diem extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private String masv;
     private ListView listView;
+    TextView txtdiemtbhocky , txtxephanghocsinh;
     private ArrayAdapter<Hienthidiem_Custom> adapter;
     private List<String> subjects;
     private Spinner spinnerHocky;
@@ -37,11 +39,16 @@ public class Hienthi_Diem extends AppCompatActivity {
     private int totalDiem = 0;
     private int tongtinchi = 0;
     private List<Hienthidiem_Custom> subjects2;
+   private double diemtatcamon ;
+   private double diemTbtatcamon ;
+   private int somonTb ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_hienthi_diem);
+        txtdiemtbhocky = findViewById(R.id.diemtbcahocky);
+        txtxephanghocsinh = findViewById(R.id.xephanghocsinh);
 
         // Nhận Intent từ Activity trước
         Intent intent = getIntent();
@@ -82,6 +89,9 @@ public class Hienthi_Diem extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         // Xử lý dữ liệu khi thay đổi
                         subjects.clear();
+                        subjects2.clear();
+
+
                         for (DataSnapshot subjectSnapshot : dataSnapshot.getChildren()) {
                             // Lấy giá trị của thuộc tính "monhoc" từ mỗi nút con
                             String monHocValue = subjectSnapshot.getKey();
@@ -93,7 +103,9 @@ public class Hienthi_Diem extends AppCompatActivity {
                         // Khai báo biến để lưu tổng điểm và tổng số tín chỉ
                          totalDiem = 0;
                          tongtinchi = 0;
-
+                         diemTbtatcamon = 0;
+                         diemtatcamon = 0;
+                         somonTb = 0;
                         // Duyệt qua danh sách subjects và lấy dữ liệu từ Firebase
                         for (String monHoc : subjects) {
                             // Tham chiếu đến dữ liệu trên Firebase
@@ -112,11 +124,14 @@ public class Hienthi_Diem extends AppCompatActivity {
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                     int totalTinChi = 0;
                                                     int totalDiem = 0;
-                                                    StringBuilder danhSachDiem = new StringBuilder();
+
+                                                    String diemString = null;
+                                                    String danhsachdiem ="";
                                                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                                        String diemString = snapshot.child("diem").getValue(String.class);
+                                                        diemString = snapshot.child("diem").getValue(String.class);
                                                         String tinchiString = snapshot.child("tinchi").getValue(String.class);
-                                                        danhSachDiem.append(" ").append(diemString);
+                                                         danhsachdiem = danhsachdiem + " " + diemString;
+
                                                         try {
                                                             int diem = Integer.parseInt(diemString);
                                                             int tinchi = Integer.parseInt(tinchiString);
@@ -131,9 +146,30 @@ public class Hienthi_Diem extends AppCompatActivity {
                                                         }
                                                     }
                                                     double diemTrungBinh = (double) totalDiem / tongtinchi;
+                                                    // Tinh diem trung binh ca hoc ky
+                                                    Log.d("Hienthi_Diem", "Diem trung binh: " + diemTrungBinh + diemString);
+                                                    diemtatcamon = diemTbtatcamon + diemTrungBinh;
+                                                    somonTb ++;
+                                                    diemTbtatcamon = diemtatcamon / somonTb;
+                                                    txtdiemtbhocky.setText(String.valueOf(diemTbtatcamon)); // Đưa điểm trung bình vào textView_diemtb_hk_4
+                                                    // xếp loại
+                                                    String xepLoai = "";
 
-                                                    Log.d("Hienthi_Diem", "Diem trung binh: " + diemTrungBinh + danhSachDiem);
-                                                    Hienthidiem_Custom hienthidiem = new Hienthidiem_Custom(tenMonHocFirebase, diemTrungBinh, new StringBuilder(danhSachDiem.toString().trim()));
+                                                    if (diemTbtatcamon >= 9) {
+                                                        xepLoai = "Xuất sắc";
+                                                    } else if (diemTbtatcamon >= 8) {
+                                                        xepLoai = "Giỏi";
+                                                    } else if (diemTbtatcamon >= 6.5) {
+                                                        xepLoai = "Khá";
+                                                    } else if (diemTbtatcamon >= 5) {
+                                                        xepLoai = "Trung bình";
+                                                    } else {
+                                                        xepLoai = "Yếu";
+                                                    }
+                                                    txtxephanghocsinh.setText(String.valueOf(xepLoai)); // Đưa điểm trung bình vào textView_diemtb_hk_4
+
+                                                    Log.d("diemTbtatcamon", String.valueOf(diemTbtatcamon));
+                                                    Hienthidiem_Custom hienthidiem = new Hienthidiem_Custom(tenMonHocFirebase, diemTrungBinh, danhsachdiem);
                                                     subjects2.add(hienthidiem);
                                                     adapter.notifyDataSetChanged();
 
@@ -157,6 +193,7 @@ public class Hienthi_Diem extends AppCompatActivity {
                         }
 
                         // Thông báo cho Adapter rằng dữ liệu đã thay đổi, cần cập nhật giao diện
+
                     }
 
                     @Override
@@ -164,6 +201,7 @@ public class Hienthi_Diem extends AppCompatActivity {
                         // Xử lý khi có lỗi xảy ra khi đọc dữ liệu từ Firebase
                     }
                 });
+
             }
 
             @Override
@@ -172,19 +210,19 @@ public class Hienthi_Diem extends AppCompatActivity {
             }
         });
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Lấy giá trị monhoc được chọn từ ListView tại vị trí (position)
-                String selectedMonHoc = (String) parent.getItemAtPosition(position);
-
-                // Tạo Intent và chuyển giá trị monhoc và hocky thông qua Intent khi mở Hienthi_Diem_Chitiet Activity
-                Intent intent = new Intent(Hienthi_Diem.this, Hienthi_Diem_Chitiet.class);
-                intent.putExtra("masv", masv);
-                intent.putExtra("monhoc", selectedMonHoc);
-                intent.putExtra("hocky", hockyValue);
-                startActivity(intent);
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                // Lấy giá trị monhoc được chọn từ ListView tại vị trí (position)
+//                String selectedMonHoc = (String) parent.getItemAtPosition(position);
+//
+//                // Tạo Intent và chuyển giá trị monhoc và hocky thông qua Intent khi mở Hienthi_Diem_Chitiet Activity
+//                Intent intent = new Intent(Hienthi_Diem.this, Hienthi_Diem_Chitiet.class);
+//                intent.putExtra("masv", masv);
+//                intent.putExtra("monhoc", selectedMonHoc);
+//                intent.putExtra("hocky", hockyValue);
+//                startActivity(intent);
+//            }
+//        });
     }
 }
