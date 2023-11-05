@@ -36,8 +36,8 @@ public class Hienthidiem_CustomAdapter extends ArrayAdapter<Hienthidiem_Custom> 
 
         // Ánh xạ các TextView từ layout
         TextView tenMonHocTextView = convertView.findViewById(R.id.text_tenmon_indiem2);
-        TextView diemTrungBinhTextView = convertView.findViewById(R.id.text_diem_trung_binh1);
-        TextView danhSachDiemTextView = convertView.findViewById(R.id.text_danh_sach_diem1);
+        TextView diemTrungBinhTextView = convertView.findViewById(R.id.text_diem_trung_binh);
+        TextView danhSachDiemTextView = convertView.findViewById(R.id.text_danh_sach_diem);
 
         // Hiển thị thông tin từ đối tượng Hienthidiem_Custom vào các TextView
         tenMonHocTextView.setText(hienthidiem.getTenMonHoc());
