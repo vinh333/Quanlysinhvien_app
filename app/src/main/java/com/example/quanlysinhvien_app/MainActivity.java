@@ -92,18 +92,33 @@ public class MainActivity extends AppCompatActivity {
 //
 //        }
 
+        loadDataToListView();
+    }
+
+    private void loadDataToListView() {
         diemDanhRef = FirebaseDatabase.getInstance().getReference("diemdanh");
+
         diemDanhRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 tonghocsinh = 0;
                 hocsinhvang = 0;
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    boolean tinhTrangDiemDanh = snapshot.child("tinhtrangdiemdanh").getValue(Boolean.class);
-                    tonghocsinh++;
-                    if (!tinhTrangDiemDanh) {
-                        hocsinhvang++;
+                // Duyệt qua tất cả các học kỳ
+                for (DataSnapshot hocKySnapshot : dataSnapshot.getChildren()) {
+                    // Duyệt qua tất cả các lớp trong học kỳ
+                    for (DataSnapshot lopSnapshot : hocKySnapshot.getChildren()) {
+                        // Duyệt qua tất cả các ngày trong lớp
+                        for (DataSnapshot ngaySnapshot : lopSnapshot.getChildren()) {
+                            // Duyệt qua tất cả các học sinh trong ngày
+                            for (DataSnapshot studentSnapshot : ngaySnapshot.getChildren()) {
+                                boolean tinhTrangDiemDanh = studentSnapshot.child("tinhtrangdiemdanh").getValue(Boolean.class);
+                                tonghocsinh++;
+                                if (!tinhTrangDiemDanh) {
+                                    hocsinhvang++;
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -117,4 +132,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
