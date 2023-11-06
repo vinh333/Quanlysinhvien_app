@@ -91,11 +91,11 @@ public class MainActivity extends AppCompatActivity {
 //            startActivity(intent);
 //
 //        }
-
-        loadDataToListView();
+        // Truyền học kỳ vào 1,2,all
+        loadDataToListView("2");
     }
 
-    private void loadDataToListView() {
+    private void loadDataToListView(String hocKy) {
         diemDanhRef = FirebaseDatabase.getInstance().getReference("diemdanh");
 
         diemDanhRef.addValueEventListener(new ValueEventListener() {
@@ -109,16 +109,20 @@ public class MainActivity extends AppCompatActivity {
                     // Duyệt qua tất cả các lớp trong học kỳ
                     for (DataSnapshot lopSnapshot : hocKySnapshot.getChildren()) {
                         // Duyệt qua tất cả các ngày trong lớp
-                        for (DataSnapshot ngaySnapshot : lopSnapshot.getChildren()) {
-                            // Duyệt qua tất cả các học sinh trong ngày
-                            for (DataSnapshot studentSnapshot : ngaySnapshot.getChildren()) {
-                                boolean tinhTrangDiemDanh = studentSnapshot.child("tinhtrangdiemdanh").getValue(Boolean.class);
-                                tonghocsinh++;
-                                if (!tinhTrangDiemDanh) {
-                                    hocsinhvang++;
+                        String lopKey = lopSnapshot.getKey();
+                        if(lopKey.equals(hocKy) || hocKy == "all"){
+                            for (DataSnapshot ngaySnapshot : lopSnapshot.getChildren()) {
+                                // Duyệt qua tất cả các học sinh trong ngày
+                                for (DataSnapshot studentSnapshot : ngaySnapshot.getChildren()) {
+                                    boolean tinhTrangDiemDanh = studentSnapshot.child("tinhtrangdiemdanh").getValue(Boolean.class);
+                                    tonghocsinh++;
+                                    if (!tinhTrangDiemDanh) {
+                                        hocsinhvang++;
+                                    }
                                 }
                             }
                         }
+
                     }
                 }
 
