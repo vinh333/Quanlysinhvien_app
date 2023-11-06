@@ -203,26 +203,10 @@ public class Hienthi_Diem extends AppCompatActivity {
                 });
 
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // Xử lý khi không có item nào được chọn
             }
         });
-
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                // Lấy giá trị monhoc được chọn từ ListView tại vị trí (position)
-//                String selectedMonHoc = (String) parent.getItemAtPosition(position);
-//
-//                // Tạo Intent và chuyển giá trị monhoc và hocky thông qua Intent khi mở Hienthi_Diem_Chitiet Activity
-//                Intent intent = new Intent(Hienthi_Diem.this, Hienthi_Diem_Chitiet.class);
-//                intent.putExtra("masv", masv);
-//                intent.putExtra("monhoc", selectedMonHoc);
-//                intent.putExtra("hocky", hockyValue);
-//                startActivity(intent);
-//            }
-//        });
     }
 }

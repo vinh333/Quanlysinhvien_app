@@ -2,6 +2,10 @@ package com.example.quanlysinhvien_app.Bieudo;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,57 +15,165 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SinhVienVang extends AppCompatActivity {
-
+    private Spinner spinnerLop, spinnerHocKy, spinnerNgay;
+    private ArrayAdapter<String> lopAdapter, hocKyAdapter, ngayAdapter;
+    private DatabaseReference diemDanhRef;
+    private int tonghocsinh, hocsinhvang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bieudo_sinhvienvang); // Thay thế your_layout bằng tên layout của bạn
+        setContentView(R.layout.activity_bieudo_sinhvienvang);
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("diemdanh").child("LH001").child("1").child("2023-11-01");
+        spinnerLop = findViewById(R.id.spinnerLop2);
+        spinnerHocKy = findViewById(R.id.spinnerHocKy2);
+        spinnerNgay = findViewById(R.id.spinnerNgay2);
+        diemDanhRef = FirebaseDatabase.getInstance().getReference("diemdanh");
 
-        // Truy vấn dữ liệu điểm danh cho tháng 11/2023
-//        Query query = databaseReference.orderByChild("ngaydiemdanh").equalTo("2023-11-01");
+        lopAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
+        lopAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLop.setAdapter(lopAdapter);
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        hocKyAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
+        hocKyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerHocKy.setAdapter(hocKyAdapter);
+
+        ngayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
+        ngayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerNgay.setAdapter(ngayAdapter);
+
+        loadLopData();
+
+        spinnerLop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedLop = parent.getItemAtPosition(position).toString();
+                loadHocKyData(selectedLop);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerHocKy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedLop = spinnerLop.getSelectedItem().toString();
+                String selectedHocKy = parent.getItemAtPosition(position).toString();
+                loadNgayData(selectedLop, selectedHocKy);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerNgay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedLop = spinnerLop.getSelectedItem().toString();
+                String selectedHocKy = spinnerHocKy.getSelectedItem().toString();
+                String selectedNgay = parent.getItemAtPosition(position).toString();
+                loadDataToListView(selectedLop, selectedHocKy, selectedNgay);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void loadLopData() {
+        diemDanhRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Map<String, Integer> absentStudentsByClass = new HashMap<>();
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String maLop = snapshot.child("malop").getValue(String.class);
-                    boolean tinhTrangDiemDanh = snapshot.child("tinhtrangdiemdanh").getValue(Boolean.class);
-
-                    // Kiểm tra nếu học sinh vắng (tinhtrangdiemdanh = false)
-                    if (!tinhTrangDiemDanh) {
-                        // Kiểm tra xem lớp đã tồn tại trong absentStudentsByClass chưa
-                        if (absentStudentsByClass.containsKey(maLop)) {
-                            // Nếu tồn tại, tăng giá trị
-                            int currentCount = absentStudentsByClass.get(maLop);
-                            absentStudentsByClass.put(maLop, currentCount + 1);
-                        } else {
-                            // Nếu chưa tồn tại, thêm mới
-                            absentStudentsByClass.put(maLop, 1);
-                        }
-                    }
+                List<String> lopList = new ArrayList<>();
+                for (DataSnapshot lopSnapshot : dataSnapshot.getChildren()) {
+                    lopList.add(lopSnapshot.getKey());
                 }
-
-                // Sử dụng absentStudentsByClass ở đây (đây chính là số lượng học sinh vắng theo từng lớp)
-                // absentStudentsByClass là một Map với key là mã lớp và value là số lượng học sinh vắng
-                // TODO: Xử lý dữ liệu (ví dụ: hiển thị trên giao diện người dùng)
-                Log.d("Absent Students", absentStudentsByClass.toString());
+                lopAdapter.clear();
+                lopAdapter.addAll(lopList);
+                lopAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Xử lý lỗi nếu có
-                Log.e("Firebase Error", databaseError.getMessage());
+                // Handle error
+            }
+        });
+    }
+
+    private void loadHocKyData(String selectedLop) {
+        diemDanhRef.child(selectedLop).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<String> hocKyList = new ArrayList<>();
+                for (DataSnapshot hocKySnapshot : dataSnapshot.getChildren()) {
+                    hocKyList.add(hocKySnapshot.getKey());
+                }
+                hocKyAdapter.clear();
+                hocKyAdapter.addAll(hocKyList);
+                hocKyAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        });
+    }
+
+    private void loadNgayData(String selectedLop, String selectedHocKy) {
+        diemDanhRef.child(selectedLop).child(selectedHocKy).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<String> ngayList = new ArrayList<>();
+                for (DataSnapshot ngaySnapshot : dataSnapshot.getChildren()) {
+                    ngayList.add(ngaySnapshot.getKey());
+                }
+                ngayAdapter.clear();
+                ngayAdapter.addAll(ngayList);
+                ngayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        });
+    }
+
+    private void loadDataToListView(String selectedLop, String selectedHocKy, String selectedNgay) {
+        diemDanhRef.child(selectedLop).child(selectedHocKy).child(selectedNgay).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                tonghocsinh = 0;
+                hocsinhvang = 0;
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    boolean tinhTrangDiemDanh = snapshot.child("tinhtrangdiemdanh").getValue(Boolean.class);
+                    tonghocsinh++;
+                    if (!tinhTrangDiemDanh) {
+                        hocsinhvang++;
+                    }
+                }
+
+                // Now you can use tonghocsinh and hocsinhvang as needed.
+                Log.d("Absent Students", "Total students: " + tonghocsinh + ", Absent students: " + hocsinhvang);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
             }
         });
     }
