@@ -3,11 +3,13 @@ package com.example.quanlysinhvien_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -15,18 +17,22 @@ import androidx.appcompat.app.AppCompatDelegate;
 import com.example.quanlysinhvien_app.Select.Select_Sinhvien;
 import com.example.quanlysinhvien_app.Tinhnang.Diemdanhsv;
 import com.example.quanlysinhvien_app.Tinhnang.Nhapdiem;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper mDatabaseHelper;
-    private int newMode;;
+    private DatabaseReference diemDanhRef;
+    private int newMode;
+    private int tonghocsinh, hocsinhvang;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        PinManager pinManager = new PinManager(this);
-//        String savedPin = pinManager.getPin();
-//
-//        if (savedPin == null) {
 
             setContentView(R.layout.activity_main);
             LinearLayout linearLayoutTrangChu = findViewById(R.id.LLnhapdiem);
@@ -85,5 +91,30 @@ public class MainActivity extends AppCompatActivity {
 //            startActivity(intent);
 //
 //        }
+
+        diemDanhRef = FirebaseDatabase.getInstance().getReference("diemdanh");
+        diemDanhRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                tonghocsinh = 0;
+                hocsinhvang = 0;
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    boolean tinhTrangDiemDanh = snapshot.child("tinhtrangdiemdanh").getValue(Boolean.class);
+                    tonghocsinh++;
+                    if (!tinhTrangDiemDanh) {
+                        hocsinhvang++;
+                    }
+                }
+
+                // Now you can use tonghocsinh and hocsinhvang as needed.
+                Log.d("Absent Students", "Total students: " + tonghocsinh + ", Absent students: " + hocsinhvang);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        });
     }
 }

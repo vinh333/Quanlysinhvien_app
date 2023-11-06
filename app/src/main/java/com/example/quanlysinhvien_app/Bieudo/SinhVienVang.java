@@ -168,7 +168,7 @@ public class SinhVienVang extends AppCompatActivity {
                 }
 
                 // Now you can use tonghocsinh and hocsinhvang as needed.
-                Log.d("Absent Students", "Total stude3nts: " + tonghocsinh + ", Absent students: " + hocsinhvang);
+                Log.d("Absent Students", "Total students: " + tonghocsinh + ", Absent students: " + hocsinhvang);
             }
 
             @Override
