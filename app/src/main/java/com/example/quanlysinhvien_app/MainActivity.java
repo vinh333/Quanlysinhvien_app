@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.example.quanlysinhvien_app.Select.Select_Khoa;
+import com.example.quanlysinhvien_app.Select.Select_Nganh;
 import com.example.quanlysinhvien_app.Select.Select_Sinhvien;
 import com.example.quanlysinhvien_app.Tinhnang.Diemdanhsv;
 import com.example.quanlysinhvien_app.Tinhnang.Nhapdiem;
@@ -71,7 +73,12 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // Chuyển sang màn hình Trang Chủ
+
+
+
+
                     Intent intent = new Intent(MainActivity.this, Select_Sinhvien.class);
+                    intent.putExtra("malop", "all");
                     startActivity(intent);
                 }
             });
@@ -93,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
         // Truyền học kỳ vào 1,2,all
         loadDataToListView("2");
+
     }
 
     private void loadDataToListView(String hocKy) {

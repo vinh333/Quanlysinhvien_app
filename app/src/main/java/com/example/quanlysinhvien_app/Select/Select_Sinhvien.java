@@ -110,7 +110,7 @@ public class Select_Sinhvien extends AppCompatActivity {
                 // Lặp qua dữ liệu đã lấy từ Firebase
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // Kiểm tra xem dữ liệu từ Firebase có tồn tại và có thuộc mã lớp đã chọn không
-                    if (snapshot.exists() && snapshot.child("malop").getValue(String.class).equals(maLop)) {
+                    if ((snapshot.exists() && snapshot.child("malop").getValue(String.class).equals(maLop)) || maLop.equals("all")) {
                         SinhVien sinhVien = new SinhVien();
                         sinhVien.setMasv(snapshot.child("masv").getValue(String.class));
                         sinhVien.setHotensv(snapshot.child("hotensv").getValue(String.class));
