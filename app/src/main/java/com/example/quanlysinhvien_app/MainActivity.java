@@ -2,6 +2,7 @@ package com.example.quanlysinhvien_app;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,11 +20,22 @@ import com.example.quanlysinhvien_app.Select.Select_Nganh;
 import com.example.quanlysinhvien_app.Select.Select_Sinhvien;
 import com.example.quanlysinhvien_app.Tinhnang.Diemdanhsv;
 import com.example.quanlysinhvien_app.Tinhnang.Nhapdiem;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper mDatabaseHelper;
@@ -42,9 +54,11 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout linearLayoutCaidat = findViewById(R.id.LLcaidat);
             Button btnSV = findViewById(R.id.btnsv);
             Button btnKhoa = findViewById(R.id.btnkhoa);
+            PieChart pieChart1 = findViewById(R.id.pieChart1);
+            PieChart pieChart2 = findViewById(R.id.pieChart2);
 
 
-            linearLayoutTrangChu.setOnClickListener(new View.OnClickListener() {
+        linearLayoutTrangChu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Chuyển sang màn hình Trang Chủ
@@ -99,11 +113,14 @@ public class MainActivity extends AppCompatActivity {
 //
 //        }
         // Truyền học kỳ vào 1,2,all
-        loadDataToListView("2");
+        loadDataToListView("1",pieChart1);
+        loadDataToListView("2",pieChart2);
+
+
 
     }
 
-    private void loadDataToListView(String hocKy) {
+    private void loadDataToListView(String hocKy, PieChart pieChart) {
         diemDanhRef = FirebaseDatabase.getInstance().getReference("diemdanh");
 
         diemDanhRef.addValueEventListener(new ValueEventListener() {
@@ -136,6 +153,37 @@ public class MainActivity extends AppCompatActivity {
 
                 // Now you can use tonghocsinh and hocsinhvang as needed.
                 Log.d("Absent Students", "Total students: " + tonghocsinh + ", Absent students: " + hocsinhvang);
+
+                // Tạo dữ liệu cho biểu đồ tròn
+                ArrayList<PieEntry> entries = new ArrayList<>();
+                entries.add(new PieEntry(tonghocsinh-hocsinhvang, "Học"));
+                entries.add(new PieEntry(hocsinhvang, "Vắng"));
+
+                PieDataSet dataSet = new PieDataSet(entries, "Học Kỳ " + hocKy);
+
+
+
+                // Tạo một mảng các màu bạn muốn sử dụng
+                int color1 = Color.parseColor("#2D8BBA"); // Màu xanh da trời
+                int color2 = Color.parseColor("#41B8D5"); // Màu xanh dương
+                int[] colors = {color1, color2};
+                dataSet.setColors(colors);
+
+
+                PieData pieData = new PieData(dataSet);
+
+                // Cài đặt dữ liệu cho biểu đồ tròn
+                pieChart.setData(pieData);
+
+                // Tắt chú thích và chú thích mô tả
+//                pieChart.getLegend().setEnabled(false);
+                pieChart.getDescription().setEnabled(false);
+                float textSize = 10f; // Đặt kích thước chữ số là 18 sp
+                dataSet.setValueTextSize(textSize);
+
+
+                // Hiển thị biểu đồ tròn
+                pieChart.invalidate();
             }
 
             @Override
