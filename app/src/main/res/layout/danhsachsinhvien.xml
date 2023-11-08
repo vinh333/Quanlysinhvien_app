@@ -33,7 +33,7 @@
                 android:textSize="44sp" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/textView_Lop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"

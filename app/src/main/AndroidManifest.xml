@@ -30,12 +30,14 @@
 
         <activity
             android:name=".Tinhnang.Thongtinsinhvien" />
-<!--        <activity-->
-<!--            android:name=".Select.Select_Lop" />-->
+        <activity
+            android:name=".Select.Select_Lop" />
+        <activity
+            android:name=".Select.Select_Khoa" />
 <!--        <activity-->
 <!--            android:name=".Select.Select_Sinhvien" />-->
-<!--        <activity-->
-<!--            android:name=".Tinhnang.Diemdanhsv" />-->
+        <activity
+            android:name=".Tinhnang.Diemdanhsv" />
 <!--        <activity-->
 <!--            android:name=".Tinhnang.Nhapdiem" />-->
         <activity
@@ -50,8 +52,7 @@
             android:name=".Select.Select_Nganh" />
         <activity
             android:name=".Select.Select_Sinhvien" />
-        <activity
-            android:name=".Select.Select_Lop" />
+
         <activity
             android:name=".Tinhnang.Nhapdiem" />
         <activity
@@ -62,10 +63,14 @@
 <!--            android:name=".User.quenpass_nhaplai" />-->
         <activity
             android:name=".Tinhnang.Hienthi_Diem" />
-        <activity
-            android:name=".Tinhnang.Hienthi_Diem_Chitiet" />
+
         <activity
             android:name=".Tinhnang.Edit_Thongtinsinhvien" />
+
+        <activity
+            android:name=".Tinhnang.HienThiDiemDanhActivity" />
+
+
     </application>
 
 </manifest>

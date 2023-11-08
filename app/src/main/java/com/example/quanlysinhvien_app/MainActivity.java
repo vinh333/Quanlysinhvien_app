@@ -16,9 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.quanlysinhvien_app.Select.Select_Khoa;
+import com.example.quanlysinhvien_app.Select.Select_Lop;
 import com.example.quanlysinhvien_app.Select.Select_Nganh;
 import com.example.quanlysinhvien_app.Select.Select_Sinhvien;
 import com.example.quanlysinhvien_app.Tinhnang.Diemdanhsv;
+import com.example.quanlysinhvien_app.Tinhnang.HienThiDiemDanhActivity;
+import com.example.quanlysinhvien_app.Tinhnang.Hienthi_Diem;
 import com.example.quanlysinhvien_app.Tinhnang.Nhapdiem;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -53,7 +56,10 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout linearLayoutDiemdanh = findViewById(R.id.LLdiemdanh);
             LinearLayout linearLayoutCaidat = findViewById(R.id.LLcaidat);
             Button btnSV = findViewById(R.id.btnsv);
+
+            Button btnLop = findViewById(R.id.btnlop);
             Button btnKhoa = findViewById(R.id.btnkhoa);
+            Button btnDiemDanh = findViewById(R.id.button_diemdanh);
             PieChart pieChart1 = findViewById(R.id.pieChart1);
             PieChart pieChart2 = findViewById(R.id.pieChart2);
 
@@ -87,12 +93,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // Chuyển sang màn hình Trang Chủ
-
-
-
-
                     Intent intent = new Intent(MainActivity.this, Select_Sinhvien.class);
-                    intent.putExtra("malop", "all");
+                    intent.putExtra("malop", "Tất cả");
                     startActivity(intent);
                 }
             });
@@ -100,11 +102,31 @@ public class MainActivity extends AppCompatActivity {
             btnKhoa.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Chuyển sang màn hình Trang Chủ
-//                    Intent intent = new Intent(MainActivity.this, dskhoa.class);
-//                    startActivity(intent);
+//                     Chuyển sang màn hình Trang Chủ
+                    Intent intent = new Intent(MainActivity.this, Select_Khoa.class);
+                    startActivity(intent);
                 }
             });
+
+        btnLop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                     Chuyển sang màn hình Trang Chủ
+                Intent intent = new Intent(MainActivity.this, Select_Lop.class);
+                intent.putExtra("MA_NGANH", "Tất cả");
+                startActivity(intent);
+            }
+        });
+
+
+        btnDiemDanh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                     Chuyển sang màn hình Trang Chủ
+                Intent intent = new Intent(MainActivity.this, HienThiDiemDanhActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        } else {
 //            // Mã PIN đã cài đặt, chuyển đến trang nhập mã PIN

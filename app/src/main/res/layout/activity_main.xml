@@ -95,7 +95,7 @@
                 android:layout_height="70dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_button"
-                android:text="KHÓA"
+                android:text="KHOA"
                 android:textSize="22sp" />
 
             <Button
@@ -107,16 +107,26 @@
                 android:text="SINH VIÊN"
                 android:textSize="22sp" />
 
+            <!-- Tiêu đề "THỐNG KÊ" -->
+
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/btnlop"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_button"
-                android:text="ĐIỂM THI"
+                android:text="LỚP"
                 android:textSize="22sp" />
 
-            <!-- Tiêu đề "THỐNG KÊ" -->
+            <Button
+                android:id="@+id/button_diemdanh"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button"
+                android:text="ĐIỂM DANH"
+                android:textSize="22sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
