@@ -69,7 +69,8 @@
 
         <activity
             android:name=".Tinhnang.HienThiDiemDanhActivity" />
-
+        <activity
+            android:name=".Bieudo.SinhVienVang" />
 
     </application>
 

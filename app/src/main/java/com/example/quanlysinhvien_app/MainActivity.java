@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.example.quanlysinhvien_app.Bieudo.SinhVienVang;
 import com.example.quanlysinhvien_app.Select.Select_Khoa;
 import com.example.quanlysinhvien_app.Select.Select_Lop;
 import com.example.quanlysinhvien_app.Select.Select_Nganh;
@@ -32,6 +34,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference diemDanhRef;
     private int newMode;
     private int tonghocsinh, hocsinhvang;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
             Button btnDiemDanh = findViewById(R.id.button_diemdanh);
             PieChart pieChart1 = findViewById(R.id.pieChart1);
             PieChart pieChart2 = findViewById(R.id.pieChart2);
+            TextView txtThongTinThemBieuDo = findViewById(R.id.textView_xemthembieudo);
 
-
-        linearLayoutTrangChu.setOnClickListener(new View.OnClickListener() {
+            linearLayoutTrangChu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Chuyển sang màn hình Trang Chủ
@@ -108,26 +110,34 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        btnLop.setOnClickListener(new View.OnClickListener() {
+            btnLop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+    //                     Chuyển sang màn hình Trang Chủ
+                    Intent intent = new Intent(MainActivity.this, Select_Lop.class);
+                    intent.putExtra("MA_NGANH", "Tất cả");
+                    startActivity(intent);
+                }
+            });
+
+
+            btnDiemDanh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+            // Chuyển sang màn hình Trang Chủ
+                    Intent intent = new Intent(MainActivity.this, HienThiDiemDanhActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+        txtThongTinThemBieuDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                     Chuyển sang màn hình Trang Chủ
-                Intent intent = new Intent(MainActivity.this, Select_Lop.class);
-                intent.putExtra("MA_NGANH", "Tất cả");
+                // Chuyển sang màn hình Trang Chủ
+                Intent intent = new Intent(MainActivity.this, SinhVienVang.class);
                 startActivity(intent);
             }
         });
-
-
-        btnDiemDanh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                     Chuyển sang màn hình Trang Chủ
-                Intent intent = new Intent(MainActivity.this, HienThiDiemDanhActivity.class);
-                startActivity(intent);
-            }
-        });
-
 //        } else {
 //            // Mã PIN đã cài đặt, chuyển đến trang nhập mã PIN
 //            Intent intent = new Intent(this, PinEntryActivity.class);
@@ -137,9 +147,6 @@ public class MainActivity extends AppCompatActivity {
         // Truyền học kỳ vào 1,2,all
         loadDataToListView("1",pieChart1);
         loadDataToListView("2",pieChart2);
-
-
-
     }
 
     private void loadDataToListView(String hocKy, PieChart pieChart) {
@@ -203,6 +210,12 @@ public class MainActivity extends AppCompatActivity {
                 float textSize = 10f; // Đặt kích thước chữ số là 18 sp
                 dataSet.setValueTextSize(textSize);
 
+                dataSet.setValueFormatter(new ValueFormatter() {
+                    @Override
+                    public String getFormattedValue(float value) {
+                        return String.valueOf((int) value); // Chuyển đổi giá trị thành số nguyên
+                    }
+                });
 
                 // Hiển thị biểu đồ tròn
                 pieChart.invalidate();
