@@ -1,0 +1,69 @@
+<!-- res/layout/activity_themdiemthi.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:text="THÊM ĐIỂM THI HỌC KỲ" />
+
+    <!-- Spinner cho Mã Sinh Viên -->
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chọn Sinh viên:" />
+
+    <Spinner
+        android:id="@+id/spinnerMaSV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Chọn Mã Sinh Viên" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chọn Môn Học:" />
+
+    <!-- Spinner cho Mã Môn Học -->
+    <Spinner
+        android:id="@+id/spinnerMaMonHoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Chọn Mã Môn Học" />
+
+    <EditText
+        android:id="@+id/editTextLanThi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Lần Thi"/>
+
+    <EditText
+        android:id="@+id/editTextHocKy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Học Kỳ"/>
+
+    <EditText
+        android:id="@+id/editTextDiem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Điểm"/>
+
+    <Button
+        android:id="@+id/buttonThemDiem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm Điểm"/>
+
+</LinearLayout>

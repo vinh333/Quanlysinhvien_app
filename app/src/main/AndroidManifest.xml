@@ -33,6 +33,8 @@
             android:name=".Tinhnang.Themsinhvien" />
         <activity
             android:name=".Tinhnang.ThemLopActivity" />
+        <activity
+            android:name=".Tinhnang.ThemDiemThiActivity" />
     </application>
 
 </manifest>

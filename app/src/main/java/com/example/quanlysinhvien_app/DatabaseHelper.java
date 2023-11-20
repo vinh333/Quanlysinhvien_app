@@ -50,14 +50,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 6;
 
     // Tạo bảng BANGDIEMTHI
-    private static final String CREATE_TABLE_BANGDIEMTHI = "CREATE TABLE BANGDIEMTHI " +
-            "(MASV CHAR(10) PRIMARY KEY, " +
+    private static final String CREATE_TABLE_BANGDIEMTHI =  "CREATE TABLE BANGDIEMTHI " +
+            "(MASV CHAR(10), " +
             "MAMONHOC CHAR(10), " +
             "LANTHI VARCHAR(20), " +
             "HOCKY VARCHAR(40), " +
             "DIEM DOUBLE, " +
+            "PRIMARY KEY (MASV, MAMONHOC,LANTHI,HOCKY), " +
             "FOREIGN KEY (MASV) REFERENCES SINHVIEN(MASV), " +
-            "FOREIGN KEY (MAMONHOC) REFERENCES MONHOC(MAMONHOC));";
+            "FOREIGN KEY (MAMONHOC) REFERENCES MONHOC(MAMONHOC))";
 
     // Tạo bảng KHOA
     private static final String CREATE_TABLE_KHOA = "CREATE TABLE KHOA " +
@@ -220,6 +221,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.close();
     }
+    public void addDiemThiFromUI(String maSV, String maMonHoc, String lanThi, String hocKy, double diem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(EXAM_SCORE_STUDENT_ID_COLUMN_NAME, maSV);
+        values.put(EXAM_SCORE_SUBJECT_CODE_COLUMN_NAME, maMonHoc);
+        values.put(EXAM_SCORE_SESSION_COLUMN_NAME, lanThi);
+        values.put(EXAM_SCORE_SEMESTER_COLUMN_NAME, hocKy);
+        values.put(EXAM_SCORE_SCORE_COLUMN_NAME, diem);
+
+        // Thêm dữ liệu vào bảng BANGDIEMTHI
+        db.insert("BANGDIEMTHI", null, values);
+
+        db.close();
+    }
 
 
 
@@ -273,6 +288,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return departmentList;
     }
 
+    public List<String> getAllMaMonHoc() {
+        List<String> maMonHocList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT " + SUBJECT_CODE_COLUMN_NAME + " FROM MONHOC", null);
+        if (cursor.moveToFirst()) {
+            do {
+                // Lấy mã môn học từ cursor và thêm vào danh sách
+                String maMonHoc = cursor.getString(cursor.getColumnIndex(SUBJECT_CODE_COLUMN_NAME));
+                maMonHocList.add(maMonHoc);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return maMonHocList;
+    }
+    public List<String> getAllMaSinhVien() {
+        List<String> maSinhVienList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT " + STUDENT_ID_COLUMN_NAME + " FROM SINHVIEN", null);
+        if (cursor.moveToFirst()) {
+            do {
+                // Lấy mã sinh viên từ cursor và thêm vào danh sách
+                String maSV = cursor.getString(cursor.getColumnIndex(STUDENT_ID_COLUMN_NAME));
+                maSinhVienList.add(maSV);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return maSinhVienList;
+    }
 
 
 
