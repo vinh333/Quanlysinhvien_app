@@ -31,7 +31,8 @@
             android:name=".Tinhnang.ThemMonHoc" />
         <activity
             android:name=".Tinhnang.Themsinhvien" />
-
+        <activity
+            android:name=".Tinhnang.ThemLopActivity" />
     </application>
 
 </manifest>

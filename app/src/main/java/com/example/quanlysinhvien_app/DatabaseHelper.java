@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
+import com.example.quanlysinhvien_app.Database.KHOA;
 import com.example.quanlysinhvien_app.Database.MONHOC;
 import com.example.quanlysinhvien_app.Database.SINHVIEN;
 
@@ -185,6 +187,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
+    //******** Các hàm add table
+    // Phương thức thêm Môn Học vào cơ sở dữ liệu
+    public void addMonHoc(MONHOC monHoc) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(SUBJECT_CODE_COLUMN_NAME, monHoc.getMaMonHoc());
+        values.put(SUBJECT_NAME_COLUMN_NAME, monHoc.getTenMonHoc());
+        values.put(SUBJECT_THEORY_COLUMN_NAME, monHoc.getLyThuyet());
+        values.put(SUBJECT_PRACTICE_COLUMN_NAME, monHoc.getThucHanh());
+
+        // Thêm dữ liệu vào bảng MONHOC
+        db.insert("MONHOC", null, values);
+
+        db.close();
+    }
+    public void addMonHocFromUI(String maMonHoc, String tenMonHoc, int lyThuyet, int thucHanh) {
+        MONHOC monHoc = new MONHOC(maMonHoc, tenMonHoc, lyThuyet, thucHanh);
+        addMonHoc(monHoc);
+    }
+    // Phương thức thêm lớp học từ giao diện người dùng
+    public void addLopHocFromUI(String maLop, String tenLop, String maKhoa) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(CLASS_CODE_COLUMN_NAME, maLop);
+        values.put("TENLOP", tenLop);
+        values.put("MAKHOA", maKhoa);
+
+        // Thêm dữ liệu vào bảng LOP
+        long result = db.insert("LOP", null, values);
+
+        db.close();
+    }
+
+
+
+    //******** các hàm select All table
     public List<SINHVIEN> getAllSinhVien() {
         List<SINHVIEN> sinhVienList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -213,28 +252,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return sinhVienList;
     }
+    public List<KHOA> getAllDepartments() {
+        List<KHOA> departmentList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
 
+        Cursor cursor = db.rawQuery("SELECT * FROM KHOA", null);
+        if (cursor.moveToFirst()) {
+            do {
+                // Lấy thông tin từ cursor và tạo đối tượng Khoa
+                String maKhoa = cursor.getString(cursor.getColumnIndex("MAKHOA"));
+                String tenKhoa = cursor.getString(cursor.getColumnIndex("TENKHOA"));
 
-    // Phương thức thêm Môn Học vào cơ sở dữ liệu
-    public void addMonHoc(MONHOC monHoc) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(SUBJECT_CODE_COLUMN_NAME, monHoc.getMaMonHoc());
-        values.put(SUBJECT_NAME_COLUMN_NAME, monHoc.getTenMonHoc());
-        values.put(SUBJECT_THEORY_COLUMN_NAME, monHoc.getLyThuyet());
-        values.put(SUBJECT_PRACTICE_COLUMN_NAME, monHoc.getThucHanh());
-
-        // Thêm dữ liệu vào bảng MONHOC
-        db.insert("MONHOC", null, values);
-
+                // Tạo đối tượng Khoa và thêm vào danh sách
+                KHOA khoa = new KHOA(maKhoa, tenKhoa);
+                departmentList.add(khoa);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
         db.close();
+        return departmentList;
     }
-    // Phương thức thêm Môn Học từ giao diện người dùng
-    public void addMonHocFromUI(String maMonHoc, String tenMonHoc, int lyThuyet, int thucHanh) {
-        MONHOC monHoc = new MONHOC(maMonHoc, tenMonHoc, lyThuyet, thucHanh);
-        addMonHoc(monHoc);
-    }
+
+
 
 
 }
