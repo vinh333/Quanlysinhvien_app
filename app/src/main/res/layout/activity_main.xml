@@ -201,7 +201,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button_Khoa"
             android:layout_width="357dp"
             android:layout_height="70dp"
             android:layout_marginLeft="25dp"
@@ -210,7 +210,7 @@
             android:textSize="22sp" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/button_SinhVien"
             android:layout_width="357dp"
             android:layout_height="70dp"
             android:layout_marginLeft="25dp"
@@ -220,7 +220,7 @@
             android:textSize="22sp" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/button_DiemThi"
             android:layout_width="357dp"
             android:layout_height="70dp"
             android:layout_marginLeft="25dp"
@@ -230,14 +230,15 @@
             android:textSize="22sp" />
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="357dp"
+            android:id="@+id/button_Test"
+            android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_button"
-            android:text="ĐIỂM RÈN LUYỆN"
+            android:text="Test"
             android:textSize="22sp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

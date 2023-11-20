@@ -1,0 +1,49 @@
+<!-- res/layout/activity_add_subject.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:text="THÊM MÔN HỌC" />
+
+    <EditText
+        android:id="@+id/editTextSubjectCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mã Môn Học" />
+
+    <EditText
+        android:id="@+id/editTextSubjectName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên Môn Học"/>
+
+    <EditText
+        android:id="@+id/editTextLyThuyet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Số Tiết Lý Thuyết"/>
+
+    <EditText
+        android:id="@+id/editTextThucHanh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Số Tiết Thực Hành"/>
+
+    <Button
+        android:id="@+id/buttonAddSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm Môn Học"/>
+
+</LinearLayout>
