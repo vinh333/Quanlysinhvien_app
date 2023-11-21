@@ -1,7 +1,9 @@
 package com.example.quanlysinhvien_app.Select;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,6 +43,19 @@ public class Select_Sinhvien extends AppCompatActivity {
 
         // Tìm nút lọc sinh viên theo tên và mã sinh viên bằng ID
         TextView btnLocSV = findViewById(R.id.btn_locsv);
+        // Bổ sung sự kiện lắng nghe cho mỗi mục trong ListView
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Lấy thông tin của sinh viên được chọn
+                SINHVIEN selectedSinhVien = sinhVienList.get(position);
+
+                // Chuyển đến màn hình thông tin sinh viên và truyền mã sinh viên
+                Intent intent = new Intent(Select_Sinhvien.this, Select_Thongtinsinhvien.class);
+                intent.putExtra("MASV", selectedSinhVien.getMaSV());
+                startActivity(intent);
+            }
+        });
         btnLocSV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,5 +82,7 @@ public class Select_Sinhvien extends AppCompatActivity {
             }
         });
     }
+
+
 }
 

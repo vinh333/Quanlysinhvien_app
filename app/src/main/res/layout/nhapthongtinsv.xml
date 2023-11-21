@@ -83,47 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Họ"
-                    android:textSize="15dp" />
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:id="@+id/txtho"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@drawable/rounded_corner_gray"
-                        android:ems="10"
-
-                        android:inputType="text" />
-
-                    <TextView
-                        android:id="@+id/textView24"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_gravity="center_vertical|end"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/icon8" />
-                </FrameLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="270dp">
-
-                <TextView
-                    android:id="@+id/textView224"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Tên "
+                    android:text="Họ và Tên "
                     android:textSize="15dp" />
 
                 <FrameLayout
@@ -292,86 +252,6 @@
 
                     <EditText
                         android:id="@+id/editTextText5"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@drawable/rounded_corner_gray"
-                        android:ems="10"
-
-                        android:inputType="text" />
-
-                    <TextView
-                        android:id="@+id/textView24"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_gravity="center_vertical|end"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/icon8" />
-                </FrameLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="270dp">
-
-                <TextView
-                    android:id="@+id/textView224"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Mã tỉnh"
-                    android:textSize="15dp" />
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:id="@+id/txtmatinh"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@drawable/rounded_corner_gray"
-                        android:ems="10"
-
-                        android:inputType="text" />
-
-                    <TextView
-                        android:id="@+id/textView24"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_gravity="center_vertical|end"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/icon8" />
-                </FrameLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="270dp">
-
-                <TextView
-                    android:id="@+id/textView224"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Quận"
-                    android:textSize="15dp" />
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:id="@+id/txtquan"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_corner_gray"

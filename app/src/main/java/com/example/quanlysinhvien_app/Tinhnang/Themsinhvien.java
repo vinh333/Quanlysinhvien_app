@@ -27,14 +27,12 @@ public class Themsinhvien extends AppCompatActivity {
         // Ánh xạ các phần tử từ layout XML
         imageView = findViewById(R.id.imageView3);
         txtMasv = findViewById(R.id.txtmasv);
-        txtHo = findViewById(R.id.txtho);
         txtTen = findViewById(R.id.txtten);
         txtGioiTinh = findViewById(R.id.txtgioitinh);
         txtNgaySinh = findViewById(R.id.txtngaysinh);
         txtNoiSinh = findViewById(R.id.txtnoisinh);
         txtDiaChi = findViewById(R.id.editTextText5);
-        txtMaTinh = findViewById(R.id.txtmatinh);
-        txtQuan = findViewById(R.id.txtquan);
+
         txtMaLop = findViewById(R.id.txtmalop);
         txtHocBong = findViewById(R.id.txthocbong);
         btnLuu = findViewById(R.id.button_luu);
@@ -45,14 +43,12 @@ public class Themsinhvien extends AppCompatActivity {
             public void onClick(View view) {
                 // Xử lý sự kiện khi nút Lưu được nhấn
                 String masv = txtMasv.getText().toString();
-                String ho = txtHo.getText().toString();
-                String ten = txtTen.getText().toString();
+                String hovaten = txtTen.getText().toString();
                 String gioiTinh = txtGioiTinh.getText().toString();
                 String ngaySinh = txtNgaySinh.getText().toString();
                 String noiSinh = txtNoiSinh.getText().toString();
                 String diaChi = txtDiaChi.getText().toString();
-                String maTinh = txtMaTinh.getText().toString();
-                String quan = txtQuan.getText().toString();
+
                 String maLop = txtMaLop.getText().toString();
                 String hocBong = txtHocBong.getText().toString();
 
@@ -62,19 +58,17 @@ public class Themsinhvien extends AppCompatActivity {
                 DatabaseHelper databaseHelper = new DatabaseHelper(Themsinhvien.this);
                 SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
-                // Tạo chuỗi lệnh SQL INSERT
-                String insertDataQuery = "INSERT INTO SINHVIEN (MASV, HOSV, TENSV, GIOITINH, NGAYSINH, NOISINH, DIACHI, MATINH, QUAN, MALOP, HOCBONG) VALUES ('" +
+                // Tạo câu lệnh SQL INSERT
+                String insertDataQuery = "INSERT INTO SINHVIEN (MASV, HOTENSV, GIOITINH, NGAYSINH, NOISINH, DIACHI, MALOP, HOCBONG) VALUES ('" +
                         masv + "', '" +
-                        ho + "', '" +
-                        ten + "', '" +
+                        hovaten + "', '" +
                         gioiTinh + "', '" +
                         ngaySinh + "', '" +
                         noiSinh + "', '" +
                         diaChi + "', '" +
-                        maTinh + "', '" +
-                        quan + "', '" +
                         maLop + "', '" +
                         hocBong + "')";
+
 
                 // Thực hiện lệnh SQL INSERT
                 db.execSQL(insertDataQuery);

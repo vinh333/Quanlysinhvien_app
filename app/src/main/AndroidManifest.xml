@@ -35,6 +35,8 @@
             android:name=".Tinhnang.ThemLopActivity" />
         <activity
             android:name=".Tinhnang.ThemDiemThiActivity" />
+        <activity
+            android:name=".Select.Select_Thongtinsinhvien" />
     </application>
 
 </manifest>

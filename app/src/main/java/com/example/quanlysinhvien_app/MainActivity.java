@@ -17,6 +17,7 @@ import com.example.quanlysinhvien_app.Select.Select_Sinhvien;
 import com.example.quanlysinhvien_app.Tinhnang.ThemDiemThiActivity;
 import com.example.quanlysinhvien_app.Tinhnang.ThemLopActivity;
 import com.example.quanlysinhvien_app.Tinhnang.ThemMonHoc;
+import com.example.quanlysinhvien_app.Tinhnang.Themsinhvien;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
-                Intent intent = new Intent(MainActivity.this, ThemDiemThiActivity.class);
+                Intent intent = new Intent(MainActivity.this, Themsinhvien.class);
                 startActivity(intent);
             }
         });

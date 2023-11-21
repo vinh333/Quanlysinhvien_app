@@ -7,25 +7,20 @@ public class SINHVIEN {
     private boolean gioiTinh;
     private String noiSinh;
     private String diaChi;
-    private String maTinh;
-    private String quan;
     private String maLop;
     private float hocBong;
 
     public SINHVIEN(String maSV, String hoTen, String ngaySinh, boolean gioiTinh,
-                    String noiSinh, String diaChi, String maTinh, String quan, String maLop, float hocBong) {
+                    String noiSinh, String diaChi, String maLop, float hocBong) {
         this.maSV = maSV;
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;
         this.noiSinh = noiSinh;
         this.diaChi = diaChi;
-        this.maTinh = maTinh;
-        this.quan = quan;
         this.maLop = maLop;
         this.hocBong = hocBong;
     }
-
     public String getMaSV() {
         return maSV;
     }
@@ -74,21 +69,7 @@ public class SINHVIEN {
         this.diaChi = diaChi;
     }
 
-    public String getMaTinh() {
-        return maTinh;
-    }
 
-    public void setMaTinh(String maTinh) {
-        this.maTinh = maTinh;
-    }
-
-    public String getQuan() {
-        return quan;
-    }
-
-    public void setQuan(String quan) {
-        this.quan = quan;
-    }
 
     public String getMaLop() {
         return maLop;

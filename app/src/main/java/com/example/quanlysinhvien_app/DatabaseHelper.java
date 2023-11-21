@@ -88,8 +88,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "NGAYSINH DATE, " +
             "NOISINH VARCHAR(30), " +
             "DIACHI VARCHAR(40), " +
-            "MATINH CHAR(6), " +
-            "QUAN CHAR(2), " +
             "MALOP CHAR(8), " +
             "HOCBONG FLOAT, " +
             "FOREIGN KEY (MALOP) REFERENCES LOP(MALOP));";
@@ -174,10 +172,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Phương thức thêm dữ liệu mẫu cho bảng SINHVIEN
     private void insertSampleDataSinhVien(SQLiteDatabase db) {
-        db.execSQL("INSERT INTO SINHVIEN (MASV, HOTENSV, GIOITINH, NGAYSINH, NOISINH, DIACHI, MATINH, QUAN, MALOP, HOCBONG) VALUES ('SV001', 'Nguyen Van A', 1, '2000-01-01', 'Hanoi', '123 Main St', 'HN', 'D1', 'L001', 500000)");
-        db.execSQL("INSERT INTO SINHVIEN (MASV, HOTENSV, GIOITINH, NGAYSINH, NOISINH, DIACHI, MATINH, QUAN, MALOP, HOCBONG) VALUES ('SV002', 'Tran Thi B', 0, '2001-02-02', 'Hanoi', '456 Main St', 'HN', 'D2', 'L002', 400000)");
-        // Thêm dữ liệu cho các sinh viên khác nếu cần thiết
+        db.execSQL("INSERT INTO SINHVIEN (MASV, HOTENSV, GIOITINH, NGAYSINH, NOISINH, DIACHI, MALOP, HOCBONG) VALUES " +
+                "('SV001', 'Nguyen Van A', 1, '2000-01-01', 'Hanoi', '123 Main St', 'L001', 500000)");
+        db.execSQL("INSERT INTO SINHVIEN (MASV, HOTENSV, GIOITINH, NGAYSINH, NOISINH, DIACHI, MALOP, HOCBONG) VALUES " +
+                "('SV002', 'Tran Thi B', 0, '2001-02-02', 'Hanoi', '456 Main St', 'L002', 400000)");
+        // Add data for other students if necessary
     }
+
 
     // Phương thức thêm dữ liệu mẫu cho bảng BANGDIEMTHI
     private void insertSampleDataBangDiemThi(SQLiteDatabase db) {
@@ -253,13 +254,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String noiSinh = cursor.getString(cursor.getColumnIndex(STUDENT_BIRTHPLACE_COLUMN_NAME));
                 String ngaySinh = cursor.getString(cursor.getColumnIndex(STUDENT_BIRTHDATE_COLUMN_NAME));
                 String diaChi = cursor.getString(cursor.getColumnIndex(STUDENT_ADDRESS_COLUMN_NAME));
-                String maTinh = cursor.getString(cursor.getColumnIndex(STUDENT_CITY_COLUMN_NAME));
-                String maQuan = cursor.getString(cursor.getColumnIndex(STUDENT_DISTRICT_COLUMN_NAME));
                 String maLop = cursor.getString(cursor.getColumnIndex(STUDENT_CLASS_CODE_COLUMN_NAME));
                 float hocBong = cursor.getFloat(cursor.getColumnIndex(STUDENT_SCHOLARSHIP_COLUMN_NAME));
 
                 // Tạo đối tượng SINHVIEN và thêm vào danh sách
-                SINHVIEN sinhVien = new SINHVIEN(maSV, hoTen, ngaySinh, gioiTinh,noiSinh, diaChi, maTinh, maQuan, maLop, hocBong);
+                SINHVIEN sinhVien = new SINHVIEN(maSV, hoTen, ngaySinh, gioiTinh, noiSinh, diaChi, maLop, hocBong);
                 sinhVienList.add(sinhVien);
             } while (cursor.moveToNext());
         }
@@ -319,6 +318,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return maSinhVienList;
+    }
+    // Trong lớp DatabaseHelper
+    public SINHVIEN getSinhVienByMaSV(String maSV) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] columns = {
+                STUDENT_ID_COLUMN_NAME,
+                STUDENT_NAME_COLUMN_NAME,
+                STUDENT_GENDER_COLUMN_NAME,
+                STUDENT_BIRTHDATE_COLUMN_NAME,
+                STUDENT_BIRTHPLACE_COLUMN_NAME,
+                STUDENT_ADDRESS_COLUMN_NAME,
+                STUDENT_CLASS_CODE_COLUMN_NAME,
+                STUDENT_SCHOLARSHIP_COLUMN_NAME
+        };
+
+        String selection = STUDENT_ID_COLUMN_NAME + " = ?";
+        String[] selectionArgs = {maSV};
+
+        Cursor cursor = db.query("SINHVIEN", columns, selection, selectionArgs, null, null, null);
+
+        SINHVIEN sinhVien = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            String hoTen = cursor.getString(cursor.getColumnIndex(STUDENT_NAME_COLUMN_NAME));
+            boolean gioiTinh = cursor.getInt(cursor.getColumnIndex(STUDENT_GENDER_COLUMN_NAME)) == 1;
+            String ngaySinh = cursor.getString(cursor.getColumnIndex(STUDENT_BIRTHDATE_COLUMN_NAME));
+            String noiSinh = cursor.getString(cursor.getColumnIndex(STUDENT_BIRTHPLACE_COLUMN_NAME));
+            String diaChi = cursor.getString(cursor.getColumnIndex(STUDENT_ADDRESS_COLUMN_NAME));
+            String maLop = cursor.getString(cursor.getColumnIndex(STUDENT_CLASS_CODE_COLUMN_NAME));
+            float hocBong = cursor.getFloat(cursor.getColumnIndex(STUDENT_SCHOLARSHIP_COLUMN_NAME));
+
+            sinhVien = new SINHVIEN(maSV, hoTen, ngaySinh, gioiTinh, noiSinh, diaChi, maLop, hocBong);
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        db.close();
+
+        return sinhVien;
     }
 
 
