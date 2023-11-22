@@ -39,6 +39,9 @@
             android:name=".Select.Select_Thongtinsinhvien" />
         <activity
             android:name=".Tinhnang.ChinhSuaThongTinSinhVien" />
+        <activity
+            android:name=".Select.Select_Khoa" />
+
     </application>
 
 </manifest>

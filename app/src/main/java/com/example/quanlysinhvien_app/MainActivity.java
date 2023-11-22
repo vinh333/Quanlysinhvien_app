@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.quanlysinhvien_app.Select.Select_Khoa;
 import com.example.quanlysinhvien_app.Select.Select_Sinhvien;
 import com.example.quanlysinhvien_app.Tinhnang.ThemDiemThiActivity;
 import com.example.quanlysinhvien_app.Tinhnang.ThemLopActivity;
@@ -23,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper mDatabaseHelper;
-    private Button button_SinhVien,button_Test;
+    private Button button_SinhVien,button_Test,button_Khoa;
     private LinearLayout btnCaiDat;
 
     @Override
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         btnCaiDat = findViewById(R.id.btn_caidat);
         button_SinhVien = findViewById(R.id.button_SinhVien);
         button_Test = findViewById(R.id.button_Test);
+        button_Khoa = findViewById(R.id.button_Khoa);
 
         // Mở cơ sở dữ liệu để đọc hoặc ghi
         SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
@@ -74,6 +76,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
                 Intent intent = new Intent(MainActivity.this, Select_Sinhvien.class);
+                startActivity(intent);
+            }
+        });
+        button_Khoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
+                Intent intent = new Intent(MainActivity.this, Select_Khoa.class);
                 startActivity(intent);
             }
         });

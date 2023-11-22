@@ -206,7 +206,7 @@
             android:layout_height="70dp"
             android:layout_marginLeft="25dp"
             android:background="@drawable/rounded_button"
-            android:text="KHÓA"
+            android:text="KHOA"
             android:textSize="22sp" />
 
         <Button
