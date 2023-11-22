@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import com.example.quanlysinhvien_app.Database.KHOA;
+import com.example.quanlysinhvien_app.Database.LOP;
 import com.example.quanlysinhvien_app.Database.MONHOC;
 import com.example.quanlysinhvien_app.Database.SINHVIEN;
 
@@ -410,6 +411,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return lopNames;
     }
 
+    // Trong lớp DatabaseHelper
+    public List<LOP> getAllClasses() {
+        List<LOP> classList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM LOP", null);
+        if (cursor.moveToFirst()) {
+            do {
+                // Lấy thông tin từ cursor và tạo đối tượng LOP
+                String maLop = cursor.getString(cursor.getColumnIndex(CLASS_CODE_COLUMN_NAME));
+                String tenLop = cursor.getString(cursor.getColumnIndex("TENLOP"));
+                String maKhoa = cursor.getString(cursor.getColumnIndex("MAKHOA"));
+
+                // Tạo đối tượng LOP và thêm vào danh sách
+                LOP lop = new LOP(maLop, tenLop, maKhoa);
+                classList.add(lop);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return classList;
+    }
 
 
 }

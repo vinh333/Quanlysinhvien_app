@@ -1,20 +1,14 @@
 package com.example.quanlysinhvien_app.Database;
 
-
-
 public class LOP {
     private String maLop;
     private String tenLop;
-    private String maKhoaHoc;
-    private String maHeDaoTao;
-    private String maNganhHoc;
+    private String maKhoa;
 
-    public LOP(String maLop, String tenLop, String maKhoaHoc, String maHeDaoTao, String maNganhHoc) {
+    public LOP(String maLop, String tenLop, String maKhoa) {
         this.maLop = maLop;
         this.tenLop = tenLop;
-        this.maKhoaHoc = maKhoaHoc;
-        this.maHeDaoTao = maHeDaoTao;
-        this.maNganhHoc = maNganhHoc;
+        this.maKhoa = maKhoa;
     }
 
     public String getMaLop() {
@@ -33,28 +27,17 @@ public class LOP {
         this.tenLop = tenLop;
     }
 
-    public String getMaKhoaHoc() {
-        return maKhoaHoc;
+    public String getMaKhoa() {
+        return maKhoa;
     }
 
-    public void setMaKhoaHoc(String maKhoaHoc) {
-        this.maKhoaHoc = maKhoaHoc;
+    public void setMaKhoa(String maKhoa) {
+        this.maKhoa = maKhoa;
     }
 
-    public String getMaHeDaoTao() {
-        return maHeDaoTao;
-    }
-
-    public void setMaHeDaoTao(String maHeDaoTao) {
-        this.maHeDaoTao = maHeDaoTao;
-    }
-
-    public String getMaNganhHoc() {
-        return maNganhHoc;
-    }
-
-    public void setMaNganhHoc(String maNganhHoc) {
-        this.maNganhHoc = maNganhHoc;
+    @Override
+    public String toString() {
+        // Hiển thị theo định dạng "MaLop: TenLop"
+        return maLop + ": " + tenLop;
     }
 }
-

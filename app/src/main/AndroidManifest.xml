@@ -41,6 +41,8 @@
             android:name=".Tinhnang.ChinhSuaThongTinSinhVien" />
         <activity
             android:name=".Select.Select_Khoa" />
+        <activity
+            android:name=".Select.Select_Lop" />
 
     </application>
 

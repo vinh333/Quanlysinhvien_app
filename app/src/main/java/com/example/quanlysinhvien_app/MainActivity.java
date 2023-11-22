@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.quanlysinhvien_app.Select.Select_Khoa;
+import com.example.quanlysinhvien_app.Select.Select_Lop;
 import com.example.quanlysinhvien_app.Select.Select_Sinhvien;
 import com.example.quanlysinhvien_app.Tinhnang.ThemDiemThiActivity;
 import com.example.quanlysinhvien_app.Tinhnang.ThemLopActivity;
@@ -52,15 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Đóng cơ sở dữ liệu sau khi sử dụng
         db.close();
-        // Đặt (*&*&^*&^*(&^OnCládasdickListener cho LinearLayout123413^&%&^%&*^%^&%&^%&^
-        button_Test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
-                Intent intent = new Intent(MainActivity.this, Themsinhvien.class);
-                startActivity(intent);
-            }
-        });
+
         // Đặt OnClickListener cho LinearLayout
         btnCaiDat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +77,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
                 Intent intent = new Intent(MainActivity.this, Select_Khoa.class);
+                startActivity(intent);
+            }
+        });
+        // Đặt (*&*&^*&^*(&^OnCládasdickListener cho LinearLayout123413^&%&^%&*^%^&%&^%&^
+        button_Test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
+                Intent intent = new Intent(MainActivity.this, Select_Lop.class);
                 startActivity(intent);
             }
         });
