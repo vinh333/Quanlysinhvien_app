@@ -1,0 +1,159 @@
+<!-- res/layout/layout_chinhsuathongtinsinhvien.xml -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CHỈNH SỬA \nTHÔNG TIN SINH VIÊN"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_masv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mã Sinh Viên"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edt_masv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập mã sinh viên"
+            android:inputType="text"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tv_tensv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tên Sinh Viên"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edt_tensv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập tên sinh viên"
+            android:inputType="text"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tv_ngaysinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ngày Sinh"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edt_ngaysinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập ngày sinh"
+            android:inputType="date"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tv_noisinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nơi Sinh"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edt_noisinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập nơi sinh"
+            android:inputType="text"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tv_diachi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Địa Chỉ"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edt_diachi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập địa chỉ"
+            android:inputType="text"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tv_diachi2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Học Bổng"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edt_hocbong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Nhập địa chỉ"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/tv_gioitinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giới Tính"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/radio_group_gioitinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <RadioButton
+                android:id="@+id/radio_nam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nam" />
+
+            <RadioButton
+                android:id="@+id/radio_nu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nữ" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tv_malop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mã Lớp"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/spinner_malop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btn_capnhat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cập Nhật Thông Tin" />
+
+    </LinearLayout>
+</ScrollView>

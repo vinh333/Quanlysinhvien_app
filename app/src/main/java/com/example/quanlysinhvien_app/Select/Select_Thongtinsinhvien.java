@@ -16,7 +16,7 @@ import com.example.quanlysinhvien_app.Tinhnang.ChinhSuaThongTinSinhVien;
 
 public class Select_Thongtinsinhvien extends AppCompatActivity {
 
-    private TextView txtEditThongTinSinhVien, txtMaSV, txtTenSV, txtGioiTinh, txtNgaySinh, txtNoiSinh, txtDiaChi, txtMaLop, txtNamHoc;
+    private TextView txtEditThongTinSinhVien, txtMaSV, txtTenSV, txtGioiTinh, txtNgaySinh, txtNoiSinh, txtDiaChi, txtMaLop, txtHocBong;
     private  String  maSV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,7 @@ public class Select_Thongtinsinhvien extends AppCompatActivity {
         txtNoiSinh = findViewById(R.id.txt_noisinh);
         txtDiaChi = findViewById(R.id.txt_diachi);
         txtMaLop = findViewById(R.id.txt_malop);
+        txtHocBong = findViewById(R.id.txt_hocbong);
         TextView txtEditThongTinSinhVien = findViewById(R.id.txt_edit_thongtinsinhvien);
         // Lấy mã sinh viên từ Intent
         Intent intent = getIntent();
@@ -73,6 +74,8 @@ public class Select_Thongtinsinhvien extends AppCompatActivity {
             txtNoiSinh.setText(sinhVien.getNoiSinh());
             txtDiaChi.setText(sinhVien.getDiaChi());
             txtMaLop.setText(sinhVien.getMaLop());
+            txtHocBong.setText(String.valueOf(sinhVien.getHocBong()));
+
             // Nếu có thông tin về năm học, thì bạn cần có một phương thức tương ứng để lấy thông tin này từ cơ sở dữ liệu.
             // txtNamHoc.setText(databaseHelper.getNamHocByMaSV(maSV));
         } else {

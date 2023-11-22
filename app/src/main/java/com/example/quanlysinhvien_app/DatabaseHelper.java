@@ -237,6 +237,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    //******** các hàm select UPDATE
+    public boolean updateSinhVien(String maSV, String hoTen, boolean gioiTinh, String ngaySinh, String noiSinh, String diaChi, String maLop, float hocBong) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(STUDENT_NAME_COLUMN_NAME, hoTen);
+        values.put(STUDENT_GENDER_COLUMN_NAME, gioiTinh ? 1 : 0);
+        values.put(STUDENT_BIRTHDATE_COLUMN_NAME, ngaySinh);
+        values.put(STUDENT_BIRTHPLACE_COLUMN_NAME, noiSinh);
+        values.put(STUDENT_ADDRESS_COLUMN_NAME, diaChi);
+        values.put(STUDENT_CLASS_CODE_COLUMN_NAME, maLop);
+        values.put(STUDENT_SCHOLARSHIP_COLUMN_NAME, hocBong);
+
+        String whereClause = STUDENT_ID_COLUMN_NAME + " = ?";
+        String[] whereArgs = {maSV};
+
+        // Cập nhật thông tin sinh viên trong bảng SINHVIEN
+        int numRowsAffected = db.update("SINHVIEN", values, whereClause, whereArgs);
+
+        db.close();
+
+        // Trả về true nếu có ít nhất một hàng được cập nhật, ngược lại trả về false
+        return numRowsAffected > 0;
+    }
 
 
     //******** các hàm select All table
