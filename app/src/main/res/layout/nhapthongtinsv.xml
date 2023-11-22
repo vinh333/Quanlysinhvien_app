@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Họ và Tên "
+                    android:text="Họ vaTên "
                     android:textSize="15dp" />
 
                 <FrameLayout
@@ -130,14 +130,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <EditText
-                        android:id="@+id/txtgioitinh"
+                    <Spinner
+                        android:id="@+id/spinnerGioiTinh"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_corner_gray"
                         android:ems="10"
-
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:entries="@array/gioi_tinh_options"
+                        android:entryValues="@array/gioi_tinh_options" />
 
                     <TextView
                         android:id="@+id/textView24"
@@ -290,8 +291,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <EditText
-                        android:id="@+id/txtmalop"
+                    <Spinner
+                        android:id="@+id/spinnerMaLop"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_corner_gray"

@@ -361,6 +361,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return sinhVien;
     }
+    public List<String> getAllLopNames() {
+        List<String> lopNames = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Câu lệnh truy vấn
+        String query = "SELECT MALOP FROM LOP";
+
+        // Thực hiện truy vấn
+        Cursor cursor = db.rawQuery(query, null);
+
+        // Xử lý dữ liệu từ con trỏ
+        if (cursor.moveToFirst()) {
+            do {
+                String tenLop = cursor.getString(cursor.getColumnIndex("MALOP"));
+                lopNames.add(tenLop);
+            } while (cursor.moveToNext());
+        }
+
+        // Đóng con trỏ và cơ sở dữ liệu
+        cursor.close();
+        db.close();
+
+        return lopNames;
+    }
 
 
 

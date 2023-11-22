@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Đóng cơ sở dữ liệu sau khi sử dụng
         db.close();
-        // Đặt OnClickListener cho LinearLayout
+        // Đặt (*&*&^*&^*(&^OnCládasdickListener cho LinearLayout123413^&%&^%&*^%^&%&^%&^
         button_Test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
