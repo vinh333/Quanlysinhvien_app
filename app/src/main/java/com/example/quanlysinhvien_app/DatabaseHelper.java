@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.quanlysinhvien_app.Database.KHOA;
@@ -433,6 +434,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return classList;
     }
+    // Các hàm xoá
+    // Hàm xóa sinh viên dựa trên mã sinh viên
+    public boolean deleteSinhVien(String maSV) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Bắt đầu một giao dịch
+        db.beginTransaction();
+
+        try {
+            // Xóa sinh viên từ bảng SINHVIEN
+            int affectedRows = db.delete("SINHVIEN", STUDENT_ID_COLUMN_NAME + "=?", new String[]{maSV});
+
+            if (affectedRows > 0) {
+                // Nếu xóa thành công, cập nhật bảng LOP
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(CLASS_CODE_COLUMN_NAME, (String) null); // Đặt giá trị của cột MALOP thành null
+                db.update("LOP", contentValues, CLASS_CODE_COLUMN_NAME + "=?", new String[]{maSV});
+            }
+
+            // Đánh dấu giao dịch là thành công
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            // In thông điệp lỗi nếu có lỗi xảy ra
+            Log.e("DatabaseHelper", "Error deleting student with ID " + maSV, e);
+        } finally {
+            // Kết thúc giao dịch
+            db.endTransaction();
+        }
+
+        // Kiểm tra xem có sinh viên nào bị xóa hay không
+        int deleteResult = db.delete("SINHVIEN", STUDENT_ID_COLUMN_NAME + "=?", new String[]{maSV});
+
+        // Đóng kết nối đến cơ sở dữ liệu
+        db.close();
+
+        return deleteResult > 0;
+    }
+
+
 
 
 }

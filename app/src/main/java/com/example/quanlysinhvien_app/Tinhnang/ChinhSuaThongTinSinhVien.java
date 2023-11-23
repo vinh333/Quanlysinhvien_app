@@ -47,6 +47,7 @@ public class ChinhSuaThongTinSinhVien extends AppCompatActivity {
         radioButtonNu = findViewById(R.id.radio_nu);
         spinnerMaLop = findViewById(R.id.spinner_malop);
         btnCapNhat = findViewById(R.id.btn_capnhat);
+        Button btnXoa = findViewById(R.id.btn_xoa);
 
         // Lấy mã sinh viên từ Intent
         maSV = getIntent().getStringExtra("MASV");
@@ -62,6 +63,13 @@ public class ChinhSuaThongTinSinhVien extends AppCompatActivity {
 //                updateSinhVien();
 //            }
 //        });
+        btnXoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Gọi phương thức xóa sinh viên
+                deleteSinhVien();
+            }
+        });
     }
 
     private void showSinhVienDetails(String maSV) {
@@ -145,4 +153,17 @@ public class ChinhSuaThongTinSinhVien extends AppCompatActivity {
             Toast.makeText(this, "Cập nhật thông tin thất bại", Toast.LENGTH_SHORT).show();
         }
     }
+    private void deleteSinhVien() {
+        // Gọi phương thức xóa sinh viên trong cơ sở dữ liệu
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        boolean isSuccess = databaseHelper.deleteSinhVien(maSV);
+        Toast.makeText(this, "Xóa sinh viên thành công", Toast.LENGTH_SHORT).show();
+        // Chuyển về MainActivity hoặc màn hình khác tùy vào yêu cầu của bạn
+        Intent intent = new Intent(ChinhSuaThongTinSinhVien.this, MainActivity.class);
+        startActivity(intent);
+        finish(); // Kết thúc activity hiện tại sau khi chuyển màn hình
+        // Kiểm tra kết quả và thông báo cho người dùng
+
+    }
+
 }
