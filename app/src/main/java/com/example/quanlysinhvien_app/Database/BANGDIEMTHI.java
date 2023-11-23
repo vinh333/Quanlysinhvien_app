@@ -6,7 +6,9 @@ public class BANGDIEMTHI {
     private String lanThi;
     private String hocKy;
     private double diem;
+    public BANGDIEMTHI() {
 
+    }
     public BANGDIEMTHI(String maSV, String maMonHoc, String lanThi, String hocKy, double diem) {
         this.maSV = maSV;
         this.maMonHoc = maMonHoc;

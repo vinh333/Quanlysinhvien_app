@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.quanlysinhvien_app.Database.BANGDIEMTHI;
 import com.example.quanlysinhvien_app.Database.KHOA;
 import com.example.quanlysinhvien_app.Database.LOP;
 import com.example.quanlysinhvien_app.Database.MONHOC;
@@ -433,6 +434,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return classList;
+    }
+    public List<BANGDIEMTHI> getAllBangDiem() {
+        List<BANGDIEMTHI> bangDiemList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM BANGDIEMTHI", null);
+        if (cursor.moveToFirst()) {
+            do {
+                // Lấy thông tin từ cursor và tạo đối tượng BangDiem
+                String maSV = cursor.getString(cursor.getColumnIndex("MASV"));
+                String maMonHoc = cursor.getString(cursor.getColumnIndex("MAMONHOC"));
+                String lanThi = cursor.getString(cursor.getColumnIndex("LANTHI"));
+                String hocKy = cursor.getString(cursor.getColumnIndex("HOCKY"));
+                double diem = cursor.getDouble(cursor.getColumnIndex("DIEM"));
+
+                // Tạo đối tượng BangDiem và thêm vào danh sách
+                BANGDIEMTHI bangDiem = new BANGDIEMTHI(maSV, maMonHoc, lanThi, hocKy, diem);
+                bangDiemList.add(bangDiem);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return bangDiemList;
+    }
+    public List<BANGDIEMTHI> executeCustomQuery(String query) {
+        List<BANGDIEMTHI> result = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                // Đọc dữ liệu từ Cursor và thêm vào danh sách kết quả
+                BANGDIEMTHI bangDiem = new BANGDIEMTHI();
+                // TODO: Đọc dữ liệu từ cursor và thiết lập vào đối tượng BANGDIEMTHI
+                result.add(bangDiem);
+            } while (cursor.moveToNext());
+        }
+
+        // Đóng cursor và kết nối đến cơ sở dữ liệu
+        cursor.close();
+        db.close();
+
+        return result;
     }
     // Các hàm xoá
     // Hàm xóa sinh viên dựa trên mã sinh viên
