@@ -3,6 +3,8 @@ package com.example.quanlysinhvien_app.Select;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -29,7 +31,6 @@ public class Select_BangDiemThi extends AppCompatActivity {
     private Spinner spinnerMonHoc;
     private Spinner spinnerLanThi;
     private Spinner spinnerHocKy;
-    private EditText editTextDiem;
     private Button buttonApplyFilter;
 
     @Override
@@ -49,8 +50,27 @@ public class Select_BangDiemThi extends AppCompatActivity {
         spinnerMonHoc = findViewById(R.id.spinner_mon_hoc);
         spinnerLanThi = findViewById(R.id.spinner_lan_thi);
         spinnerHocKy = findViewById(R.id.spinner_hoc_ky);
-        editTextDiem = findViewById(R.id.edit_text_diem);
         buttonApplyFilter = findViewById(R.id.button_apply_filter);
+        // Khởi tạo dữ liệu cho Spinner MonHoc
+        List<String> monHocList = databaseHelper.getAllMaMonHoc();
+        monHocList.add(0, "Tất cả"); // Thêm lựa chọn "Tất cả" vào đầu danh sách
+        ArrayAdapter<String> monHocAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, monHocList);
+        monHocAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMonHoc.setAdapter(monHocAdapter);
+
+        // Khởi tạo dữ liệu cho Spinner LanThi
+        List<String> lanThiList = databaseHelper.getAllLanThi();
+        lanThiList.add(0, "Tất cả");
+        ArrayAdapter<String> lanThiAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, lanThiList);
+        lanThiAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLanThi.setAdapter(lanThiAdapter);
+
+        // Khởi tạo dữ liệu cho Spinner HocKy
+        List<String> hocKyList = databaseHelper.getAllHocKy();
+        hocKyList.add(0, "Tất cả");
+        ArrayAdapter<String> hocKyAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, hocKyList);
+        hocKyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerHocKy.setAdapter(hocKyAdapter);
 
         // Xử lý sự kiện khi người dùng áp dụng bộ lọc
         buttonApplyFilter.setOnClickListener(new View.OnClickListener() {
@@ -74,30 +94,27 @@ public class Select_BangDiemThi extends AppCompatActivity {
     }
 
     private void handleFilterOptions() {
-        // Nhận thông tin điều kiện lọc từ các thành phần giao diện
+        // Nhận thông tin điều kiện lọc từ các Spinner
         String selectedMonHoc = spinnerMonHoc.getSelectedItem().toString();
         String selectedLanThi = spinnerLanThi.getSelectedItem().toString();
         String selectedHocKy = spinnerHocKy.getSelectedItem().toString();
-        String enteredDiem = editTextDiem.getText().toString();
 
         // Xây dựng câu truy vấn SQL với các điều kiện đã chọn
-        String query = "SELECT * FROM BANGDIEMTHI WHERE 1=1"; // 1=1 để kết hợp điều kiện mà không cần kiểm tra điều kiện trước
+        StringBuilder queryBuilder = new StringBuilder("SELECT * FROM BANGDIEMTHI WHERE 1=1");
 
-        if (!TextUtils.isEmpty(selectedMonHoc)) {
-            query += " AND MAMONHOC = '" + selectedMonHoc + "'";
+        if (!TextUtils.isEmpty(selectedMonHoc) && !selectedMonHoc.equals("Tất cả")) {
+            queryBuilder.append(" AND MAMONHOC = '").append(selectedMonHoc).append("'");
         }
 
-        if (!TextUtils.isEmpty(selectedLanThi)) {
-            query += " AND LANTHI = '" + selectedLanThi + "'";
+        if (!TextUtils.isEmpty(selectedLanThi) && !selectedLanThi.equals("Tất cả")) {
+            queryBuilder.append(" AND LANTHI = '").append(selectedLanThi).append("'");
         }
 
-        if (!TextUtils.isEmpty(selectedHocKy)) {
-            query += " AND HOCKY = '" + selectedHocKy + "'";
+        if (!TextUtils.isEmpty(selectedHocKy) && !selectedHocKy.equals("Tất cả")) {
+            queryBuilder.append(" AND HOCKY = '").append(selectedHocKy).append("'");
         }
 
-        if (!TextUtils.isEmpty(enteredDiem)) {
-            query += " AND DIEM >= " + enteredDiem;
-        }
+        String query = queryBuilder.toString();
 
         // Thực hiện truy vấn và cập nhật giao diện
         executeQueryAndUpdateUI(query);
@@ -112,4 +129,3 @@ public class Select_BangDiemThi extends AppCompatActivity {
         bangDiemAdapter.notifyDataSetChanged();
     }
 }
-

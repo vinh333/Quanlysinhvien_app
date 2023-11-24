@@ -48,7 +48,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String SUBJECT_NAME_COLUMN_NAME = "TENMONHOC";
     public static final String SUBJECT_THEORY_COLUMN_NAME = "LYTHUYET";
     public static final String SUBJECT_PRACTICE_COLUMN_NAME = "THUCHANH";
-
+    // Tên cột cảu BANGDIEMHOCKY
+    public static final String TABLE_NAME = "BANGDIEMHOCKY";
+    public static final String COLUMN_ID = "ID";
+    public static final String COLUMN_MASV = "MASV";
+    public static final String COLUMN_HOCKY = "HOCKY";
+    public static final String COLUMN_LANTHI = "LANTHI";
+    public static final String COLUMN_DIEM = "DIEM";
 
     private static final int DATABASE_VERSION = 6;
 
@@ -467,7 +473,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 // Đọc dữ liệu từ Cursor và thêm vào danh sách kết quả
                 BANGDIEMTHI bangDiem = new BANGDIEMTHI();
-                // TODO: Đọc dữ liệu từ cursor và thiết lập vào đối tượng BANGDIEMTHI
+
+                bangDiem.setMaSV(cursor.getString(cursor.getColumnIndex("MASV")));
+                bangDiem.setMaMonHoc(cursor.getString(cursor.getColumnIndex("MAMONHOC")));
+                bangDiem.setLanThi(cursor.getString(cursor.getColumnIndex("LANTHI")));
+                bangDiem.setHocKy(cursor.getString(cursor.getColumnIndex("HOCKY")));
+                bangDiem.setDiem(cursor.getDouble(cursor.getColumnIndex("DIEM")));
+
                 result.add(bangDiem);
             } while (cursor.moveToNext());
         }
@@ -478,6 +490,62 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return result;
     }
+
+    public List<String> getAllHocKy() {
+        List<String> hocKyList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Câu lệnh truy vấn
+        String query = "SELECT DISTINCT " + COLUMN_HOCKY + " FROM BANGDIEMTHI";
+
+        // Thực hiện truy vấn
+        Cursor cursor = db.rawQuery(query, null);
+
+        // Xử lý dữ liệu từ con trỏ
+        try {
+            while (cursor.moveToNext()) {
+                String hocKy = cursor.getString(cursor.getColumnIndex(COLUMN_HOCKY));
+                hocKyList.add(hocKy);
+            }
+        } finally {
+            // Đảm bảo con trỏ được đóng ngay cả khi có lỗi xảy ra
+            cursor.close();
+        }
+
+        // Đóng cơ sở dữ liệu
+        db.close();
+
+        return hocKyList;
+    }
+
+    public List<String> getAllLanThi() {
+        List<String> lanThiList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Câu lệnh truy vấn
+        String query = "SELECT DISTINCT " + COLUMN_LANTHI + " FROM BANGDIEMTHI";
+
+        // Thực hiện truy vấn
+        Cursor cursor = db.rawQuery(query, null);
+
+        // Xử lý dữ liệu từ con trỏ
+        try {
+            while (cursor.moveToNext()) {
+                String lanThi = cursor.getString(cursor.getColumnIndex(COLUMN_LANTHI));
+                lanThiList.add(lanThi);
+            }
+        } finally {
+            // Đảm bảo con trỏ được đóng ngay cả khi có lỗi xảy ra
+            cursor.close();
+        }
+
+        // Đóng cơ sở dữ liệu
+        db.close();
+
+        return lanThiList;
+    }
+
+
     // Các hàm xoá
     // Hàm xóa sinh viên dựa trên mã sinh viên
     public boolean deleteSinhVien(String maSV) {
