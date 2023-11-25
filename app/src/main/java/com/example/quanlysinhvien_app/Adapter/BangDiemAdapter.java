@@ -1,66 +1,59 @@
 package com.example.quanlysinhvien_app.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlysinhvien_app.Database.BANGDIEMTHI;
 import com.example.quanlysinhvien_app.R;
 
 import java.util.List;
 
-public class BangDiemAdapter extends RecyclerView.Adapter<BangDiemAdapter.ViewHolder> {
+public class BangDiemAdapter extends ArrayAdapter<BANGDIEMTHI> {
 
-    private List<BANGDIEMTHI> bangDiemList; // Thay BangDiem bằng lớp dữ liệu thực tế
-
-    public BangDiemAdapter(List<BANGDIEMTHI> bangDiemList) {
-        this.bangDiemList = bangDiemList;
+    public BangDiemAdapter(Context context, List<BANGDIEMTHI> bangDiemList) {
+        super(context, R.layout.item_bang_diem, bangDiemList);
     }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        // Khai báo các thành phần giao diện trong ViewHolder
-        public TextView maSVTextView;
-        public TextView maMonHocTextView;
-        public TextView lanThiTextView;
-        public TextView hocKyTextView;
-        public TextView diemTextView;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            // Ánh xạ các thành phần giao diện
-            maSVTextView = itemView.findViewById(R.id.text_view_masv);
-            maMonHocTextView = itemView.findViewById(R.id.text_view_mamonhoc);
-            lanThiTextView = itemView.findViewById(R.id.text_view_lanthi);
-            hocKyTextView = itemView.findViewById(R.id.text_view_hocky);
-            diemTextView = itemView.findViewById(R.id.text_view_diem);
+    // Thêm phương thức này để lấy BANGDIEMTHI tại vị trí position
+    public BANGDIEMTHI getItemAtPosition(int position) {
+        return getItem(position);
+    }
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        // Tạo và cấu hình view item từ layout (item_bang_diem.xml)
+        View itemView = convertView;
+        if (itemView == null) {
+            itemView = LayoutInflater.from(getContext()).inflate(R.layout.item_bang_diem, parent, false);
         }
-    }
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Tạo ViewHolder từ layout của mỗi hàng trong RecyclerView
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bang_diem, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        // Gán dữ liệu cho các thành phần giao diện trong ViewHolder từ danh sách bangDiemList
-        BANGDIEMTHI bangDiem = bangDiemList.get(position);
+        // Ghi đè phương thức này để hiển thị dữ liệu từ danh sách vào view item
+        BANGDIEMTHI bangDiem = getItem(position);
 
         // Cập nhật các thành phần giao diện với dữ liệu từ bangDiem
-        holder.maSVTextView.setText(bangDiem.getMaSV());
-        holder.maMonHocTextView.setText(bangDiem.getMaMonHoc());
-        holder.lanThiTextView.setText(bangDiem.getLanThi());
-        holder.hocKyTextView.setText(bangDiem.getHocKy());
-        holder.diemTextView.setText(String.valueOf(bangDiem.getDiem()));
-    }
+        TextView maSVTextView = itemView.findViewById(R.id.text_view_masv);
+        maSVTextView.setText(bangDiem.getMaSV()); // Giả sử getMaSV() là phương thức để lấy mã sinh viên
 
-    @Override
-    public int getItemCount() {
-        return bangDiemList.size();
+        // Cập nhật các thành phần giao diện với dữ liệu từ bangDiem
+        TextView monHocTextView = itemView.findViewById(R.id.text_view_mamonhoc);
+        monHocTextView.setText(bangDiem.getMaMonHoc()); // Giả sử getMaMonHoc() là phương thức để lấy mã môn học
+
+        // Cập nhật các thành phần giao diện với dữ liệu từ bangDiem
+        TextView lanThiTextView = itemView.findViewById(R.id.text_view_lanthi);
+        lanThiTextView.setText(bangDiem.getLanThi()); // Giả sử getLanThi() là phương thức để lấy số lần thi
+
+        // Cập nhật các thành phần giao diện với dữ liệu từ bangDiem
+        TextView hocKyTextView = itemView.findViewById(R.id.text_view_hocky);
+        hocKyTextView.setText(bangDiem.getHocKy()); // Giả sử getHocKy() là phương thức để lấy học kỳ
+
+        // Giả sử có thêm các TextView khác trong layout item, cập nhật chúng tương tự
+
+        // Cập nhật TextView cho điểm
+        TextView diemTextView = itemView.findViewById(R.id.text_view_diem);
+        diemTextView.setText(String.valueOf(bangDiem.getDiem())); // Giả sử getDiem() là phương thức để lấy điểm
+
+        return itemView;
     }
 }
