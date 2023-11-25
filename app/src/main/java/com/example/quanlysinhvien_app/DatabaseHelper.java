@@ -270,6 +270,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Trả về true nếu có ít nhất một hàng được cập nhật, ngược lại trả về false
         return numRowsAffected > 0;
     }
+    // Trong DatabaseHelper.java
+    public boolean updateDiemThi(String maSV, String maMonHoc, String lanThi, String hocKy, double diem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(EXAM_SCORE_SCORE_COLUMN_NAME, diem);
+
+        String whereClause = EXAM_SCORE_STUDENT_ID_COLUMN_NAME + " = ? AND " +
+                EXAM_SCORE_SUBJECT_CODE_COLUMN_NAME + " = ? AND " +
+                EXAM_SCORE_SESSION_COLUMN_NAME + " = ? AND " +
+                EXAM_SCORE_SEMESTER_COLUMN_NAME + " = ?";
+
+        String[] whereArgs = {maSV, maMonHoc, lanThi, hocKy};
+
+        // Cập nhật điểm trong bảng BANGDIEMTHI
+        int numRowsAffected = db.update("BANGDIEMTHI", values, whereClause, whereArgs);
+
+        db.close();
+
+        return numRowsAffected > 0;
+    }
 
 
     //******** các hàm select All table

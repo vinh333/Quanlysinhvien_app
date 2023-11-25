@@ -9,6 +9,7 @@
         android:id="@+id/text_view_masv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingRight="15dp"
         android:text="Mã SV: "
         android:textStyle="bold" />
 
@@ -16,6 +17,7 @@
         android:id="@+id/text_view_mamonhoc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingRight="15dp"
         android:text="Mã Môn Học: "
         android:textStyle="bold" />
 
@@ -23,6 +25,7 @@
         android:id="@+id/text_view_lanthi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingRight="15dp"
         android:text="Lần Thi: "
         android:textStyle="bold" />
 
@@ -30,6 +33,7 @@
         android:id="@+id/text_view_hocky"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingRight="15dp"
         android:text="Học Kỳ: "
         android:textStyle="bold" />
 
@@ -37,6 +41,7 @@
         android:id="@+id/text_view_diem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingRight="15dp"
         android:text="Điểm: "
         android:textStyle="bold" />
 

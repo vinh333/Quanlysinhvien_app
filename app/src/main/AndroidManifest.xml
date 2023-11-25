@@ -45,7 +45,8 @@
             android:name=".Select.Select_Lop" />
         <activity
             android:name=".Select.Select_BangDiemThi" />
-
+        <activity
+            android:name=".Tinhnang.ChinhSuaDiem" />
     </application>
 
 </manifest>

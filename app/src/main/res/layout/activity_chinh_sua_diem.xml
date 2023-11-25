@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Add these EditTexts to display the values -->
+    <TextView
+        android:id="@+id/textViewTitle3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHỈNH SỬA\n THÔNG TIN SINH VIÊN"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextMasv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mã Sinh Viên" />
+
+    <EditText
+        android:id="@+id/editTextMon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Mã Môn" />
+
+    <EditText
+        android:id="@+id/editTextLanThi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Lần Thi" />
+
+    <EditText
+        android:id="@+id/editTextHocky"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Học Kỳ" />
+
+    <EditText
+        android:id="@+id/editTextDiem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Điểm" />
+
+    <Button
+        android:id="@+id/btn_capnhat_diem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cập Nhật Thông Tin" />
+
+    <Button
+        android:id="@+id/btn_xoa_diem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Xóa Sinh Viên" />
+</LinearLayout>

@@ -16,6 +16,7 @@ import com.example.quanlysinhvien_app.Adapter.BangDiemAdapter;
 import com.example.quanlysinhvien_app.Database.BANGDIEMTHI;
 import com.example.quanlysinhvien_app.DatabaseHelper;
 import com.example.quanlysinhvien_app.R;
+import com.example.quanlysinhvien_app.Tinhnang.ChinhSuaDiem;
 
 import java.util.ArrayList;
 import java.util.List;
