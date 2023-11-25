@@ -604,6 +604,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return deleteResult > 0;
     }
+    public boolean deleteDiemThi(String maSV) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = "MASV = ?";
+        String[] whereArgs = {maSV};
+        int result = db.delete("BANGDIEMTHI", whereClause, whereArgs);
+        return result > 0;
+    }
 
 
 

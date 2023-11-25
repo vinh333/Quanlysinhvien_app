@@ -57,11 +57,11 @@
         android:id="@+id/btn_capnhat_diem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cập Nhật Thông Tin" />
+        android:text="Cập Nhật Điểm" />
 
     <Button
         android:id="@+id/btn_xoa_diem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Xóa Sinh Viên" />
+        android:text="Xóa Điểm" />
 </LinearLayout>

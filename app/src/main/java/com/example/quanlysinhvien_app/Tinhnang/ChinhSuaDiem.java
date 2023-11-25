@@ -35,6 +35,7 @@ public class ChinhSuaDiem extends AppCompatActivity {
         EditText editTextHocky = findViewById(R.id.editTextHocky);
         EditText editTextDiem = findViewById(R.id.editTextDiem);
         Button btn_capnhat_diem = findViewById(R.id.btn_capnhat_diem);
+        Button btnXoaDiem = findViewById(R.id.btn_xoa_diem);
 
         editTextMasv.setText(masv);
         editTextMon.setText(mamon);
@@ -42,6 +43,12 @@ public class ChinhSuaDiem extends AppCompatActivity {
         editTextHocky.setText(hocky);
         editTextDiem.setText(String.valueOf(diem));
 
+        btnXoaDiem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onDeleteButtonClick();
+            }
+        });
         btn_capnhat_diem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +83,32 @@ public class ChinhSuaDiem extends AppCompatActivity {
         } else {
             // Hiển thị thông báo cập nhật không thành công hoặc xử lý theo logic của bạn
             Toast.makeText(this, "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
+        }
+
+        dbHelper.close();
+    }
+    // Thêm sự kiện cho nút "Xóa Sinh Viên"
+    public void onDeleteButtonClick() {
+        // Lấy mã sinh viên từ EditText
+        String maSV = ((EditText) findViewById(R.id.editTextMasv)).getText().toString();
+
+        // Thực hiện xóa điểm từ cơ sở dữ liệu
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        boolean deleted = dbHelper.deleteDiemThi(maSV);
+
+        if (deleted) {
+            // Hiển thị thông báo xóa thành công
+            Toast.makeText(this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+
+            // Chuyển về MainActivity
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+            // Kết thúc Activity hiện tại
+            finish();
+        } else {
+            // Hiển thị thông báo xóa không thành công hoặc xử lý theo logic của bạn
+            Toast.makeText(this, "Xóa không thành công", Toast.LENGTH_SHORT).show();
         }
 
         dbHelper.close();
