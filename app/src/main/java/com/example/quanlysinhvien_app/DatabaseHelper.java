@@ -292,7 +292,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return numRowsAffected > 0;
     }
 
+    public void updateMonHoc(MONHOC monHoc) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SUBJECT_NAME_COLUMN_NAME, monHoc.getTenMonHoc());
+        values.put(SUBJECT_THEORY_COLUMN_NAME, monHoc.getLyThuyet());
+        values.put(SUBJECT_PRACTICE_COLUMN_NAME, monHoc.getThucHanh());
 
+        db.update("MONHOC", values, SUBJECT_CODE_COLUMN_NAME + "=?", new String[]{monHoc.getMaMonHoc()});
+        db.close();
+    }
     //******** các hàm select All table
     public List<SINHVIEN> getAllSinhVien() {
         List<SINHVIEN> sinhVienList = new ArrayList<>();
@@ -565,6 +574,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return lanThiList;
     }
+
+    // Trong lớp DatabaseHelper
+    public List<String> getNameSubjects() {
+        List<String> subjects = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT MAMONHOC, " + SUBJECT_NAME_COLUMN_NAME + " FROM MONHOC", null);
+        if (cursor.moveToFirst()) {
+            do {
+                // Lấy MAMON và Tên môn từ con trỏ và thêm vào danh sách
+                String subjectId = cursor.getString(cursor.getColumnIndex("MAMONHOC")); // Thay "MAMON" bằng tên cột thực tế
+                String subjectName = cursor.getString(cursor.getColumnIndex(SUBJECT_NAME_COLUMN_NAME));
+                subjects.add(subjectId + " - " + subjectName);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return subjects;
+    }
+    public List<MONHOC> getAllMonHoc() {
+        List<MONHOC> monHocList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM MONHOC", null);
+        if (cursor.moveToFirst()) {
+            do {
+                String maMonHoc = cursor.getString(cursor.getColumnIndex("MAMONHOC"));
+                String tenMonHoc = cursor.getString(cursor.getColumnIndex(SUBJECT_NAME_COLUMN_NAME));
+                int lyThuyet = cursor.getInt(cursor.getColumnIndex("LYTHUYET"));
+                int thucHanh = cursor.getInt(cursor.getColumnIndex("THUCHANH"));
+
+                MONHOC monHoc = new MONHOC(maMonHoc, tenMonHoc, lyThuyet, thucHanh);
+                monHocList.add(monHoc);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return monHocList;
+    }
+
 
 
     // Các hàm xoá

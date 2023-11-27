@@ -46,7 +46,11 @@
         <activity
             android:name=".Select.Select_BangDiemThi" />
         <activity
-            android:name=".Tinhnang.ChinhSuaDiem" />
+            android:name=".Select.Select_MonHoc" />
+
+        <activity
+            android:name=".Tinhnang.ChinhSuaMonHoc" />
+
     </application>
 
 </manifest>

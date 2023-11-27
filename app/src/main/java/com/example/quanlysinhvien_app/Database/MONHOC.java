@@ -47,12 +47,8 @@ public class MONHOC {
 
     @Override
     public String toString() {
-        return "MonHoc{" +
-                "maMonHoc='" + maMonHoc + '\'' +
-                ", tenMonHoc='" + tenMonHoc + '\'' +
-                ", lyThuyet=" + lyThuyet +
-                ", thucHanh=" + thucHanh +
-                '}';
+        return  maMonHoc + "              "+ tenMonHoc;
     }
+
 }
 

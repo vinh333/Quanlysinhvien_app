@@ -26,7 +26,7 @@ public class Select_Khoa extends AppCompatActivity {
 
         // Khởi tạo Adapter và gán nó cho ListView
         KhoaAdapter adapter = new KhoaAdapter(this, departmentList);
-        ListView listViewDepartments = findViewById(R.id.listViewDepartments);
+        ListView listViewDepartments = findViewById(R.id.listViewMonHoc);
         listViewDepartments.setAdapter(adapter);
     }
 }

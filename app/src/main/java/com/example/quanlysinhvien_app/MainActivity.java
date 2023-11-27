@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import com.example.quanlysinhvien_app.Select.Select_BangDiemThi;
 import com.example.quanlysinhvien_app.Select.Select_Khoa;
 import com.example.quanlysinhvien_app.Select.Select_Lop;
+import com.example.quanlysinhvien_app.Select.Select_MonHoc;
 import com.example.quanlysinhvien_app.Select.Select_Sinhvien;
 import com.example.quanlysinhvien_app.Tinhnang.ThemDiemThiActivity;
 import com.example.quanlysinhvien_app.Tinhnang.ThemLopActivity;
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
-                Intent intent = new Intent(MainActivity.this, Select_BangDiemThi.class);
+                Intent intent = new Intent(MainActivity.this, Select_MonHoc.class);
                 startActivity(intent);
             }
         });

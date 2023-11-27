@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewMaMonHoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mã Môn Học"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextMaMonHoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewMaMonHoc"
+        android:layout_marginBottom="16dp"
+        android:inputType="text"/>
+
+    <TextView
+        android:id="@+id/textViewTenMonHoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên Môn Học"
+        android:textSize="18sp"
+        android:layout_below="@id/editTextMaMonHoc"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextTenMonHoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewTenMonHoc"
+        android:layout_marginBottom="16dp"
+        android:inputType="text"/>
+
+    <TextView
+        android:id="@+id/textViewLyThuyet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Số Tiết Lý Thuyết"
+        android:textSize="18sp"
+        android:layout_below="@id/editTextTenMonHoc"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextLyThuyet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewLyThuyet"
+        android:layout_marginBottom="16dp"
+        android:inputType="number"/>
+
+    <TextView
+        android:id="@+id/textViewThucHanh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Số Tiết Thực Hành"
+        android:textSize="18sp"
+        android:layout_below="@id/editTextLyThuyet"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextThucHanh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewThucHanh"
+        android:layout_marginBottom="16dp"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/buttonSaveChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextThucHanh"
+        android:layout_marginTop="24dp"
+        android:text="Lưu Thay Đổi"/>
+</RelativeLayout>
