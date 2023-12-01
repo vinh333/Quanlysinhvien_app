@@ -7,106 +7,6 @@
     android:layout_height="match_parent"
     android:backgroundTint="#5D71C8">
 
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="17dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView148"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/icon2"
-                android:gravity="center_horizontal" />
-
-            <TextView
-                android:id="@+id/textView152"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Trang chủ" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="17dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView114"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/icon3"
-                android:gravity="center_horizontal" />
-
-            <TextView
-                android:id="@+id/textView115"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Nhập diểm" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="17dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView164"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/icon1"
-                android:gravity="center_horizontal" />
-
-            <TextView
-                android:id="@+id/textView125"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Điểm danh" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btn_caidat"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="17dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView144"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/icon4"
-                android:gravity="center_horizontal" />
-
-            <TextView
-                android:id="@+id/textView154"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Cài đặt" />
-        </LinearLayout>
-
-    </LinearLayout>
-
     <FrameLayout
         android:id="@+id/textView4"
         android:layout_width="411dp"
@@ -148,6 +48,102 @@
         </LinearLayout>
     </FrameLayout>
 
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/infoButtonsContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
+
+            <!-- Tiêu đề "THÔNG TIN" -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="THÔNG TIN"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="..."
+                    android:textSize="30sp" />
+            </LinearLayout>
+
+            <!-- Các nút "KHÓA", "SINH VIÊN", "ĐIỂM THI" -->
+            <Button
+                android:id="@+id/btnkhoa"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button"
+                android:text="KHOA"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/btnsv"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button"
+                android:text="SINH VIÊN"
+                android:textSize="22sp" />
+
+            <!-- Tiêu đề "THỐNG KÊ" -->
+
+            <Button
+                android:id="@+id/btnlop"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button"
+                android:text="LỚP"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/button_monhoc"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button"
+                android:text="MÔN HỌC"
+                android:textSize="22sp" />
+
+            <!-- Biểu đồ tròn -->
+            <Button
+                android:id="@+id/button_diemthi"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button"
+                android:text="BẢNG ĐIỂM THI"
+                android:textSize="22sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -193,52 +189,111 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="410dp"
-        android:layout_height="409dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        android:id="@+id/infoButtonsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/button_Khoa"
-            android:layout_width="357dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="25dp"
-            android:background="@drawable/rounded_button"
-            android:text="KHOA"
-            android:textSize="22sp" />
+        <LinearLayout
+            android:id="@+id/addStudentContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button_SinhVien"
-            android:layout_width="357dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_button"
-            android:text="SINH VIÊN"
-            android:textSize="22sp" />
+            <TextView
+                android:id="@+id/addStudentIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/icon1"
+                android:gravity="center_horizontal" />
 
-        <Button
-            android:id="@+id/button_DiemThi"
-            android:layout_width="357dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_button"
-            android:text="ĐIỂM THI"
-            android:textSize="22sp" />
+            <TextView
+                android:id="@+id/addStudentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Thêm Sinh viên" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/button_Test"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_button"
-            android:text="Test"
-            android:textSize="22sp" />
+        <LinearLayout
+            android:id="@+id/addCourseContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/icon2"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/addCourseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Nhập môn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/addGradeContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/addGradeIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/icon3"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/addGradeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Nhập điểm" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/addClassContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/addClassIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/icon1"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/addClassText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Thêm Lớp" />
+        </LinearLayout>
 
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

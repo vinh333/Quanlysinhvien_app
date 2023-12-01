@@ -27,9 +27,17 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper mDatabaseHelper;
-    private Button button_SinhVien,button_Test,button_Khoa;
     private LinearLayout btnCaiDat;
-
+    private LinearLayout infoButtonsContainer;
+    private LinearLayout addStudentContainer;
+    private LinearLayout addCourseContainer;
+    private LinearLayout addGradeContainer;
+    private LinearLayout addClassContainer;
+    private Button btnKhoa;
+    private Button btnSinhVien;
+    private Button btnLop;
+    private Button btnMonHoc;
+    private Button btnDiemThi;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +47,18 @@ public class MainActivity extends AppCompatActivity {
         mDatabaseHelper = new DatabaseHelper(this);
 
         // Tìm  theo id
-        btnCaiDat = findViewById(R.id.btn_caidat);
-        button_SinhVien = findViewById(R.id.button_SinhVien);
-        button_Test = findViewById(R.id.button_Test);
-        button_Khoa = findViewById(R.id.button_Khoa);
+        // Tham chiếu đến các ButtonsContainer
+//        infoButtonsContainer = findViewById(R.id.infoButtonsContainer);
+        addStudentContainer = findViewById(R.id.addStudentContainer);
+        addCourseContainer = findViewById(R.id.addCourseContainer);
+        addGradeContainer = findViewById(R.id.addGradeContainer);
+        addClassContainer = findViewById(R.id.addClassContainer);
+        // Tham chiếu đến các Button trong ScrollView
+        btnKhoa = findViewById(R.id.btnkhoa);
+        btnSinhVien = findViewById(R.id.btnsv);
+        btnLop = findViewById(R.id.btnlop);
+        btnMonHoc = findViewById(R.id.button_monhoc);
+        btnDiemThi = findViewById(R.id.button_diemthi);
 
         // Mở cơ sở dữ liệu để đọc hoặc ghi
         SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
@@ -56,17 +72,9 @@ public class MainActivity extends AppCompatActivity {
         // Đóng cơ sở dữ liệu sau khi sử dụng
         db.close();
 
-        // Đặt OnClickListener cho LinearLayout
-        btnCaiDat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
-                Intent intent = new Intent(MainActivity.this, CaidatActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        button_SinhVien.setOnClickListener(new View.OnClickListener() {
+
+        btnSinhVien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
@@ -74,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        button_Khoa.setOnClickListener(new View.OnClickListener() {
+        btnKhoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
@@ -82,8 +90,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        // Đặt (*&*&^*&^*(&^OnCládasdickListener cho LinearLayout123413^&%&^%&*^%^&%&^%&^
-        button_Test.setOnClickListener(new View.OnClickListener() {
+        btnLop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
+                Intent intent = new Intent(MainActivity.this, Select_Lop.class);
+                startActivity(intent);
+            }
+        });
+        btnMonHoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
@@ -91,6 +106,48 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnDiemThi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
+                Intent intent = new Intent(MainActivity.this, Select_BangDiemThi.class);
+                startActivity(intent);
+            }
+        });
+         addStudentContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
+                Intent intent = new Intent(MainActivity.this, Themsinhvien.class);
+                startActivity(intent);
+            }
+        });
+         addCourseContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
+                Intent intent = new Intent(MainActivity.this, ThemMonHoc.class);
+                startActivity(intent);
+            }
+        });
+         addGradeContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
+                Intent intent = new Intent(MainActivity.this, ThemDiemThiActivity.class);
+                startActivity(intent);
+            }
+        });
+         addClassContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
+                Intent intent = new Intent(MainActivity.this, ThemLopActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     // Phương thức kiểm tra xem cơ sở dữ liệu có dữ liệu hay không
