@@ -21,8 +21,8 @@ public class SinhVienAdapter extends ArrayAdapter<SINHVIEN> {
 
     private List<SINHVIEN> sinhVienList;
     private Context context;
-    private int[] randomDrawables_Nam = {R.drawable.student4, R.drawable.student2, R.drawable.student5};
-    private int[] randomDrawables_Nu = { R.drawable.student6, R.drawable.student3,R.drawable.student1};
+    private int[] randomDrawables_Nam = {R.drawable.nam__1_, R.drawable.nam__2_, R.drawable.nam__3_};
+    private int[] randomDrawables_Nu = { R.drawable.nu__1_, R.drawable.nu__2_,R.drawable.nu__3_};
 
     public SinhVienAdapter(Context context, List<SINHVIEN> sinhVienList) {
         super(context, R.layout.list_item_sinhvien, sinhVienList);
