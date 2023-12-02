@@ -27,7 +27,8 @@
                 android:layout_height="wrap_content"
                 android:text="THÊM SINH VIÊN"
                 android:textAlignment="center"
-                android:textSize="24dp"
+                android:textSize="28dp"
+                android:layout_marginBottom="20dp"
                 android:textStyle="bold" />
 
             <LinearLayout

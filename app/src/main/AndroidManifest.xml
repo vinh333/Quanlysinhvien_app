@@ -50,6 +50,9 @@
 
         <activity
             android:name=".Tinhnang.ChinhSuaMonHoc" />
+        <activity
+            android:name=".Tinhnang.ChinhSuaDiem" />
+
 <!--        <activity-->
 <!--            android:name=".MainActivity" />-->
     </application>

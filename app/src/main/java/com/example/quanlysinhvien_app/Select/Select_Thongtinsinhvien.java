@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,10 +15,14 @@ import com.example.quanlysinhvien_app.DatabaseHelper;
 import com.example.quanlysinhvien_app.R;
 import com.example.quanlysinhvien_app.Tinhnang.ChinhSuaThongTinSinhVien;
 
-public class Select_Thongtinsinhvien extends AppCompatActivity {
+import java.util.Random;
 
+public class Select_Thongtinsinhvien extends AppCompatActivity {
+    private int[] randomDrawables_Nam = {R.drawable.nam__1_, R.drawable.nam__2_, R.drawable.nam__3_};
+    private int[] randomDrawables_Nu = { R.drawable.nu__1_, R.drawable.nu__2_,R.drawable.nu__3_};
     private TextView txtEditThongTinSinhVien, txtMaSV, txtTenSV, txtGioiTinh, txtNgaySinh, txtNoiSinh, txtDiaChi, txtMaLop, txtHocBong;
     private  String  maSV;
+    private ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +39,7 @@ public class Select_Thongtinsinhvien extends AppCompatActivity {
         txtMaLop = findViewById(R.id.txt_malop);
         txtHocBong = findViewById(R.id.txt_hocbong);
         TextView txtEditThongTinSinhVien = findViewById(R.id.txt_edit_thongtinsinhvien);
+        imageView = findViewById(R.id.imgAvatar);
         // Lấy mã sinh viên từ Intent
         Intent intent = getIntent();
         if (intent != null) {
@@ -75,7 +81,19 @@ public class Select_Thongtinsinhvien extends AppCompatActivity {
             txtDiaChi.setText(sinhVien.getDiaChi());
             txtMaLop.setText(sinhVien.getMaLop());
             txtHocBong.setText(String.valueOf(sinhVien.getHocBong()));
+            // Chọn ngẫu nhiên một drawable từ mảng randomDrawables
+            boolean gioitinh = sinhVien.isGioiTinh();
+            if (gioitinh){
+                int randomIndex = new Random().nextInt(randomDrawables_Nam.length);
+                imageView.setImageResource(randomDrawables_Nam[randomIndex]);
 
+
+            }else {
+                int randomIndex = new Random().nextInt(randomDrawables_Nu.length);
+                imageView.setImageResource(randomDrawables_Nu[randomIndex]);
+
+
+            }
             // Nếu có thông tin về năm học, thì bạn cần có một phương thức tương ứng để lấy thông tin này từ cơ sở dữ liệu.
             // txtNamHoc.setText(databaseHelper.getNamHocByMaSV(maSV));
         } else {

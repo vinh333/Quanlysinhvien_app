@@ -32,12 +32,14 @@
         android:id="@+id/editTextLyThuyet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
         android:hint="Số Tiết Lý Thuyết"/>
 
     <EditText
         android:id="@+id/editTextThucHanh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
         android:hint="Số Tiết Thực Hành"/>
 
     <Button

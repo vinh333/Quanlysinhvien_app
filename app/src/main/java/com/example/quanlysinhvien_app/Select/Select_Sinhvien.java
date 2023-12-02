@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.quanlysinhvien_app.Adapter.SinhVienAdapter;
 import com.example.quanlysinhvien_app.DatabaseHelper;
 import com.example.quanlysinhvien_app.Database.SINHVIEN;
@@ -29,10 +29,20 @@ public class Select_Sinhvien extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.danhsachsinhvien);
+        Intent intent = getIntent();
 
-        // Lấy danh sách sinh viên từ cơ sở dữ liệu hoặc nguồn dữ liệu khác
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
-        sinhVienList = databaseHelper.getAllSinhVien();
+        if ("All".equals(intent.getStringExtra("CHECK"))) {
+            // Lấy danh sách sinh viên từ cơ sở dữ liệu hoặc nguồn dữ liệu khác
+            DatabaseHelper databaseHelper = new DatabaseHelper(this);
+            sinhVienList = databaseHelper.getAllSinhVien();
+        } else {
+            // Lấy mã lớp từ Intent
+            String maLop = intent.getStringExtra("MALOP");
+
+            // Lấy danh sách sinh viên được lọc từ cơ sở dữ liệu hoặc nguồn dữ liệu khác dựa trên mã lớp
+            DatabaseHelper databaseHelper = new DatabaseHelper(this);
+            sinhVienList = databaseHelper.getSinhVienByMaLop(maLop);
+        }
 
         // Tìm ListView bằng ID
         listView = findViewById(R.id.listView_Sinhvien);
@@ -82,7 +92,4 @@ public class Select_Sinhvien extends AppCompatActivity {
             }
         });
     }
-
-
 }
-

@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewTitle4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="CHỈNH SỬA\n ĐIỂM SINH VIÊN"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewMaMonHoc"
@@ -79,6 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextThucHanh"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="24dp"
-        android:text="Lưu Thay Đổi"/>
-</RelativeLayout>
+        android:text="Lưu Thay Đổi" />
+</LinearLayout>

@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/text_view_masv"
-        android:layout_width="80dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:paddingRight="15dp"
         android:text="Mã SV: "
@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/text_view_mamonhoc"
-        android:layout_width="80dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:paddingRight="15dp"
         android:text="Mã Môn Học: "
@@ -25,7 +25,7 @@
 
     <TextView
         android:id="@+id/text_view_lanthi"
-        android:layout_width="80dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:paddingRight="15dp"
         android:text="Lần Thi: "
@@ -34,7 +34,7 @@
 
     <TextView
         android:id="@+id/text_view_hocky"
-        android:layout_width="80dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:paddingRight="15dp"
         android:text="Học Kỳ: "
@@ -43,7 +43,7 @@
 
     <TextView
         android:id="@+id/text_view_diem"
-        android:layout_width="80dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:paddingRight="15dp"
         android:text="Điểm: "

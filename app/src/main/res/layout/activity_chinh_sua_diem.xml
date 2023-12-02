@@ -14,7 +14,7 @@
         android:id="@+id/textViewTitle3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CHỈNH SỬA\n THÔNG TIN SINH VIÊN"
+        android:text="CHỈNH SỬA\n ĐIỂM SINH VIÊN"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold" />

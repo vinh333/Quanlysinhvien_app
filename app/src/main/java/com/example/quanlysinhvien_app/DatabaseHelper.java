@@ -613,6 +613,67 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return monHocList;
     }
+    public List<LOP> getClassesByMaKhoa(String maKhoa) {
+        List<LOP> classList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Define the columns you want to retrieve
+        String[] columns = {"MALOP", "TENLOP", "MAKHOA"};
+
+        // Define the selection criteria
+        String selection = "MAKHOA = ?";
+
+        // Define the selection arguments
+        String[] selectionArgs = {maKhoa};
+
+        Cursor cursor = db.query("LOP", columns, selection, selectionArgs, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Retrieve information from the cursor and create a LOP object
+                String maLop = cursor.getString(cursor.getColumnIndex("MALOP"));
+                String tenLop = cursor.getString(cursor.getColumnIndex("TENLOP"));
+                String khoa = cursor.getString(cursor.getColumnIndex("MAKHOA"));
+
+                // Create a LOP object and add it to the list
+                LOP lop = new LOP(maLop, tenLop, khoa);
+                classList.add(lop);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return classList;
+    }
+    public List<SINHVIEN> getSinhVienByMaLop(String maLop) {
+        List<SINHVIEN> sinhVienList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Query to retrieve students based on class code (maLop)
+        String query = "SELECT * FROM SINHVIEN WHERE MALOP = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{maLop});
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Retrieve information from the cursor and create a SINHVIEN object
+                String maSV = cursor.getString(cursor.getColumnIndex(STUDENT_ID_COLUMN_NAME));
+                String hoTen = cursor.getString(cursor.getColumnIndex(STUDENT_NAME_COLUMN_NAME));
+                boolean gioiTinh = cursor.getInt(cursor.getColumnIndex(STUDENT_GENDER_COLUMN_NAME)) == 1;
+                String noiSinh = cursor.getString(cursor.getColumnIndex(STUDENT_BIRTHPLACE_COLUMN_NAME));
+                String ngaySinh = cursor.getString(cursor.getColumnIndex(STUDENT_BIRTHDATE_COLUMN_NAME));
+                String diaChi = cursor.getString(cursor.getColumnIndex(STUDENT_ADDRESS_COLUMN_NAME));
+                float hocBong = cursor.getFloat(cursor.getColumnIndex(STUDENT_SCHOLARSHIP_COLUMN_NAME));
+
+                // Create a SINHVIEN object and add it to the list
+                SINHVIEN sinhVien = new SINHVIEN(maSV, hoTen, ngaySinh, gioiTinh, noiSinh, diaChi, maLop, hocBong);
+                sinhVienList.add(sinhVien);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return sinhVienList;
+    }
 
 
 

@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
                 Intent intent = new Intent(MainActivity.this, Select_Sinhvien.class);
+                intent.putExtra("CHECK", "All");
                 startActivity(intent);
             }
         });
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
                 Intent intent = new Intent(MainActivity.this, Select_Khoa.class);
+                intent.putExtra("CHECK", "All");
                 startActivity(intent);
             }
         });
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
                 Intent intent = new Intent(MainActivity.this, Select_Lop.class);
+                intent.putExtra("CHECK", "All");
                 startActivity(intent);
             }
         });
@@ -103,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
                 Intent intent = new Intent(MainActivity.this, Select_MonHoc.class);
+                intent.putExtra("CHECK", "All");
                 startActivity(intent);
             }
         });
@@ -111,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
                 Intent intent = new Intent(MainActivity.this, Select_BangDiemThi.class);
+                intent.putExtra("CHECK", "All");
                 startActivity(intent);
             }
         });
@@ -119,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
                 Intent intent = new Intent(MainActivity.this, Themsinhvien.class);
+                intent.putExtra("CHECK", "All");
                 startActivity(intent);
             }
         });
@@ -127,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
                 Intent intent = new Intent(MainActivity.this, ThemMonHoc.class);
+                intent.putExtra("CHECK", "All");
                 startActivity(intent);
             }
         });
@@ -135,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
                 Intent intent = new Intent(MainActivity.this, ThemDiemThiActivity.class);
+                intent.putExtra("CHECK", "All");
                 startActivity(intent);
             }
         });
@@ -143,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Chuyển sang CaidatActivity khi nhấn vào btn_caidat
                 Intent intent = new Intent(MainActivity.this, ThemLopActivity.class);
+                intent.putExtra("CHECK", "All");
                 startActivity(intent);
             }
         });
