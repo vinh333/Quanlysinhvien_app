@@ -1,57 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#0158C8"
+            android:gravity="center"
+            android:padding="5dp"
+
+            android:text="Hồ sơ"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/icon6"
+            android:padding="4dp" />
+    </FrameLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:id="@+id/linearLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout">
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal"
+
+            android:src="@drawable/avt2" />
 
         <TextView
-            android:id="@+id/textView22"
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:background="#5D71C9"
-            android:gravity="center"
-            android:text="CÀI ĐẶT CHUNG "
-            android:textColor="#FFFFFF"
-            android:layout_marginBottom="60dp"
-            android:textSize="30sp" />
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Nguyễn Phước Vinh"
 
-        <Switch
-            android:id="@+id/giaodien"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:text="Giao diện" />
+            android:textSize="24dp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/doimk"
+            android:id="@+id/textView17"
             android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:gravity="center_vertical"
-            android:text="Đổi mật khẩu" />
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
 
-        <TextView
-            android:id="@+id/ngonngu"
-            android:layout_width="match_parent"
-            android:layout_height="67dp"
-            android:gravity="center_vertical"
-            android:text="Ngôn ngữ" />
+            android:text="Anhem3423@gmail.com"
+            android:textSize="16dp" />
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/mapin"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:gravity="center_vertical"
-            android:text="Cài đặt mã pin" />
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:background="#EDEDED"
+        android:padding="6dp"
 
-        <Button
-            android:id="@+id/dangxuat"
+        android:text="Cài đặt chung"
+        android:textColor="#888888"
+        android:textSize="23dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="326dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:gravity="center_vertical"
-            android:text="Đăng xuất" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Switch
+                android:id="@+id/giaodien"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:text="Giao diện" />
+
+            <TextView
+                android:id="@+id/doimk"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:gravity="center_vertical"
+                android:text="Đổi mật khẩu" />
+
+            <TextView
+                android:id="@+id/ngonngu"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:gravity="center_vertical"
+                android:text="Ngôn ngữ" />
+
+            <TextView
+                android:id="@+id/mapin"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:gravity="center_vertical"
+                android:text="Cài đặt mã pin" />
+
+            <TextView
+                android:id="@+id/dangxuat"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:gravity="center_vertical"
+                android:text="Đăng xuất" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="395dp"
+        android:layout_height="92dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="17dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView148"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/icon2"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/textView152"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Trang chủ" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LLnhapdiem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="17dp"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView114"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/icon3"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/textView115"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Nhập diểm" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LLdsdiemdanh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="17dp"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView164"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/icon1"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/textView125"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Điểm danh" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LLcaidat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="17dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView144"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/icon4"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/textView154"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Cài đặt" />
+        </LinearLayout>
 
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

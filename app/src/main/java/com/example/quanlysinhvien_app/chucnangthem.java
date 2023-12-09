@@ -18,7 +18,7 @@ public class chucnangthem extends AppCompatActivity {
     private DatabaseHelper mDatabaseHelper;
     private int newMode;
     private PinManager pinManager;
-    private Button logout;
+    private TextView logout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -8,22 +8,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.quanlysinhvien_app.Bieudo.SinhVienVang;
 import com.example.quanlysinhvien_app.Select.Select_Khoa;
 import com.example.quanlysinhvien_app.Select.Select_Lop;
-import com.example.quanlysinhvien_app.Select.Select_Nganh;
 import com.example.quanlysinhvien_app.Select.Select_Sinhvien;
 import com.example.quanlysinhvien_app.Tinhnang.Diemdanhsv;
 import com.example.quanlysinhvien_app.Tinhnang.HienThiDiemDanhActivity;
-import com.example.quanlysinhvien_app.Tinhnang.Hienthi_Diem;
 import com.example.quanlysinhvien_app.Tinhnang.Nhapdiem;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -48,25 +44,31 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference diemDanhRef;
     private int newMode;
     private int tonghocsinh, hocsinhvang;
+    private LinearLayout LLsv, LLkhoa, LLlop, LLdsdiemdanh, LLdsdiem, LLnhapdiem, LLnhapdiemdanh, LLthemsv;
+    private LinearLayout LLcaidat;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
             setContentView(R.layout.activity_main);
-            LinearLayout linearLayoutTrangChu = findViewById(R.id.LLnhapdiem);
-            LinearLayout linearLayoutDiemdanh = findViewById(R.id.LLdiemdanh);
-            LinearLayout linearLayoutCaidat = findViewById(R.id.LLcaidat);
-            Button btnSV = findViewById(R.id.btnsv);
+        LLsv = findViewById(R.id.LLsv);
+        LLkhoa = findViewById(R.id.LLkhoa);
+        LLlop = findViewById(R.id.LLlop);
+        LLdsdiemdanh = findViewById(R.id.LLdsdiemdanh);
+        LLdsdiem = findViewById(R.id.LLdsdiem);
+        LLnhapdiem = findViewById(R.id.LLnhapdiem);
+        LLnhapdiemdanh = findViewById(R.id.LLnhapdiemdanh);
+        LLthemsv = findViewById(R.id.LLthemsv);
 
-            Button btnLop = findViewById(R.id.btnlop);
-            Button btnKhoa = findViewById(R.id.btnkhoa);
-            Button btnDiemDanh = findViewById(R.id.button_diemdanh);
+        LLcaidat = findViewById(R.id.LLcaidat);
+
             PieChart pieChart1 = findViewById(R.id.pieChart1);
             PieChart pieChart2 = findViewById(R.id.pieChart2);
             TextView txtThongTinThemBieuDo = findViewById(R.id.textView_xemthembieudo);
 
-            linearLayoutTrangChu.setOnClickListener(new View.OnClickListener() {
+            LLnhapdiem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Chuyển sang màn hình Trang Chủ
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-            linearLayoutDiemdanh.setOnClickListener(new View.OnClickListener() {
+            LLdsdiemdanh.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Chuyển sang màn hình Trang Chủ
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            linearLayoutCaidat.setOnClickListener(new View.OnClickListener() {
+            LLcaidat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Chuyển sang màn hình Trang Chủ
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-            btnSV.setOnClickListener(new View.OnClickListener() {
+            LLsv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Chuyển sang màn hình Trang Chủ
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            btnKhoa.setOnClickListener(new View.OnClickListener() {
+            LLkhoa.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                     Chuyển sang màn hình Trang Chủ
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            btnLop.setOnClickListener(new View.OnClickListener() {
+            LLlop.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
     //                     Chuyển sang màn hình Trang Chủ
@@ -121,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-            btnDiemDanh.setOnClickListener(new View.OnClickListener() {
+            LLdsdiemdanh.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
             // Chuyển sang màn hình Trang Chủ
