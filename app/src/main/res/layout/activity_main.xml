@@ -175,9 +175,9 @@
                         <ImageView
                             android:id="@+id/imageView4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
                             android:layout_marginTop="8dp"
-                            app:srcCompat="@drawable/ic_1" />
+                            app:srcCompat="@drawable/icon_main___2_" />
 
                         <TextView
                             android:id="@+id/textView5"
@@ -202,9 +202,9 @@
                         <ImageView
                             android:id="@+id/imageView4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
                             android:layout_marginTop="8dp"
-                            app:srcCompat="@drawable/ic_2" />
+                            app:srcCompat="@drawable/icon_main___3_" />
 
                         <TextView
                             android:id="@+id/textView5"
@@ -229,9 +229,9 @@
                         <ImageView
                             android:id="@+id/imageView4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
                             android:layout_marginTop="8dp"
-                            app:srcCompat="@drawable/ic_3" />
+                            app:srcCompat="@drawable/icon_lop" />
 
                         <TextView
                             android:id="@+id/textView5"
@@ -289,9 +289,9 @@
                         <ImageView
                             android:id="@+id/imageView4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
                             android:layout_marginTop="8dp"
-                            app:srcCompat="@drawable/ic_5" />
+                            app:srcCompat="@drawable/icon_main___6_" />
 
                         <TextView
                             android:id="@+id/textView5"
@@ -316,10 +316,10 @@
                         <ImageView
                             android:id="@+id/imageView4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
                             android:layout_marginTop="8dp"
                             android:layout_weight="1"
-                            app:srcCompat="@drawable/ic_6" />
+                            app:srcCompat="@drawable/icon_score" />
 
                         <TextView
                             android:id="@+id/textView5"
@@ -344,9 +344,9 @@
                         <ImageView
                             android:id="@+id/imageView4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
                             android:layout_marginTop="8dp"
-                            app:srcCompat="@drawable/ic_7" />
+                            app:srcCompat="@drawable/icon_main___7_" />
 
                         <TextView
                             android:id="@+id/textView5"
@@ -371,9 +371,9 @@
                         <ImageView
                             android:id="@+id/imageView4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
                             android:layout_marginTop="8dp"
-                            app:srcCompat="@drawable/ic_8" />
+                            app:srcCompat="@drawable/icon_main___1_" />
 
                         <TextView
                             android:id="@+id/textView5"

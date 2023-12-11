@@ -32,19 +32,19 @@ public class mapin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String enteredPin = pinInput.getText().toString();
-                if (enteredPin.length() == 6) {
+                if (enteredPin.length() == 4) {
                     // Lưu mã PIN
                     Log.d("New PIN", enteredPin);
                     pinManager.setPin(enteredPin);
                     Toast.makeText(mapin.this, "Mã PIN đã được lưu.", Toast.LENGTH_SHORT).show();
 
                     // Chuyển đến trang chính của ứng dụng
-                    Intent intent = new Intent(mapin.this, MainActivity.class);
+                    Intent intent = new Intent(mapin.this, LockScreenActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
                     // Mã PIN không hợp lệ
-                    Toast.makeText(mapin.this, "Mã PIN phải có 6 chữ số.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mapin.this, "Mã PIN phải có 4 chữ số.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

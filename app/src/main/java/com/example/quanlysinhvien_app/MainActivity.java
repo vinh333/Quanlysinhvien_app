@@ -131,7 +131,14 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-
+        LLnhapdiemdanh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang màn hình Trang Chủ
+                Intent intent = new Intent(MainActivity.this, Diemdanhsv.class);
+                startActivity(intent);
+            }
+        });
         txtThongTinThemBieuDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -71,7 +71,8 @@
             android:name=".Tinhnang.HienThiDiemDanhActivity" />
         <activity
             android:name=".Bieudo.SinhVienVang" />
-
+        <activity
+            android:name=".LockScreenActivity" />
     </application>
 
 </manifest>

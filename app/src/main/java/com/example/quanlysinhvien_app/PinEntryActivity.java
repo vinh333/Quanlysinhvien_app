@@ -35,7 +35,7 @@ public class PinEntryActivity extends AppCompatActivity {
 
                 if (enteredPin.equals(savedPin)) {
                     // Mã PIN đúng, chuyển sang màn hình chính của ứng dụng
-                    Intent intent = new Intent(PinEntryActivity.this, MainActivity.class);
+                    Intent intent = new Intent(PinEntryActivity.this, LockScreenActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
 
