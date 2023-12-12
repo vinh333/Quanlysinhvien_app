@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cấu trúc dữ liệu"
-            android:textSize="20sp" />
+            android:textSize="25sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,7 +26,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="8 9 8.5 10" />
+                android:text="8 9 8.5 10"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/text_diem_trung_binh"
@@ -33,7 +35,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="8"
-                android:textColor="#E91E63" />
+                android:textColor="#E91E63"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
