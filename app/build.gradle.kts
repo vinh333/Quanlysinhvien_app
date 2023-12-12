@@ -48,6 +48,7 @@ dependencies {
     implementation ("com.squareup.picasso:picasso:2.8")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("info.androidhive:fontawesome:0.0.5")
 
 
 

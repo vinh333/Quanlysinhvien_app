@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,8 +23,9 @@ import java.util.HashMap;
 
 public class Nhapdiem extends AppCompatActivity {
 
-    private Spinner spinner_masv, spinner_tenmonhoc, spinner_hocky, spinner_diem,spinner_tinchi;
+    private Spinner spinner_masv, spinner_tenmonhoc, spinner_hocky,spinner_tinchi;
     private Button btnLuu;
+    private EditText editext_diem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +36,17 @@ public class Nhapdiem extends AppCompatActivity {
         spinner_masv = findViewById(R.id.spinner_sinhvien);
         spinner_hocky = findViewById(R.id.spinner_hocky);
         spinner_tenmonhoc = findViewById(R.id.spinner_tenmonhoc);
-        spinner_diem = findViewById(R.id.spinner_diem);
+        editext_diem = findViewById(R.id.spinner_diem);
         spinner_tinchi = findViewById(R.id.spinner_tinchi);
         btnLuu = findViewById(R.id.button_luu_nhapmonhoc); // Thêm dòng này để ánh xạ nút lưu
 
-        // Thêm sự kiện lắng nghe cho nút Lưu
+        // Thay đổi trong sự kiện onClick cho nút Lưu
         btnLuu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String masv = spinner_masv.getSelectedItem().toString();
                 String monhoc = spinner_tenmonhoc.getSelectedItem().toString();
-                String diem = spinner_diem.getSelectedItem().toString();
+                String diem = editext_diem.getText().toString(); // Thay thế spinner_diem bằng editext_diem
                 String hocky = spinner_hocky.getSelectedItem().toString();
                 String tinchi = spinner_tinchi.getSelectedItem().toString();
 
@@ -76,14 +78,7 @@ public class Nhapdiem extends AppCompatActivity {
         loadSpinnerData(databaseReferenceMonhoc, spinner_tinchi, "tongtinchi");
 
 
-        // Tạo một danh sách điểm và cập nhật Spinner điểm
-        ArrayList<String> diemList = new ArrayList<>();
-        for (int i = 0; i <= 10; i++) {
-            diemList.add(String.valueOf(i));
-        }
-        ArrayAdapter<String> diemAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, diemList);
-        diemAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_diem.setAdapter(diemAdapter);
+
 
         // Tạo một danh sách hoc ky và cập nhật Spinner
         ArrayList<String> hockyList = new ArrayList<>();

@@ -17,97 +17,175 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:padding="5dp"
             android:text="Nhập điểm sinh viên"
             android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#CDC8C8"
+            android:gravity="center"
             android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
+
+            <info.androidhive.fontawesome.FontTextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:text="@string/fa_graduation_cap_solid"
+                android:textColor="@color/icon_color"
+                android:textSize="@dimen/icon_size"
+                app:solid_icon="true" />
 
             <TextView
                 android:id="@+id/textView23"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:padding="5sp"
                 android:text="Mã sv" />
 
             <Spinner
                 android:id="@+id/spinner_sinhvien"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:padding="5sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
+
+            <info.androidhive.fontawesome.FontTextView
+                android:id="@+id/fontTextView"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:text="@string/fa_book_solid"
+                android:textColor="@color/icon_color"
+                android:textSize="@dimen/icon_size"
+                app:solid_icon="true" />
 
             <TextView
                 android:id="@+id/textView23"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:padding="5sp"
                 android:text="Môn học" />
 
             <Spinner
                 android:id="@+id/spinner_tenmonhoc"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:padding="5sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
+
+            <info.androidhive.fontawesome.FontTextView
+                android:id="@+id/fontTextView2"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:text="@string/fa_scroll_solid"
+                android:textColor="@color/icon_color"
+                android:textSize="@dimen/icon_size"
+                app:solid_icon="true" />
 
             <TextView
                 android:id="@+id/textView23"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:padding="5sp"
                 android:text="Học kỳ" />
 
             <Spinner
                 android:id="@+id/spinner_hocky"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:padding="5sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
+
+            <info.androidhive.fontawesome.FontTextView
+                android:id="@+id/fontTextView3"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:text="@string/fa_check_circle"
+                android:textColor="@color/icon_color"
+                android:textSize="@dimen/icon_size"
+                app:solid_icon="true" />
 
             <TextView
                 android:id="@+id/textView23"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:padding="5sp"
                 android:text="Tín chỉ" />
 
             <Spinner
                 android:id="@+id/spinner_tinchi"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:padding="5sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
+
+            <info.androidhive.fontawesome.FontTextView
+                android:id="@+id/fontTextView4"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:text="@string/fa_pen_alt_solid"
+                android:textColor="@color/icon_color"
+                android:textSize="@dimen/icon_size"
+                app:solid_icon="true" />
 
             <TextView
                 android:id="@+id/textView23"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:padding="5sp"
                 android:text="Điểm" />
 
-            <Spinner
+            <EditText
                 android:id="@+id/spinner_diem"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Nhập điểm ở đây"
+                android:inputType="numberDecimal"
+                android:padding="5sp" />
+
 
         </LinearLayout>
 
@@ -115,6 +193,9 @@
             android:id="@+id/button_luu_nhapmonhoc"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
             android:text="Lưu" />
 
     </LinearLayout>

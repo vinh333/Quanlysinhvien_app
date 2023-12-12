@@ -12,5 +12,6 @@
     <color name="imageBorderColor">#E01E7A</color>
     <color name="miniTitle">#2A2E43</color>
     <color name="colorGreen">#00FF00</color>
+    <color name="icon_color">#6750A3</color>
 
 </resources>
