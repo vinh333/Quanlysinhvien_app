@@ -116,11 +116,11 @@
                 android:id="@+id/textView_tennganh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:gravity="bottom|right"
+                android:gravity="center"
                 android:text="TÀI CHÍNH NGÂN HÀNG"
                 android:textColor="#000000"
-                android:textSize="44sp" />
+                android:textSize="38sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView2"

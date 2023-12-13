@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -23,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="Tài chính ngân hàng 21 A"
                 android:textColor="#000000"
@@ -33,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
+                android:layout_marginLeft="10dp"
                 android:text="21CTCNHA"
                 android:textColor="#000000"
                 android:textSize="14sp" />

@@ -2,9 +2,11 @@ package com.example.quanlysinhvien_app.Select;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,7 @@ public class Select_Nganh extends AppCompatActivity {
     private ArrayList<String> tenNganhList;
     private ListView listView;
     private Nganh_Adapter adapter;
+    private TextView textView_tenkhoa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,11 @@ public class Select_Nganh extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             String makhoa = intent.getStringExtra("MA_KHOA");
+            String tenkhoa = intent.getStringExtra("TEN_KHOA");
+            textView_tenkhoa = findViewById(R.id.textView_tenkhoa);
+            textView_tenkhoa.setText(tenkhoa);
 
+            Log.d("khia",tenkhoa);
             // Kiểm tra xem mã khoa có tồn tại trong Firebase không
             DatabaseReference khoaRef = FirebaseDatabase.getInstance().getReference().child("khoa").child(makhoa);
             khoaRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -85,6 +92,7 @@ public class Select_Nganh extends AppCompatActivity {
                                     public void onCallback(String maNganh) {
                                         Intent intent = new Intent(Select_Nganh.this, Select_Lop.class);
                                         intent.putExtra("MA_NGANH", maNganh);
+                                        intent.putExtra("TEN_NGANH", selectedNganh);
                                         startActivity(intent);
                                     }
                                 });

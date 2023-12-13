@@ -31,7 +31,7 @@ public class Select_Lop extends AppCompatActivity {
     private LopAdapter adapter;
     private ListView listView;
     private boolean isAscendingOrder = true; // Biến để theo dõi trạng thái sắp xếp
-    private String maNganh; // Biến để lưu giá trị "manganh" nhận từ Intent
+    private String maNganh,tenNganh; // Biến để lưu giá trị "manganh" nhận từ Intent
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +42,9 @@ public class Select_Lop extends AppCompatActivity {
         if (intent != null) {
             // Nhận giá trị "manganh" từ Intent
             maNganh = intent.getStringExtra("MA_NGANH");
+            tenNganh = intent.getStringExtra("TEN_NGANH");
             TextView txtTennganh = findViewById(R.id.textView_tennganh);
-            txtTennganh.setText(maNganh);
+            txtTennganh.setText(tenNganh);
         }
 
         // Tìm ListView bằng ID

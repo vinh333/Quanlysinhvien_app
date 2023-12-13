@@ -60,6 +60,7 @@ public class Select_Khoa extends AppCompatActivity {
                     public void onCallback(String maKhoa) {
                         Intent intent = new Intent(Select_Khoa.this, Select_Nganh.class);
                         intent.putExtra("MA_KHOA", maKhoa);
+                        intent.putExtra("TEN_KHOA", selectedKhoa);
                         startActivity(intent);
                     }
                 });
