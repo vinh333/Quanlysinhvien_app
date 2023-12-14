@@ -1,8 +1,11 @@
 package com.example.quanlysinhvien_app.Tinhnang;
 
 import android.content.DialogInterface;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,12 +13,15 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quanlysinhvien_app.Adapter.HienThiDiemDanhAdapter;
 import com.example.quanlysinhvien_app.Database.Diemdanh;
 import com.example.quanlysinhvien_app.R;
 import com.google.firebase.database.DataSnapshot;
@@ -173,24 +179,29 @@ public class HienThiDiemDanhActivity extends AppCompatActivity {
         diemDanhRef.child(selectedLop).child(selectedHocKy).child(selectedNgay).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<String> diemDanhInfoList = new ArrayList<>();
+                List<Diemdanh> diemDanhInfoList = new ArrayList<>();
+                int tongSinhVien = 0;
+                int sinhVienVang = 0;
                 for (DataSnapshot svSnapshot : dataSnapshot.getChildren()) {
                     String maSV = svSnapshot.getKey();
                     Diemdanh diemDanh = svSnapshot.getValue(Diemdanh.class);
                     if (diemDanh != null) {
-                        String tinhTrang = diemDanh.getTinhtrangdiemdanh() ? "Có" : "Vắng";
-                        String diemDanhInfo = "Mã SV: " + diemDanh.getHotensv() +
-                                "\nNgày Điểm Danh: " + diemDanh.getNgaydiemdanh() +
-                                "\nMôn Học: " + diemDanh.getMamonhoc() +
-                                "\nLớp: " + diemDanh.getMalop() +
-                                "\nTình Trạng Điểm Danh: " + tinhTrang +
-                                "\nGhi Chú: " + diemDanh.getGhiChu() +
-                                "\n----------------------------------------";
+                        diemDanhInfoList.add(diemDanh);
+                        // Đếm tổng số sinh viên
+                        tongSinhVien++;
 
-                        diemDanhInfoList.add(diemDanhInfo);
+                        // Kiểm tra và đếm số sinh viên vắng
+                        if (!diemDanh.getTinhtrangdiemdanh()) {
+                            sinhVienVang++;
+                        }
                     }
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(HienThiDiemDanhActivity.this, android.R.layout.simple_list_item_1, diemDanhInfoList);
+                // Hiển thị thông tin tổng số sinh viên và số sinh viên vắng lên TextView
+                TextView textViewTongSV = findViewById(R.id.tongsv);
+                TextView textViewVang = findViewById(R.id.vang);
+                textViewTongSV.setText(" " + tongSinhVien);
+                textViewVang.setText(" " + sinhVienVang);
+                HienThiDiemDanhAdapter adapter = new HienThiDiemDanhAdapter(HienThiDiemDanhActivity.this, diemDanhInfoList);
                 listViewDiemDanh.setAdapter(adapter);
             }
 
@@ -247,5 +258,4 @@ public class HienThiDiemDanhActivity extends AppCompatActivity {
             }
         }
     }
-
 }

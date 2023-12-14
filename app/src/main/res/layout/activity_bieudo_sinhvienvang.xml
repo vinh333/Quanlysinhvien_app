@@ -11,6 +11,25 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/textView_tennganh3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="THỐNG KÊ"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="38sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView44"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="7dp"
+            android:background="#CDC8C8"
+            android:gravity="center"
+            android:textSize="24sp" />
+
+        <TextView
             android:id="@+id/textViewLop2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,7 +39,7 @@
             android:id="@+id/spinnerLop2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewLop"
+            android:layout_below="@id/textViewLop2"
             android:layout_centerHorizontal="true" />
 
         <TextView
@@ -34,7 +53,7 @@
             android:id="@+id/spinnerHocKy2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewHocKy"
+            android:layout_below="@id/textViewHocKy2"
             android:layout_centerHorizontal="true" />
 
         <TextView
@@ -48,7 +67,7 @@
             android:id="@+id/spinnerNgay2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewNgay"
+            android:layout_below="@id/textViewNgay2"
             android:layout_centerHorizontal="true" />
 
         <com.github.mikephil.charting.charts.PieChart

@@ -1,62 +1,240 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textViewLop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chọn Lớp:"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
-
-    <Spinner
-        android:id="@+id/spinnerLop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewLop"
-        android:layout_marginTop="8dp"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/textViewHocKy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chọn Học Kỳ:"
-        android:layout_below="@id/spinnerLop"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
-
-    <Spinner
-        android:id="@+id/spinnerHocKy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewHocKy"
-        android:layout_marginTop="8dp"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/textViewNgay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chọn Ngày:"
-        android:layout_below="@id/spinnerHocKy"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
-
-    <Spinner
-        android:id="@+id/spinnerNgay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewNgay"
-        android:layout_marginTop="8dp"
-        android:layout_centerHorizontal="true" />
-
-    <ListView
-        android:id="@+id/listViewDiemDanh"
+        android:id="@+id/textView_tennganh2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spinnerNgay"
-        android:layout_marginTop="16dp" />
-</RelativeLayout>
+        android:text="ĐIỂM DANH\nSINH VIÊN"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="38sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="7dp"
+        android:background="#CDC8C8"
+        android:gravity="center"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="10dp"
+            android:text="Chọn Lớp:"
+            android:textSize="24sp" />
+
+        <Spinner
+            android:id="@+id/spinnerLop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textDirection="firstStrongRtl" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:text="Chọn Học Kỳ:"
+            android:textSize="24sp" />
+
+        <Spinner
+            android:id="@+id/spinnerHocKy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#2196F3"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:text="Chọn Ngày:"
+            android:textSize="24sp" />
+
+        <Spinner
+            android:id="@+id/spinnerNgay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#4CAF50"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="413dp"
+        android:layout_marginTop="7dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="900dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#EFEEEE"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="#EFEEEE"
+                    android:padding="5dp"
+                    android:text="HỌ VÀ TÊN"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="#EFEEEE"
+                    android:padding="5dp"
+                    android:text="NGÀY ĐIỂM DANH"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:background="#EFEEEE"
+                    android:padding="5dp"
+                    android:text="MÔN HỌC"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:background="#EFEEEE"
+                    android:padding="5dp"
+                    android:text="LỚP"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#EFEEEE"
+                    android:padding="5dp"
+                    android:text="TÌNH TRẠNG ĐIỂM DANH"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView46"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="#EFEEEE"
+                    android:padding="5dp"
+                    android:text="GHI CHÚ"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/listViewDiemDanh"
+                android:layout_width="900dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spinnerNgay"
+                android:layout_marginTop="16dp" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:text="Tổng Số Viên:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tongsv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="3"
+            android:textColor="#2196F3"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:text="Vắng:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/vang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="2"
+            android:textColor="#E91E1E"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</LinearLayout>

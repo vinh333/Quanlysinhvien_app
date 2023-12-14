@@ -120,7 +120,7 @@
                 android:gravity="bottom|right"
                 android:text="DANH SÁCH KHOA"
                 android:textAlignment="center"
-                android:textColor="#000000"
+                android:textColor="#252427"
                 android:textSize="38sp"
                 android:textStyle="bold" />
 
