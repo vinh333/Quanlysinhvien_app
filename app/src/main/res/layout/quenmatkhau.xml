@@ -78,7 +78,7 @@
             android:background="@drawable/rounded_corner_blue"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="Đăng nhập"
+            android:text="Gửi"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp"
