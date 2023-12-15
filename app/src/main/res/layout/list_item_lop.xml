@@ -13,6 +13,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <com.github.ivbaranov.mli.MaterialLetterIcon
+            android:id="@+id/m_icon"
+            android:layout_width="55dp"
+            android:layout_height="60dp"
+            android:layout_margin="5dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

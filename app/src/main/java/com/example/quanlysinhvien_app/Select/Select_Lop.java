@@ -44,7 +44,13 @@ public class Select_Lop extends AppCompatActivity {
             maNganh = intent.getStringExtra("MA_NGANH");
             tenNganh = intent.getStringExtra("TEN_NGANH");
             TextView txtTennganh = findViewById(R.id.textView_tennganh);
-            txtTennganh.setText(tenNganh);
+            if (maNganh.equals("Tất cả")){
+                txtTennganh.setText("Tất Cả Lớp");
+
+            }else {
+                txtTennganh.setText(tenNganh);
+
+            }
         }
 
         // Tìm ListView bằng ID

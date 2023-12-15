@@ -19,6 +19,11 @@ import java.util.List;
 public class HienThiDiemDanhAdapter extends ArrayAdapter<Diemdanh> {
     private Context context;
     private List<Diemdanh> diemDanhList;
+    private OnItemClickListener onItemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(String maSV);
+    }
 
     public HienThiDiemDanhAdapter(Context context, List<Diemdanh> diemDanhList) {
         super(context, 0, diemDanhList);
@@ -26,9 +31,13 @@ public class HienThiDiemDanhAdapter extends ArrayAdapter<Diemdanh> {
         this.diemDanhList = diemDanhList;
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
+
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         // Kiểm tra nếu convertView là null, tạo mới nếu cần
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.list_hienthidiemdanh, parent, false);
@@ -57,7 +66,15 @@ public class HienThiDiemDanhAdapter extends ArrayAdapter<Diemdanh> {
 
         ghiChuTextView.setText( diemDanh.getGhiChu());
 
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick("Mã SV:"+diemDanh.getHotensv()+"Ngày Điểm Danh:"+diemDanh.getNgaydiemdanh());
+                }
+            }
+        });
+
         return convertView;
     }
 }
-

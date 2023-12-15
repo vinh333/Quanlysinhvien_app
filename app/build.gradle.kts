@@ -49,6 +49,7 @@ dependencies {
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("info.androidhive:fontawesome:0.0.5")
+    implementation("com.github.ivbaranov:materiallettericon:0.2.3")
 
 
 

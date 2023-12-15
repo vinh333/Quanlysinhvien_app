@@ -113,6 +113,7 @@ public class HienThiDiemDanhActivity extends AppCompatActivity {
                 showEditDialog(maSV);
             }
         });
+
     }
 
     private void loadLopData() {
@@ -203,6 +204,13 @@ public class HienThiDiemDanhActivity extends AppCompatActivity {
                 textViewVang.setText(" " + sinhVienVang);
                 HienThiDiemDanhAdapter adapter = new HienThiDiemDanhAdapter(HienThiDiemDanhActivity.this, diemDanhInfoList);
                 listViewDiemDanh.setAdapter(adapter);
+
+                adapter.setOnItemClickListener(new HienThiDiemDanhAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(String maSV) {
+                        showEditDialog(maSV);
+                    }
+                });
             }
 
             @Override

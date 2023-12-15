@@ -21,6 +21,7 @@ import com.example.quanlysinhvien_app.Select.Select_Sinhvien;
 import com.example.quanlysinhvien_app.Tinhnang.Diemdanhsv;
 import com.example.quanlysinhvien_app.Tinhnang.HienThiDiemDanhActivity;
 import com.example.quanlysinhvien_app.Tinhnang.Nhapdiem;
+import com.example.quanlysinhvien_app.Tinhnang.Themsinhvien;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -136,6 +137,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Chuyển sang màn hình Trang Chủ
                 Intent intent = new Intent(MainActivity.this, Diemdanhsv.class);
+                startActivity(intent);
+            }
+        });
+
+        LLthemsv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang màn hình Trang Chủ
+                Intent intent = new Intent(MainActivity.this, Themsinhvien.class);
                 startActivity(intent);
             }
         });
