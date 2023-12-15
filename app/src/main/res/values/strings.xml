@@ -3,6 +3,45 @@
     <string-array name="hocky_array">
         <item>Học Kỳ 1</item>
         <item>Học Kỳ 2</item>
-    </string-array>
 
+    </string-array>
+    // Trang chủ
+    <string name="hello">Xin chào</string>
+    <string name="search_hint">Tìm kiếm...</string>
+    <string name="sinh_vien">Sinh viên</string>
+    <string name="faculty">Khoa</string>
+    <string name="full_name">LÊ THỊ TRANG ANH</string>
+    <string name="major">Công nghệ thông tin</string>
+    <string name="search_label">Tìm kiếm</string>
+    <string name="bell_description">Danh sách thông báo</string>
+    <string name="notification_count">5</string>
+    <string name="statistics">Thống kê</string>
+    <string name="view_more_charts">Xem thêm biểu đồ</string>
+    <string name="home">Trang chủ</string>
+    <string name="settings">Cài đặt</string>
+    <string name="info">Thông tin</string>
+    <string name="sv">Sinh viên</string>
+    <string name="khoa">Khoa</string>
+    <string name="lop">Lớp</string>
+    <string name="danh_sach_diem_danh">Danh Sách Điểm Danh</string>
+    <string name="danh_sach_diem">Danh Sách Điểm</string>
+    <string name="nhap_diem">Nhập Điểm</string>
+    <string name="nhap_diem_danh">Nhập Điểm Danh</string>
+    <string name="them_sinh_vien">Thêm Sinh Viên</string>
+    <string name="thong_ke">Thống Kê</string>
+    <string name="xem_them_bieu_do">Xem thêm biểu đồ</string>
+    <string name="trang_chu">Trang chủ</string>
+    <string name="cai_dat">Cài đặt</string>
+    <string name="thong_tin">Thông tin</string>
+    // Cài đặt
+    <string name="tieu_de_cai_dat">Cài đặt</string>
+    <string name="ten_nguoi_dung">Nguyễn Phước Vinh</string>
+    <string name="chuc_vu">Giảng viên</string>
+    <string name="che_do_toi">Chế độ tối</string>
+    <string name="chinh_sua_thong_tin">Chỉnh sửa thông tin</string>
+    <string name="thay_doi_mat_khau">Đổi mật khẩu</string>
+    <string name="ngon_ngu">Ngôn ngữ</string>
+    <string name="ma_pin">Mã PIN</string>
+    <string name="dang_xuat">Đăng xuất</string>
+    <string name="chuc_nang">Chức năng</string>
 </resources>

@@ -16,7 +16,7 @@
 
         <TextView
             style="@style/viewParent.headerText"
-            android:text="Cài đặt" />
+            android:text="@string/tieu_de_cai_dat" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
 
             <TextView
                 style="@style/viewParent.headerText"
-                android:text="Giảng viên"
+                android:text="@string/chuc_vu"
                 android:textSize="16sp"
                 android:textColor="#5D5C5C"
                 android:layout_below="@id/usernameTextView"
@@ -64,30 +64,30 @@
 
         <TextView
             style="@style/viewParent.headerText.settingsMiniTitle"
-            android:text="Thông tin" />
+            android:text="@string/thong_tin" />
 
         <TextView
             android:id="@+id/txt_thongtin"
             style="@style/viewParent.headerText.settingsTextIcon"
             android:drawableLeft="@drawable/ic_edit_profile"
-            android:text="Chỉnh sửa thông tin" />
+            android:text="@string/chinh_sua_thong_tin" />
 
         <TextView
             android:id="@+id/txt_doimk"
             style="@style/viewParent.headerText.settingsTextIcon"
             android:layout_marginTop="10dp"
             android:drawableLeft="@drawable/ic_edit_password"
-            android:text="Đổi mật khẩu" />
+            android:text="@string/thay_doi_mat_khau" />
 
         <TextView
             style="@style/viewParent.headerText.settingsMiniTitle"
-            android:text="Chức năng" />
+            android:text="@string/chuc_nang" />
 
         <TextView
             android:id="@+id/txt_ngonngu"
             style="@style/viewParent.headerText.settingsTextIcon"
             android:drawableLeft="@drawable/ic_languages"
-            android:text="Ngôn ngữ" />
+            android:text="@string/ngon_ngu" />
 
 
         <LinearLayout
@@ -111,7 +111,7 @@
                 android:layout_marginLeft="20dp"
                 android:drawablePadding="20dp"
                 android:gravity="center_vertical"
-                android:text="Mã PIN"
+                android:text="@string/ma_pin"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -120,7 +120,7 @@
             android:id="@+id/txt_dangxuat"
             style="@style/viewParent.headerText.settingsTextIcon"
             android:drawableLeft="@drawable/ic_logout"
-            android:text="Đăng xuất" />
+            android:text="@string/dang_xuat" />
 
 
         <TextView

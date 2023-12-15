@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">こんにちは</string>
+    <string name="search_hint">検索...</string>
+    <string name="sinh_vien">学生</string>
+    <string name="faculty">学部</string>
+    <string name="full_name">LE THI TRANG ANH</string>
+    <string name="major">情報技術</string>
+    <string name="search_label">検索</string>
+    <string name="bell_description">通知リスト</string>
+    <string name="notification_count">5</string>
+    <string name="statistics">統計</string>
+    <string name="view_more_charts">詳細なグラフを見る</string>
+    <string name="home">ホーム</string>
+    <string name="settings">設定</string>
+    <string name="info">情報</string>
+    <string name="sv">学生</string>
+    <string name="khoa">学部</string>
+    <string name="lop">クラス</string>
+    <string name="danh_sach_diem_danh">出席リスト</string>
+    <string name="danh_sach_diem">スコアリスト</string>
+    <string name="nhap_diem">スコアを入力</string>
+    <string name="nhap_diem_danh">出席を入力</string>
+    <string name="them_sinh_vien">学生を追加</string>
+    <string name="thong_ke">統計</string>
+    <string name="xem_them_bieu_do">詳細なグラフを見る</string>
+    <string name="trang_chu">ホーム</string>
+    <string name="cai_dat">設定</string>
+    <string name="thong_tin">情報</string>
+
+    //cai dat
+    <string name="tieu_de_cai_dat">設定</string>
+    <string name="ten_nguoi_dung">Nguyễn Phước Vinh</string>
+    <string name="chuc_vu">教員</string>
+    <string name="che_do_toi">ダークモード</string>
+    <string name="chinh_sua_thong_tin">プロフィール編集</string>
+    <string name="thay_doi_mat_khau">パスワード変更</string>
+    <string name="ngon_ngu">言語</string>
+    <string name="ma_pin">PINコード</string>
+    <string name="dang_xuat">ログアウト</string>
+    <string name="chuc_nang">機能</string>
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello</string>
+    <string name="search_hint">Search...</string>
+    <string name="sinh_vien">Student</string>
+    <string name="faculty">Faculty</string>
+    <string name="full_name">LE THI TRANG ANH</string>
+    <string name="major">Information Technology</string>
+    <string name="search_label">Search</string>
+    <string name="bell_description">Notification List</string>
+    <string name="notification_count">5</string>
+    <string name="statistics">Statistics</string>
+    <string name="view_more_charts">View More Charts</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="info">Information</string>
+    <string name="sv">Student</string>
+    <string name="khoa">Faculty</string>
+    <string name="lop">Class</string>
+    <string name="danh_sach_diem_danh">Attendance List</string>
+    <string name="danh_sach_diem">Score List</string>
+    <string name="nhap_diem">Enter Score</string>
+    <string name="nhap_diem_danh">Enter Attendance</string>
+    <string name="them_sinh_vien">Add Student</string>
+    <string name="thong_ke">Statistic</string>
+    <string name="xem_them_bieu_do">View More Charts</string>
+    <string name="trang_chu">Home</string>
+    <string name="cai_dat">Settings</string>
+    <string name="thong_tin">Information</string>
+
+    //cai dat
+    <string name="tieu_de_cai_dat">Settings</string>
+    <string name="ten_nguoi_dung">Nguyễn Phước Vinh</string>
+    <string name="chuc_vu">Lecturer</string>
+    <string name="che_do_toi">Dark Mode</string>
+    <string name="chinh_sua_thong_tin">Edit Profile</string>
+    <string name="thay_doi_mat_khau">Change Password</string>
+    <string name="ngon_ngu">Language</string>
+    <string name="ma_pin">PIN Code</string>
+    <string name="dang_xuat">Logout</string>
+    <string name="chuc_nang">Function</string>
+</resources>

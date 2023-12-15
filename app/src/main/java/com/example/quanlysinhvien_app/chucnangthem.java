@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.example.quanlysinhvien_app.NgonNgu.LanguageActivity;
 import com.example.quanlysinhvien_app.User.LoginActivity;
 
 public class chucnangthem extends AppCompatActivity {
@@ -67,7 +68,14 @@ public class chucnangthem extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        txtNgonNgu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang màn hình cài đặt mã PIN
+                Intent intent = new Intent(chucnangthem.this, LanguageActivity.class);
+                startActivity(intent);
+            }
+        });
         txtDangXuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

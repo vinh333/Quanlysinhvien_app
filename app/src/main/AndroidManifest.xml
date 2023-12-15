@@ -58,7 +58,7 @@
         <activity
             android:name=".mapin" />
         <activity
-            android:name=".PinEntryActivity" />
+            android:name=".NgonNgu.LanguageActivity" />
 <!--        <activity-->
 <!--            android:name=".User.quenpass_nhaplai" />-->
         <activity

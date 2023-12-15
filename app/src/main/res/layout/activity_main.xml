@@ -44,7 +44,7 @@
                             android:id="@+id/textView10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="LÊ THỊ TRANG ANH"
+                            android:text="@string/hello"
                             android:textColor="@color/white"
                             android:textSize="24dp"
                             android:textStyle="bold" />
@@ -53,9 +53,8 @@
                             android:id="@+id/textView11"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Công nghệ thông tin"
+                            android:text="@string/faculty"
                             android:textColor="@color/white"
-
                             android:textSize="16dp" />
                     </LinearLayout>
 
@@ -92,7 +91,7 @@
                         android:drawablePadding="15dp"
                         android:ems="10"
                         android:gravity="center_vertical"
-                        android:hint="Tìm kiếm..."
+                        android:hint="@string/search_hint"
                         android:inputType="textPersonName"
                         android:padding="10dp"
                         android:textSize="14sp"
@@ -185,7 +184,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Sinh viên"
+                            android:text="@string/sinh_vien"
                             android:textAlignment="center"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -212,7 +211,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Khoa"
+                            android:text="@string/khoa"
                             android:textAlignment="center"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -239,7 +238,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Lớp"
+                            android:text="@string/lop"
                             android:textAlignment="center"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -266,7 +265,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Danh Sách Điểm Danh"
+                            android:text="@string/danh_sach_diem_danh"
                             android:textAlignment="center"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -299,7 +298,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Danh Sách Điểm"
+                            android:text="@string/danh_sach_diem"
                             android:textAlignment="center"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -327,7 +326,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Nhập Điểm"
+                            android:text="@string/nhap_diem"
                             android:textAlignment="center"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -354,7 +353,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Nhập Điểm Danh"
+                            android:text="@string/nhap_diem_danh"
                             android:textAlignment="center"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -381,12 +380,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
-                            android:text="Thêm Sinh VIên"
+                            android:text="@string/them_sinh_vien"
                             android:textAlignment="center"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -400,7 +400,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Thống Kê"
+                    android:text="@string/thong_ke"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -471,7 +471,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Trang chủ"
+                        android:text="@string/trang_chu"
                         android:textAlignment="center"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -495,7 +495,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Cài đặt"
+                        android:text="@string/cai_dat"
                         android:textAlignment="center"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -517,7 +517,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Thông tin"
+                        android:text="@string/thong_tin"
                         android:textAlignment="center"
                         android:textSize="12sp" />
                 </LinearLayout>

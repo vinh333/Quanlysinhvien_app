@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">你好</string>
+    <string name="search_hint">搜索...</string>
+    <string name="sinh_vien">學生</string>
+    <string name="faculty">學院</string>
+    <string name="full_name">黎氏莊英</string>
+    <string name="major">信息技術</string>
+    <string name="search_label">搜索</string>
+    <string name="bell_description">通知列表</string>
+    <string name="notification_count">5</string>
+    <string name="statistics">統計</string>
+    <string name="view_more_charts">查看更多圖表</string>
+    <string name="home">主頁</string>
+    <string name="settings">設定</string>
+    <string name="info">信息</string>
+    <string name="sv">學生</string>
+    <string name="khoa">學院</string>
+    <string name="lop">班級</string>
+    <string name="danh_sach_diem_danh">點名名單</string>
+    <string name="danh_sach_diem">成績名單</string>
+    <string name="nhap_diem">輸入成績</string>
+    <string name="nhap_diem_danh">輸入點名</string>
+    <string name="them_sinh_vien">添加學生</string>
+    <string name="thong_ke">統計</string>
+    <string name="xem_them_bieu_do">查看更多圖表</string>
+    <string name="trang_chu">主頁</string>
+    <string name="cai_dat">設定</string>
+    <string name="thong_tin">信息</string>
+
+    //cai dat
+    <string name="tieu_de_cai_dat">设置</string>
+    <string name="ten_nguoi_dung">Nguyễn Phước Vinh</string>
+    <string name="chuc_vu">讲师</string>
+    <string name="che_do_toi">深色模式</string>
+    <string name="chinh_sua_thong_tin">编辑个人资料</string>
+    <string name="thay_doi_mat_khau">修改密码</string>
+    <string name="ngon_ngu">语言</string>
+    <string name="ma_pin">PIN码</string>
+    <string name="dang_xuat">退出登录</string>
+    <string name="chuc_nang">功能</string>
+</resources>
