@@ -1,6 +1,7 @@
 package com.example.quanlysinhvien_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ public class LockScreenActivity extends AppCompatActivity {
 
     private StringBuilder passwordBuilder = new StringBuilder(); // Dùng để xây dựng mật khẩu
     private TextView[] passwordTextViews = new TextView[4]; // Mảng chứa TextViews của mật khẩu
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,10 @@ public class LockScreenActivity extends AppCompatActivity {
         passwordTextViews[1] = findViewById(R.id.textView34);
         passwordTextViews[2] = findViewById(R.id.textView35);
         passwordTextViews[3] = findViewById(R.id.textView36);
+
+
+        sharedPreferences = getSharedPreferences("PIN_PREFERENCES", MODE_PRIVATE);
+
     }
 
     // Phương thức xử lý khi một số được chọn
@@ -63,9 +69,10 @@ public class LockScreenActivity extends AppCompatActivity {
     private void checkPassword() {
         String enteredPassword = passwordBuilder.toString();
         // Thực hiện kiểm tra mật khẩu ở đây và thực hiện các hành động cần thiết
+        String savedPin = sharedPreferences.getString("pin_key", "");
 
         // Ví dụ: Hiển thị một thông báo (cần thay đổi theo nhu cầu của bạn)
-        if ("1234".equals(enteredPassword)) {
+        if (savedPin.equals(enteredPassword)) {
             // Mã PIN đúng, chuyển sang màn hình chính của ứng dụng
             Intent intent = new Intent(LockScreenActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
